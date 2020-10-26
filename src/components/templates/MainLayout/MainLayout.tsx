@@ -1,11 +1,11 @@
 import React from 'react';
 // import {Outlet} from 'react-router-dom';
-import {makeStyles, useTheme} from '@material-ui/core';
-import TopBar from './TopBar';
-import SideBar from './SideBar';
+import TopBar, {getTopBarHeight} from './TopBar';
+import SideBar, {getSideBarWidth} from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
+import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   root: {
     backgroundColor: theme.palette.background.default,
     height: '100%',
@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
   wrapper: {
     overflow: 'hidden',
-    paddingTop: 48,
-    paddingLeft: 96,
+    paddingTop: getTopBarHeight(responsiveInfo),
+    paddingLeft: getSideBarWidth(responsiveInfo),
     width: '100vw',
     height: '100vh',
     boxSizing: 'border-box',
@@ -26,8 +26,6 @@ type Props = {} & RouteConfigComponentProps<any>;
 
 const MainLayout = (props: Props) => {
   const {route} = props;
-  const theme = useTheme();
-  console.debug({theme});
   const classes = useStyles();
 
   return (

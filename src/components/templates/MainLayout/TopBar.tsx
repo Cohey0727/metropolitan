@@ -2,11 +2,17 @@ import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 // import clsx from 'clsx';
 import {AppBar, Toolbar, makeStyles} from '@material-ui/core';
+import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
+import {ResponsiveInfo} from '../../../theme/useResponsive';
 // import Logo from "src/components/Logo";
 
-const useStyles = makeStyles((theme) => ({
+export function getTopBarHeight(responsiveInfo: ResponsiveInfo) {
+  return 48;
+}
+
+const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   root: {
-    height: 48,
+    height: getTopBarHeight(responsiveInfo),
     display: 'flex',
     justifyContent: 'center',
     padding: theme.spacing(0, 2),

@@ -1,20 +1,25 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 // import clsx from 'clsx';
-import {makeStyles, useTheme} from '@material-ui/core';
 import People from '@material-ui/icons/People';
 import {OverridableComponent} from '@material-ui/core/OverridableComponent';
 import {SvgIconTypeMap} from '@material-ui/core/SvgIcon/SvgIcon';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Settings from '@material-ui/icons/Settings';
+import {ResponsiveInfo} from '../../../theme/useResponsive';
+import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
 // import Logo from "src/components/Logo";
 
-const useStyles = makeStyles((theme) => ({
+export function getSideBarWidth(responsiveInfo: ResponsiveInfo) {
+  return 96;
+}
+
+const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   sidebar: {
     display: 'flex',
     alignItems: 'flex-start',
     position: 'fixed',
-    width: 96,
+    width: getSideBarWidth(responsiveInfo),
     padding: theme.spacing(6, 0, 0, 0),
     height: '100vh',
     background: theme.palette.secondary.dark,
