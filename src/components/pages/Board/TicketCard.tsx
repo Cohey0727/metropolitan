@@ -1,72 +1,50 @@
 import React from 'react';
-import {FixedSizeList, areEqual} from 'react-window';
-import {
-  DraggableProvided,
-  DraggableRubric,
-  DraggableStateSnapshot,
-  Droppable,
-  DroppableProvided,
-  DroppableStateSnapshot,
-} from 'react-beautiful-dnd';
-import {List, Ticket} from '../../../types';
-import styled from '@material-ui/core/styles/styled';
-import useTheme from '@material-ui/core/styles/useTheme';
 
-type Props = {
-  tickets: Ticket[];
-  list: List;
+import {Ticket} from '../../../types';
+import {
+  Draggable,
+  DraggableProvided,
+  DraggableStateSnapshot,
+} from 'react-beautiful-dnd';
+import {areEqual} from 'react-window';
+
+type RowProps = {
+  data: Ticket[];
+  index: number;
+  style: any;
 };
 
-const ListComponent: React.FC<Props> = (props) => {
-  const {list, tickets} = props;
-  const theme = useTheme();
-  return (
-    <div>
-      <h2>{list.title}</h2>
-      <Droppable
-        droppableId={list.id}
-        mode='virtual'
-        renderClone={(
-          provided: DraggableProvided,
-          snapshot: DraggableStateSnapshot,
-          rubric: DraggableRubric
-        ) => <div>Hello</div>}
-      >
-        {(
-          droppableProvided: DroppableProvided,
-          snapshot: DroppableStateSnapshot
-        ) => {
-          // Add an extra item to our list to make space for a dragging item
-          // Usually the DroppableProvided.placeholder does this, but that won't
-          // work in a virtual list
-          const itemCount: number = snapshot.isUsingPlaceholder
-            ? tickets.length + 1
-            : tickets.length;
+// Memoizing row items for even better performance!
+const Row = ({data: quotes, index, style}: RowProps) => {
+  const quote: Ticket = quotes[index];
 
-          return (
-            <FixedSizeList
-              height={500}
-              itemCount={itemCount}
-              itemSize={110}
-              width={300}
-              outerRef={droppableProvided.innerRef}
-              style={{
-                backgroundColor: getBackgroundColor(
-                  snapshot.isDraggingOver,
-                  Boolean(snapshot.draggingFromThisWith)
-                ),
-                transition: 'background-color 0.2s ease',
-                padding: theme.spacing(1),
-              }}
-              itemData={tickets}
-            >
-              {Row}
-            </FixedSizeList>
-          );
-        }}
-      </Droppable>
-    </div>
+  // We are rendering an extra item for the placeholder
+  // Do do this we increased our data set size to include one 'fake' item
+  if (!quote) {
+    return null;
+  }
+
+  // Faking some nice spacing around the items
+  const patchedStyle = {
+    ...style,
+    left: style.left + grid,
+    top: style.top + grid,
+    width: `calc(${style.width} - ${grid * 2}px)`,
+    height: style.height - grid,
+  };
+
+  return (
+    <Draggable draggableId={quote.id} index={index} key={quote.id}>
+      {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
+        <QuoteItem
+          provided={provided}
+          quote={quote}
+          isDragging={snapshot.isDragging}
+          style={patchedStyle}
+        />
+      )}
+    </Draggable>
   );
 };
 
-export default ListComponent;
+export default React.memo(Row, areEqual);

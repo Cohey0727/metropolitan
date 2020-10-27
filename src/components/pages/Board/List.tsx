@@ -1,5 +1,5 @@
 import React from 'react';
-import {FixedSizeList, areEqual} from 'react-window';
+import {FixedSizeList} from 'react-window';
 import {
   DraggableProvided,
   DraggableRubric,
@@ -8,13 +8,28 @@ import {
   DroppableProvided,
   DroppableStateSnapshot,
 } from 'react-beautiful-dnd';
-import {List, Ticket} from '../../../types';
-import styled from '@material-ui/core/styles/styled';
 import useTheme from '@material-ui/core/styles/useTheme';
+import {Theme} from '@material-ui/core';
+import {List, Ticket} from '../../../types';
+import TicketCard from './TicketCard';
 
 type Props = {
   tickets: Ticket[];
   list: List;
+};
+
+export const getBackgroundColor = (
+  theme: Theme,
+  isDraggingOver: boolean,
+  isDraggingFrom: boolean
+): string => {
+  if (isDraggingOver) {
+    return theme.palette.info.dark;
+  }
+  if (isDraggingFrom) {
+    return theme.palette.info.light;
+  }
+  return theme.palette.info.main;
 };
 
 const ListComponent: React.FC<Props> = (props) => {
@@ -52,6 +67,7 @@ const ListComponent: React.FC<Props> = (props) => {
               outerRef={droppableProvided.innerRef}
               style={{
                 backgroundColor: getBackgroundColor(
+                  theme,
                   snapshot.isDraggingOver,
                   Boolean(snapshot.draggingFromThisWith)
                 ),
@@ -60,7 +76,7 @@ const ListComponent: React.FC<Props> = (props) => {
               }}
               itemData={tickets}
             >
-              {Row}
+              {TicketCard}
             </FixedSizeList>
           );
         }}
