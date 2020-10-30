@@ -52,7 +52,7 @@ const TicketCard = ({data: quotes, index, style}: RowProps) => {
         // data-index={index}
         // aria-label={`${quote.author.name} quote ${quote.content}`}
         >
-          Hello
+          {ticket.title}
           {/*<Avatar src={quote.author.avatarUrl} alt={quote.author.name} />*/}
           {/*{isClone ? <CloneBadge>Clone</CloneBadge> : null}*/}
           {/*<Content>*/}

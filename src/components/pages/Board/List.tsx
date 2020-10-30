@@ -49,7 +49,7 @@ const ListComponent: React.FC<Props> = (props) => {
           provided: DraggableProvided,
           snapshot: DraggableStateSnapshot,
           rubric: DraggableRubric
-        ) => <div>Hello</div>}
+        ) => <div>Hello1</div>}
       >
         {(
           droppableProvided: DroppableProvided,
