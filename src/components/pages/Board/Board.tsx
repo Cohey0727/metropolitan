@@ -4,12 +4,10 @@ import {
   DraggableLocation,
   DropResult,
 } from 'react-beautiful-dnd';
-import styled from '@material-ui/core/styles/styled';
 import {ticketsData, boardData} from '../../../samples';
 import List from './List';
 import {Ticket} from '../../../types';
-
-const Container = styled('div')({});
+import {Row} from '../../atoms/containers';
 
 const Board: React.FC = () => {
   const [tickets, setTickets] = useState(ticketsData);
@@ -37,11 +35,11 @@ const Board: React.FC = () => {
   }
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Container>
-        {boardData.lists.map((list) => (
+      <Row>
+        {board.lists.map((list) => (
           <List list={list} tickets={ticketsByList[list.id]} />
         ))}
-      </Container>
+      </Row>
     </DragDropContext>
   );
 };

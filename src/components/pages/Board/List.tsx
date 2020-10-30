@@ -14,7 +14,7 @@ import {List, Ticket} from '../../../types';
 import TicketCard from './TicketCard';
 
 type Props = {
-  tickets: Ticket[];
+  tickets?: Ticket[];
   list: List;
 };
 
@@ -33,7 +33,7 @@ export const getBackgroundColor = (
 };
 
 const ListComponent: React.FC<Props> = (props) => {
-  const {list, tickets} = props;
+  const {list, tickets = []} = props;
   const theme = useTheme();
   return (
     <div>

@@ -14,13 +14,15 @@ type RowProps = {
   style: any;
 };
 
+const grid = 8;
+
 // Memoizing row items for even better performance!
-const Row = ({data: quotes, index, style}: RowProps) => {
-  const quote: Ticket = quotes[index];
+const TicketCard = ({data: quotes, index, style}: RowProps) => {
+  const ticket: Ticket = quotes[index];
 
   // We are rendering an extra item for the placeholder
   // Do do this we increased our data set size to include one 'fake' item
-  if (!quote) {
+  if (!ticket) {
     return null;
   }
 
@@ -34,17 +36,36 @@ const Row = ({data: quotes, index, style}: RowProps) => {
   };
 
   return (
-    <Draggable draggableId={quote.id} index={index} key={quote.id}>
+    <Draggable draggableId={ticket.id} index={index} key={ticket.id}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
-        <QuoteItem
-          provided={provided}
-          quote={quote}
-          isDragging={snapshot.isDragging}
-          style={patchedStyle}
-        />
+        <div
+        // isDragging={snapshot.isDragging}
+        // // isGroupedOver={isGroupedOver}
+        // isClone={isClone}
+        // colors={quote.author.colors}
+        // ref={provided.innerRef}
+        // {...provided.draggableProps}
+        // {...provided.dragHandleProps}
+        // style={getStyle(provided, style)}
+        // data-is-dragging={isDragging}
+        // data-testid={quote.id}
+        // data-index={index}
+        // aria-label={`${quote.author.name} quote ${quote.content}`}
+        >
+          Hello
+          {/*<Avatar src={quote.author.avatarUrl} alt={quote.author.name} />*/}
+          {/*{isClone ? <CloneBadge>Clone</CloneBadge> : null}*/}
+          {/*<Content>*/}
+          {/*  <BlockQuote>{quote.content}</BlockQuote>*/}
+          {/*  <Footer>*/}
+          {/*    <Author colors={quote.author.colors}>{quote.author.name}</Author>*/}
+          {/*    <QuoteId>id:{quote.id}</QuoteId>*/}
+          {/*  </Footer>*/}
+          {/*</Content>*/}
+        </div>
       )}
     </Draggable>
   );
 };
 
-export default React.memo(Row, areEqual);
+export default React.memo(TicketCard);

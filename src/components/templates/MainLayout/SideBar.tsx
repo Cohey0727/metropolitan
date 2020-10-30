@@ -71,7 +71,7 @@ const sideBarContents: SideBarContent[] = [
   },
   {
     label: 'Boards',
-    link: '/boards',
+    link: '/board',
     Icon: Dashboard,
   },
 ];
