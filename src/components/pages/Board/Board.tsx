@@ -8,9 +8,11 @@ import {ticketsData, boardData} from '../../../samples';
 import List from './List';
 import {Ticket} from '../../../types';
 import {Row} from '../../atoms/containers';
+import {Theme, useTheme} from '@material-ui/core';
 
 const Board: React.FC = () => {
   const [tickets, setTickets] = useState(ticketsData);
+  const {spacing} = useTheme();
   const ticketsByList = useMemo(
     () =>
       tickets.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
@@ -35,9 +37,9 @@ const Board: React.FC = () => {
   }
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Row>
-        {board.lists.map((list) => (
-          <List list={list} tickets={ticketsByList[list.id]} />
+      <Row padding={[0, 2]} height={'100%'}>
+        {board.lists.map((list, index) => (
+          <List list={list} index={index} tickets={ticketsByList[list.id]} />
         ))}
       </Row>
     </DragDropContext>

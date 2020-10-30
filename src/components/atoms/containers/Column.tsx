@@ -7,7 +7,7 @@ type OwnProps = {};
 
 type Props = OwnProps & Partial<CssProps>;
 
-const Column = styled<any>(Container)<Theme, Props>({
+const Column = styled(Container)<Theme, Props>({
   display: 'flex',
   flexDirection: 'column',
 });

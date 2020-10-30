@@ -7,9 +7,10 @@ type OwnProps = {};
 
 type Props = OwnProps & Partial<CssProps>;
 
-const Row = styled<any>(Container)<Theme, Props>({
+const Row = styled(Container)<Theme, Props>({
   display: 'flex',
   flexDirection: 'row',
+  width: '100%',
 });
 
 export default Row;

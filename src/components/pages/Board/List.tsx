@@ -12,11 +12,15 @@ import useTheme from '@material-ui/core/styles/useTheme';
 import {Theme} from '@material-ui/core';
 import {List, Ticket} from '../../../types';
 import TicketCard from './TicketCard';
+import {Column, Paper} from '../../atoms/containers';
 
 type Props = {
   tickets?: Ticket[];
   list: List;
+  index: number;
 };
+
+const listColors = [];
 
 export const getBackgroundColor = (
   theme: Theme,
@@ -33,10 +37,10 @@ export const getBackgroundColor = (
 };
 
 const ListComponent: React.FC<Props> = (props) => {
-  const {list, tickets = []} = props;
+  const {list, tickets = [], index} = props;
   const theme = useTheme();
   return (
-    <div>
+    <Paper elevation={6} padding={1} margin={1}>
       <h2>{list.title}</h2>
       <Droppable
         droppableId={list.id}
@@ -81,7 +85,7 @@ const ListComponent: React.FC<Props> = (props) => {
           );
         }}
       </Droppable>
-    </div>
+    </Paper>
   );
 };
 

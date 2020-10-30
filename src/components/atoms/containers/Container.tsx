@@ -1,22 +1,11 @@
-import {CSSProperties, styled} from '@material-ui/styles';
+import {styled} from '@material-ui/styles';
 import {Theme} from '@material-ui/core';
-
-type CssProps = {
-  color: CSSProperties['color'];
-  backgroundColor: CSSProperties['backgroundColor'];
-  width: number;
-  height: number;
-};
+import {cssCreator, CssProps} from '../common/style';
 
 type OwnProps = {};
 
 type Props = OwnProps & Partial<CssProps>;
 
-const Container = styled<any>('div')<Theme, Props>({
-  color: ({color}) => color || 'inherits',
-  backgroundColor: ({backgroundColor}) => backgroundColor || 'inherits',
-  width: ({width}) => width || 'auto',
-  height: ({height}) => height || 'auto',
-});
+const Container = styled('div')<Theme, Props>(cssCreator);
 
 export default Container;
