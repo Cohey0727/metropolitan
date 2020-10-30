@@ -45,11 +45,11 @@ const ListComponent: React.FC<Props> = (props) => {
       <Droppable
         droppableId={list.id}
         mode='virtual'
-        renderClone={(
-          provided: DraggableProvided,
-          snapshot: DraggableStateSnapshot,
-          rubric: DraggableRubric
-        ) => <div>Hello1</div>}
+        // renderClone={(
+        //   provided: DraggableProvided,
+        //   snapshot: DraggableStateSnapshot,
+        //   rubric: DraggableRubric
+        // ) => <div>Hello1</div>}
       >
         {(
           droppableProvided: DroppableProvided,

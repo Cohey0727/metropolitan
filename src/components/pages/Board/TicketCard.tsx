@@ -7,6 +7,7 @@ import {
   DraggableStateSnapshot,
 } from 'react-beautiful-dnd';
 import {areEqual} from 'react-window';
+import {Column} from '../../atoms/containers';
 
 type RowProps = {
   data: Ticket[];
@@ -38,19 +39,11 @@ const TicketCard = ({data: quotes, index, style}: RowProps) => {
   return (
     <Draggable draggableId={ticket.id} index={index} key={ticket.id}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
-        <div
-        // isDragging={snapshot.isDragging}
-        // // isGroupedOver={isGroupedOver}
-        // isClone={isClone}
-        // colors={quote.author.colors}
-        // ref={provided.innerRef}
-        // {...provided.draggableProps}
-        // {...provided.dragHandleProps}
-        // style={getStyle(provided, style)}
-        // data-is-dragging={isDragging}
-        // data-testid={quote.id}
-        // data-index={index}
-        // aria-label={`${quote.author.name} quote ${quote.content}`}
+        <Column
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          data-index={index}
         >
           {ticket.title}
           {/*<Avatar src={quote.author.avatarUrl} alt={quote.author.name} />*/}
@@ -62,7 +55,7 @@ const TicketCard = ({data: quotes, index, style}: RowProps) => {
           {/*    <QuoteId>id:{quote.id}</QuoteId>*/}
           {/*  </Footer>*/}
           {/*</Content>*/}
-        </div>
+        </Column>
       )}
     </Draggable>
   );
