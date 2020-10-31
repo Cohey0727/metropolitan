@@ -1,1 +1,1 @@
-export {default as AccountUser} from './AccountUser';
+export {default as AccountUser} from './AccountMenu';

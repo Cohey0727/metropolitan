@@ -10,6 +10,7 @@ const auth0Hoc = (Component: ComponentType<any>) => (props: any) => {
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID as string}
       useRefreshTokens={true}
       redirectUri={window.location.origin}
+      cacheLocation={'localstorage'}
     >
       <Auth0Authentication>
         <Component {...props} />
