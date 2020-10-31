@@ -1,15 +1,13 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {
   DragDropContext,
   DraggableLocation,
   DropResult,
 } from 'react-beautiful-dnd';
-import {ticketsData, boardData} from '../../../samples';
+import {boardData} from '../../../samples';
 import List from './List';
 import {Ticket} from '../../../types';
 import {Row} from '../../atoms/containers';
-import {Theme, useTheme} from '@material-ui/core';
-import {useLocalStorage} from 'react-use';
 import {useTickets} from '../../../api/ticket/hooks';
 import {Spinner} from '../../atoms/spinner';
 import {updateTicket} from '../../../api/ticket/operations';
