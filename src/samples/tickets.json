@@ -53,5 +53,27 @@
     "author": "John",
     "title": "ticket5",
     "description": "description5"
+  },
+  {
+    "id": "ticket6",
+    "projectId": "projectId",
+    "currentPosition": {
+      "board": "board1",
+      "list": "list1"
+    },
+    "author": "John",
+    "title": "ticket6",
+    "description": "description6"
+  },
+  {
+    "id": "ticket7",
+    "projectId": "projectId",
+    "currentPosition": {
+      "board": "board1",
+      "list": "list1"
+    },
+    "author": "John",
+    "title": "ticket7",
+    "description": "description7"
   }
 ]

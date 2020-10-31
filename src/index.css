@@ -17,3 +17,16 @@ a:-webkit-any-link {
   cursor: pointer;
   text-decoration: unset;
 }
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  opacity: 1;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #9ba4b444;
+  border-radius: 4px;
+}

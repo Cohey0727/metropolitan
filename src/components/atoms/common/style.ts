@@ -14,6 +14,7 @@ export type CssProps = {
   padding: number | number[];
   margin: number | number[];
   display: CSSProperties['display'];
+  flex: CSSProperties['flex'];
   flexDirection: CSSProperties['flexDirection'];
 };
 
@@ -42,6 +43,7 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     padding,
     margin,
     display,
+    flex,
     flexDirection,
   } = props;
   return {
@@ -56,6 +58,7 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     padding: spaceCreator(padding),
     margin: spaceCreator(margin),
     display,
+    flex,
     flexDirection,
   };
 };
