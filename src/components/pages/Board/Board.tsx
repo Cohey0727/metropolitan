@@ -9,13 +9,14 @@ import List from './List';
 import {Ticket} from '../../../types';
 import {Row} from '../../atoms/containers';
 import {Theme, useTheme} from '@material-ui/core';
+import {useLocalStorage} from 'react-use';
 
 const Board: React.FC = () => {
-  const [tickets, setTickets] = useState(ticketsData);
+  const [tickets, setTickets] = useLocalStorage('tickets', ticketsData);
 
   const ticketsByList = useMemo(
     () =>
-      tickets.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
+      tickets!.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
         const listId = ticket.currentPosition.list;
         acc[listId] = acc[listId] ? [...acc[listId], ticket] : [ticket];
         return acc;
@@ -28,7 +29,7 @@ const Board: React.FC = () => {
     if (!result.destination) return;
     const source: DraggableLocation = result.source;
     const destination: DraggableLocation = result.destination;
-    const ticket = tickets.find((_ticket) => _ticket.id === result.draggableId);
+    const ticket = tickets!.find((_ticket) => _ticket.id === result.draggableId);
 
     // did not move anywhere - can bail early
     if (
@@ -39,7 +40,7 @@ const Board: React.FC = () => {
       return;
 
     ticket.currentPosition.list = destination.droppableId;
-    setTickets([...tickets]);
+    setTickets([...tickets!]);
   }
 
   return (
