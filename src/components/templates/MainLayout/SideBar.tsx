@@ -84,7 +84,7 @@ const SideBar = () => {
         {sideBarContents.map((sideBarContent) => {
           const {label, Icon, link} = sideBarContent;
           return (
-            <Link to={link}>
+            <Link to={link} key={label}>
               <div className={classes.menu}>
                 <Icon />
                 <p>{label}</p>
