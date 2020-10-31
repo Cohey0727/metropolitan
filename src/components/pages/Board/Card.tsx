@@ -6,44 +6,34 @@ import {
   DraggableProvided,
   DraggableStateSnapshot,
 } from 'react-beautiful-dnd';
-import {areEqual} from 'react-window';
-import {Column} from '../../atoms/containers';
+import {Column, Paper} from '../../atoms/containers';
+import {styled} from '@material-ui/styles';
 
-type RowProps = {
-  data: Ticket[];
+type Props = {
+  ticket: Ticket;
   index: number;
-  style: any;
 };
+
+const Container = styled(Paper)(() => ({}));
 
 const grid = 8;
 
 // Memoizing row items for even better performance!
-const TicketCard = ({data: quotes, index, style}: RowProps) => {
-  const ticket: Ticket = quotes[index];
-
-  // We are rendering an extra item for the placeholder
-  // Do do this we increased our data set size to include one 'fake' item
-  if (!ticket) {
-    return null;
-  }
-
+const Card = ({ticket, index}: Props) => {
   // Faking some nice spacing around the items
-  const patchedStyle = {
-    ...style,
-    left: style.left + grid,
-    top: style.top + grid,
-    width: `calc(${style.width} - ${grid * 2}px)`,
-    height: style.height - grid,
-  };
 
   return (
     <Draggable draggableId={ticket.id} index={index} key={ticket.id}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
-        <Column
+        <Container
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           data-index={index}
+          minHeight={120}
+          maxHeight={240}
+          margin={[1, 0]}
+          padding={1}
         >
           {ticket.title}
           {/*<Avatar src={quote.author.avatarUrl} alt={quote.author.name} />*/}
@@ -55,10 +45,10 @@ const TicketCard = ({data: quotes, index, style}: RowProps) => {
           {/*    <QuoteId>id:{quote.id}</QuoteId>*/}
           {/*  </Footer>*/}
           {/*</Content>*/}
-        </Column>
+        </Container>
       )}
     </Draggable>
   );
 };
 
-export default React.memo(TicketCard);
+export default React.memo(Card);

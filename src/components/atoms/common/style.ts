@@ -6,7 +6,11 @@ export type CssProps = {
   color: CSSProperties['color'];
   backgroundColor: CSSProperties['backgroundColor'];
   width: number | string;
+  minWidth: number | string;
+  maxWidth: number | string;
   height: number | string;
+  minHeight: number | string;
+  maxHeight: number | string;
   padding: number | number[];
   margin: number | number[];
   display: CSSProperties['display'];
@@ -30,7 +34,11 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     color,
     backgroundColor,
     width,
+    minWidth,
+    maxWidth,
     height,
+    minHeight,
+    maxHeight,
     padding,
     margin,
     display,
@@ -40,7 +48,11 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     color: color || 'inherits',
     backgroundColor: backgroundColor || 'inherits',
     width: typeof width === 'number' ? `${width}px` : width,
+    minWidth: typeof minWidth === 'number' ? `${minWidth}px` : minWidth,
+    maxWidth: typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth,
     height: typeof height === 'number' ? `${height}px` : height,
+    minHeight: typeof height === 'number' ? `${minHeight}px` : minHeight,
+    maxHeight: typeof height === 'number' ? `${maxHeight}px` : maxHeight,
     padding: spaceCreator(padding),
     margin: spaceCreator(margin),
     display,

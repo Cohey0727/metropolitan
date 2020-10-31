@@ -23,11 +23,11 @@ const Board: React.FC = () => {
     [tickets]
   );
   const board = boardData;
+
   function onDragEnd(result: DropResult) {
     if (!result.destination) return;
     const source: DraggableLocation = result.source;
     const destination: DraggableLocation = result.destination;
-
     // did not move anywhere - can bail early
     if (
       source.droppableId === destination.droppableId &&
@@ -35,6 +35,7 @@ const Board: React.FC = () => {
     )
       return;
   }
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Row padding={[0, 2]} height={'100%'}>
