@@ -12,6 +12,7 @@ import {Theme} from '@material-ui/core';
 import {List, Ticket} from '../../../types';
 import {Column, Paper} from '../../atoms/containers';
 import Card from './Card';
+import {styled} from '@material-ui/styles';
 
 type Props = {
   tickets?: Ticket[];
@@ -19,7 +20,15 @@ type Props = {
   index: number;
 };
 
-const listColors = [];
+type StyleProps = {
+  index: number;
+};
+
+const listColors = ['#9999ff', '#05aa9d', '#d5e524', '#deccff', '#76f7ea'];
+
+const Container = styled(Paper)<Theme, StyleProps>({
+  borderTop: ({index}) => `4px solid ${listColors[index % listColors.length]}`,
+});
 
 export const getBackgroundColor = (
   theme: Theme,
@@ -39,7 +48,7 @@ const ListComponent: React.FC<Props> = (props) => {
   const {list, tickets = [], index} = props;
   const theme = useTheme();
   return (
-    <Paper padding={1} margin={1} width={320}>
+    <Container padding={1} margin={1} width={320} index={index}>
       <h2>{list.title}</h2>
       <Droppable droppableId={list.id}>
         {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
@@ -55,7 +64,7 @@ const ListComponent: React.FC<Props> = (props) => {
           </Column>
         )}
       </Droppable>
-    </Paper>
+    </Container>
   );
 };
 
