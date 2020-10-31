@@ -33,7 +33,6 @@ const Board: React.FC = () => {
       (_ticket) => _ticket.id === result.draggableId
     );
 
-    // did not move anywhere - can bail early
     if (
       (source.droppableId === destination.droppableId &&
         source.index === destination.index) ||

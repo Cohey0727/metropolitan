@@ -6,9 +6,12 @@
       "board": "board1",
       "list": "list1"
     },
-    "author": "John",
+    "author": "google-oauth2|105675009773641077796",
+    "assignees": [{"board1": "google-oauth2|105675009773641077796"}],
     "title": "ticket1",
-    "description": "description1"
+    "description": "description1",
+    "createDate": "2020-10-31T16:19:03.635Z",
+    "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
     "id": "ticket2",
@@ -17,9 +20,11 @@
       "board": "board1",
       "list": "list1"
     },
-    "author": "John",
+    "author": "google-oauth2|105675009773641077796",
     "title": "ticket2",
-    "description": "description2"
+    "description": "description2",
+    "createDate": "2020-10-31T16:19:03.635Z",
+    "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
     "id": "ticket3",
@@ -28,9 +33,12 @@
       "board": "board1",
       "list": "list1"
     },
-    "author": "John",
+    "author": "google-oauth2|105675009773641077796",
+    "assignees": [{"board1": "google-oauth2|105675009773641077796"}],
     "title": "ticket3",
-    "description": "description3"
+    "description": "description3",
+    "createDate": "2020-10-31T16:19:03.635Z",
+    "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
     "id": "ticket4",
@@ -39,9 +47,12 @@
       "board": "board1",
       "list": "list2"
     },
-    "author": "John",
+    "author": "google-oauth2|105675009773641077796",
+    "assignees": [{"board1": "google-oauth2|105675009773641077796"}],
     "title": "ticket4",
-    "description": "description4"
+    "description": "description4",
+    "createDate": "2020-10-31T16:19:03.635Z",
+    "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
     "id": "ticket5",
@@ -50,9 +61,12 @@
       "board": "board1",
       "list": "list3"
     },
-    "author": "John",
+    "author": "google-oauth2|105675009773641077796",
+    "assignees": [{"board1": "google-oauth2|105675009773641077796"}],
     "title": "ticket5",
-    "description": "description5"
+    "description": "description5",
+    "createDate": "2020-10-31T16:19:03.635Z",
+    "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
     "id": "ticket6",
@@ -61,9 +75,12 @@
       "board": "board1",
       "list": "list1"
     },
-    "author": "John",
+    "author": "google-oauth2|105675009773641077796",
+    "assignees": [{"board1": "google-oauth2|105675009773641077796"}],
     "title": "ticket6",
-    "description": "description6"
+    "description": "description6",
+    "createDate": "2020-10-31T16:19:03.635Z",
+    "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
     "id": "ticket7",
@@ -72,8 +89,11 @@
       "board": "board1",
       "list": "list1"
     },
-    "author": "John",
+    "author": "google-oauth2|105675009773641077796",
+    "assignees": [{"board1": "google-oauth2|105675009773641077796"}],
     "title": "ticket7",
-    "description": "description7"
+    "description": "description7",
+    "createDate": "2020-10-31T16:19:03.635Z",
+    "dueDate": "2020-10-31T16:19:03.635Z"
   }
 ]

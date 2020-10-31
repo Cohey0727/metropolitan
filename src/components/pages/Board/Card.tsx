@@ -21,7 +21,7 @@ const grid = 8;
 // Memoizing row items for even better performance!
 const Card = ({ticket, index}: Props) => {
   // Faking some nice spacing around the items
-
+  
   return (
     <Draggable draggableId={ticket.id} index={index} key={ticket.id}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
@@ -38,7 +38,6 @@ const Card = ({ticket, index}: Props) => {
         >
           {ticket.title}
           {/*<Avatar src={quote.author.avatarUrl} alt={quote.author.name} />*/}
-          {/*{isClone ? <CloneBadge>Clone</CloneBadge> : null}*/}
           {/*<Content>*/}
           {/*  <BlockQuote>{quote.content}</BlockQuote>*/}
           {/*  <Footer>*/}
