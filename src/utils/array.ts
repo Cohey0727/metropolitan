@@ -8,3 +8,13 @@ export function replace<T>(array: T[], predicate: Predicate, newObj: T) {
   if (index >= 0) array[index] = newObj;
   return index;
 }
+
+export function injectInterval<T>(array: T[], obj: T, interval = 1) {
+  let isFirst = true;
+  return array.reduce((acc, current, index) => {
+    if (!isFirst && (index + 1) % interval === 0) acc.push(obj);
+    isFirst = false;
+    acc.push(current);
+    return acc;
+  }, [] as T[]);
+}
