@@ -9,7 +9,7 @@ const routes: RouteConfig[] = [
       {
         key: 'board',
         component: Board,
-        path: '/board',
+        path: '',
       },
     ],
   },
