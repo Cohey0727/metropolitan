@@ -1,13 +1,9 @@
 import React from 'react';
 import {
-  DraggableProvided,
-  DraggableRubric,
-  DraggableStateSnapshot,
   Droppable,
   DroppableProvided,
   DroppableStateSnapshot,
 } from 'react-beautiful-dnd';
-import useTheme from '@material-ui/core/styles/useTheme';
 import {Theme} from '@material-ui/core';
 import {List, Ticket} from '../../../types';
 import {Column, Paper, Row} from '../../atoms/containers';
@@ -37,7 +33,6 @@ const Title = styled(Row)<Theme, any>(({theme}) => ({
 
 const ListComponent: React.FC<Props> = (props) => {
   const {list, tickets = [], index} = props;
-  const theme = useTheme();
   return (
     <Container
       padding={[1, 1, 0, 1]}

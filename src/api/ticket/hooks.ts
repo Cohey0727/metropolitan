@@ -11,7 +11,7 @@ export const useTickets = (projectId: string) => {
       setTickets(tickets);
       setLoading(false);
     });
-    return disconnect;
+    return () => disconnect();
   }, [projectId]);
 
   return {tickets, loading};
