@@ -41,12 +41,17 @@ const ListComponent: React.FC<Props> = (props) => {
   return (
     <Paper padding={1} margin={1} width={320}>
       <h2>{list.title}</h2>
-      <Droppable droppableId={list.id} mode='virtual'>
+      <Droppable droppableId={list.id}>
         {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
-          <Column ref={provided.innerRef} {...provided.droppableProps}>
+          <Column
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            height={'100%'}
+          >
             {tickets.map((ticket, ticketIndex) => (
               <Card ticket={ticket} index={ticketIndex} />
             ))}
+            {provided.placeholder}
           </Column>
         )}
       </Droppable>

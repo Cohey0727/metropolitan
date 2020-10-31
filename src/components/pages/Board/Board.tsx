@@ -12,7 +12,7 @@ import {Theme, useTheme} from '@material-ui/core';
 
 const Board: React.FC = () => {
   const [tickets, setTickets] = useState(ticketsData);
-  const {spacing} = useTheme();
+
   const ticketsByList = useMemo(
     () =>
       tickets.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
@@ -28,12 +28,18 @@ const Board: React.FC = () => {
     if (!result.destination) return;
     const source: DraggableLocation = result.source;
     const destination: DraggableLocation = result.destination;
+    const ticket = tickets.find((_ticket) => _ticket.id === result.draggableId);
+
     // did not move anywhere - can bail early
     if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
+      (source.droppableId === destination.droppableId &&
+        source.index === destination.index) ||
+      !ticket
     )
       return;
+
+    ticket.currentPosition.list = destination.droppableId;
+    setTickets([...tickets]);
   }
 
   return (
