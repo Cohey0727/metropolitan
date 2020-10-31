@@ -21,7 +21,7 @@ const grid = 8;
 // Memoizing row items for even better performance!
 const Card = ({ticket, index}: Props) => {
   // Faking some nice spacing around the items
-  
+
   return (
     <Draggable draggableId={ticket.id} index={index} key={ticket.id}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
