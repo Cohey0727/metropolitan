@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
 a:-webkit-any-link {
   color: unset;
   cursor: pointer;

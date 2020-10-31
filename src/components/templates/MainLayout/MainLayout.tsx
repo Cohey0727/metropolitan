@@ -4,6 +4,7 @@ import TopBar, {getTopBarHeight} from './TopBar';
 import SideBar, {getSideBarWidth} from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
 import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
+import auth0Hoc from '../../../auth/auth0Hoc';
 
 const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   root: {
@@ -37,4 +38,4 @@ const MainLayout = (props: Props) => {
   );
 };
 
-export default MainLayout;
+export default auth0Hoc(MainLayout);

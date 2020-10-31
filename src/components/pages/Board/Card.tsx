@@ -30,7 +30,7 @@ const Card = ({ticket, index}: Props) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           data-index={index}
-          elevation={2}
+          elevation={4}
           minHeight={120}
           maxHeight={240}
           margin={[1, 0]}

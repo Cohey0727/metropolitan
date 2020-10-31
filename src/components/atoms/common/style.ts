@@ -16,6 +16,8 @@ export type CssProps = {
   display: CSSProperties['display'];
   flex: CSSProperties['flex'];
   flexDirection: CSSProperties['flexDirection'];
+  justifyContent: CSSProperties['justifyContent'];
+  alignItems: CSSProperties['alignItems'];
 };
 
 const spaceUnit = 8;
@@ -45,6 +47,8 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     display,
     flex,
     flexDirection,
+    justifyContent,
+    alignItems,
   } = props;
   return {
     color: color || 'inherits',
@@ -60,5 +64,7 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     display,
     flex,
     flexDirection,
+    justifyContent,
+    alignItems,
   };
 };

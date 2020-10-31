@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import {Auth0Provider, useAuth0} from '@auth0/auth0-react';
 import {useAsync} from 'react-use';
+import {Spinner} from '../components/atoms/spinner';
 
-const auth0Hoc: React.FC = ({children}) => {
+const auth0Hoc = (Component: ComponentType<any>) => (props: any) => {
   return (
     <Auth0Provider
-        domain={process.env.REACT_APP_AUTH0_DOMAIN as string}
+      domain={process.env.REACT_APP_AUTH0_DOMAIN as string}
       clientId={process.env.REACT_APP_AUTH0_CLIENT_ID as string}
       useRefreshTokens={true}
       redirectUri={window.location.origin}
     >
-      <Auth0Authentication>{children}</Auth0Authentication>
+      <Auth0Authentication>
+        <Component {...props} />
+      </Auth0Authentication>
     </Auth0Provider>
   );
 };
@@ -24,6 +27,6 @@ const Auth0Authentication: React.FC = ({children}) => {
     if (!isLoading && !isAuthenticated) await loginWithRedirect();
   }, [isLoading, isAuthenticated]);
 
-  if (isLoading) return <div>...Loading</div>;
+  if (isLoading) return <Spinner />;
   return <>{isAuthenticated && children}</>;
 };
