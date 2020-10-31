@@ -30,11 +30,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AccountUser = () => {
+const AccountMenu = () => {
   const {user, logout} = useAuth0();
   const classes = useStyles();
   const handleSelect = useCallback((item: MenuItemType) => {
-    if (item.key === 'logout') logout();
+    if (item.key === 'logout') logout({returnTo: window.location.origin});
   }, []);
 
   return (
@@ -48,4 +48,4 @@ const AccountUser = () => {
   );
 };
 
-export default AccountUser;
+export default AccountMenu;
