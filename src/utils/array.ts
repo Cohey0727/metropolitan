@@ -31,6 +31,5 @@ export function inject<T>(
   } else {
     array.push(newObj);
   }
-  console.debug([...array]);
   return index;
 }
