@@ -1,10 +1,10 @@
-import MainLayout from './components/templates/MainLayout';
+import ProjectLayout from './components/templates/ProjectLayout';
 import {RouteConfig} from 'react-router-config';
 import Board from './components/pages/Board';
 
 const routes: RouteConfig[] = [
   {
-    component: MainLayout,
+    component: ProjectLayout,
     routes: [
       {
         key: 'board',

@@ -1,12 +1,12 @@
 export type User = {
   sub: string;
-  given_name: string;
-  family_name: string;
-  nickname: string;
-  name: string;
-  picture: string;
-  locale: string;
-  updated_at: string;
   email: string;
+  name: string;
+  nickname: string;
+  picture: string;
+  updated_at: string;
   email_verified: boolean;
+  locale?: string;
+  given_name?: string;
+  family_name?: string;
 };

@@ -1,9 +1,9 @@
-import {Board, List} from './project';
+import {Board, List, Project} from './project';
 import {User} from './user';
 
 export type Ticket = {
   id: string;
-  projectId: string;
+  projectId: Project['id'];
   currentPosition: {
     board: Board['id'];
     list: List['id'];

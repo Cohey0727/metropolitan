@@ -36,7 +36,6 @@ const AccountMenu = () => {
   const handleSelect = useCallback((item: MenuItemType) => {
     if (item.key === 'logout') logout({returnTo: window.location.origin});
   }, []);
-  console.debug(JSON.stringify(user));
   return (
     <PopperMenu itemsList={accountMenu} onSelect={handleSelect}>
       <Avatar
