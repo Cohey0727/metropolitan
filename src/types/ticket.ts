@@ -8,6 +8,7 @@ export type Ticket = {
     board: Board['id'];
     list: List['id'];
   };
+  order: number;
   author: User['sub'];
   assignees: {[BoardId: string]: User['sub']};
   title: string;

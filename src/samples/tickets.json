@@ -6,6 +6,7 @@
       "board": "board1",
       "list": "list1"
     },
+    "order": 65536,
     "author": "google-oauth2|105675009773641077796",
     "assignees": {"board1": "github|29517743"},
     "title": "ticket1",
@@ -20,6 +21,7 @@
       "board": "board1",
       "list": "list1"
     },
+    "order": 131072,
     "author": "github|29517743",
     "assignees": {"board1": "google-oauth2|105675009773641077796"},
     "title": "ticket2",
@@ -34,6 +36,7 @@
       "board": "board1",
       "list": "list1"
     },
+    "order": 196608,
     "author": "google-oauth2|105675009773641077796",
     "assignees": {"board1": "google-oauth2|105675009773641077796"},
     "title": "ticket3",
@@ -48,6 +51,7 @@
       "board": "board1",
       "list": "list2"
     },
+    "order": 262144,
     "author": "github|29517743",
     "assignees": {"board1": "github|29517743"},
     "title": "ticket4",
@@ -62,6 +66,7 @@
       "board": "board1",
       "list": "list3"
     },
+    "order": 327680,
     "author": "google-oauth2|105675009773641077796",
     "assignees": {"board1": "google-oauth2|105675009773641077796"},
     "title": "ticket5",
@@ -76,6 +81,7 @@
       "board": "board1",
       "list": "list1"
     },
+    "order": 393216,
     "author": "github|29517743",
     "assignees": {"board1": "google-oauth2|105675009773641077796"},
     "title": "ticket6",
@@ -90,6 +96,7 @@
       "board": "board1",
       "list": "list1"
     },
+    "order": 458752,
     "author": "google-oauth2|105675009773641077796",
     "assignees": {"board1": "github|29517743"},
     "title": "ticket7",

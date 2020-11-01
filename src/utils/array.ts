@@ -1,9 +1,10 @@
-import {Diff} from './types';
-import _ from 'lodash';
+import _, {ListIterateeCustom} from 'lodash';
 
-type Predicate = Diff<Parameters<typeof _.findIndex>[1], undefined | null>;
-
-export function replace<T>(array: T[], predicate: Predicate, newObj: T) {
+export function replace<T>(
+  array: T[],
+  newObj: T,
+  predicate: ListIterateeCustom<T, boolean>
+) {
   const index = _.findIndex<T>(array, predicate);
   if (index >= 0) array[index] = newObj;
   return index;
@@ -17,4 +18,19 @@ export function injectInterval<T>(array: T[], obj: T, interval = 1) {
     acc.push(current);
     return acc;
   }, [] as T[]);
+}
+
+export function inject<T>(
+  array: T[],
+  newObj: T,
+  predicate: ListIterateeCustom<T, boolean>
+) {
+  const index = _.findIndex(array, predicate);
+  if (index >= 0) {
+    array.splice(index, 0, newObj);
+  } else {
+    array.push(newObj);
+  }
+  console.debug([...array]);
+  return index;
 }

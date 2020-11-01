@@ -15,7 +15,7 @@ export const getTickets = async (projectId: string) => {
 
 export const updateTicket = async (newTicket: Ticket) => {
   const tickets = await getTickets(newTicket.projectId);
-  replace(tickets, {id: newTicket.id}, newTicket);
+  replace(tickets, newTicket, {id: newTicket.id});
   /**
    * @TODO change localStorage → api
    **/
