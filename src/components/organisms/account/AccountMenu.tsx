@@ -33,9 +33,12 @@ const useStyles = makeStyles(() => ({
 const AccountMenu = () => {
   const {user, logout} = useAuth0();
   const classes = useStyles();
-  const handleSelect = useCallback((item: MenuItemType) => {
-    if (item.key === 'logout') logout({returnTo: window.location.origin});
-  }, []);
+  const handleSelect = useCallback(
+    (item: MenuItemType) => {
+      if (item.key === 'logout') logout({returnTo: window.location.origin});
+    },
+    [logout]
+  );
   return (
     <PopperMenu itemsList={accountMenu} onSelect={handleSelect}>
       <Avatar

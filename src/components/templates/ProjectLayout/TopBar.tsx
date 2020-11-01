@@ -3,7 +3,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import {AppBar} from '@material-ui/core';
 import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
 import {ResponsiveInfo} from '../../../theme/useResponsive';
-import {Container, Row} from '../../atoms/containers';
+import {Container} from '../../atoms/containers';
 import {AccountUser} from '../../organisms/account';
 
 export function getTopBarHeight(responsiveInfo: ResponsiveInfo) {
