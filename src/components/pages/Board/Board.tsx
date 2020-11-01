@@ -11,6 +11,9 @@ import {Row} from '../../atoms/containers';
 import {useTickets} from '../../../api/ticket/hooks';
 import {Spinner} from '../../atoms/spinner';
 import {updateTicket} from '../../../api/ticket/operations';
+import {calcNewOrder} from './utils';
+import {inject} from '../../../utils/array';
+import _ from 'lodash';
 
 const Board: React.FC = () => {
   const {tickets, loading} = useTickets('projectId');
@@ -18,7 +21,11 @@ const Board: React.FC = () => {
     () =>
       tickets!.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
         const listId = ticket.currentPosition.list;
-        acc[listId] = acc[listId] ? [...acc[listId], ticket] : [ticket];
+        if (acc[listId] === undefined) {
+          acc[listId] = [ticket];
+          return acc;
+        }
+        inject(acc[listId], ticket, (_ticket) => _ticket.order > ticket.order);
         return acc;
       }, {} as {[key: string]: Ticket[]}),
     [tickets]
@@ -32,7 +39,7 @@ const Board: React.FC = () => {
     const ticket = tickets!.find(
       (_ticket) => _ticket.id === result.draggableId
     );
-
+    const listTickets = ticketsByList[destination.droppableId] || [];
     if (
       (source.droppableId === destination.droppableId &&
         source.index === destination.index) ||
@@ -41,6 +48,7 @@ const Board: React.FC = () => {
       return;
 
     ticket.currentPosition.list = destination.droppableId;
+    ticket.order = calcNewOrder(listTickets, ticket, destination.index);
     updateTicket(ticket);
   }
 
