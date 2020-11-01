@@ -62,7 +62,7 @@ const Body = React.forwardRef(
 
 const Footer = React.forwardRef(
   (props: React.ComponentProps<typeof Row>, ref) => (
-    <Row {...props} flex={'0 0 auto'}>
+    <Row {...props} flex={'0 0 auto'} justifyContent={'flex-end'}>
       {props.children}
     </Row>
   )
