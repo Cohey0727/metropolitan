@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-// import clsx from 'clsx';
 import People from '@material-ui/icons/People';
 import {OverridableComponent} from '@material-ui/core/OverridableComponent';
 import {SvgIconTypeMap} from '@material-ui/core/SvgIcon/SvgIcon';
@@ -8,7 +7,6 @@ import Dashboard from '@material-ui/icons/Dashboard';
 import Settings from '@material-ui/icons/Settings';
 import {ResponsiveInfo} from '../../../theme/useResponsive';
 import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
-// import Logo from "src/components/Logo";
 
 export function getSideBarWidth(responsiveInfo: ResponsiveInfo) {
   return 96;
@@ -71,7 +69,7 @@ const sideBarContents: SideBarContent[] = [
   },
   {
     label: 'Boards',
-    link: '/board',
+    link: '/boards',
     Icon: Dashboard,
   },
 ];

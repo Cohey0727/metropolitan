@@ -1,10 +1,10 @@
 import React from 'react';
-// import {Outlet} from 'react-router-dom';
 import TopBar, {getTopBarHeight} from './TopBar';
 import SideBar, {getSideBarWidth} from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
 import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
 import auth0Hoc from '../../../auth/auth0Hoc';
+import UsersProvider from '../../../api/user/providers';
 
 const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   root: {
@@ -25,17 +25,19 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
 
 type Props = {} & RouteConfigComponentProps<any>;
 
-const MainLayout = (props: Props) => {
+const ProjectLayout = (props: Props) => {
   const {route} = props;
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <TopBar />
-      <SideBar />
-      <div className={classes.wrapper}>{renderRoutes(route!.routes)}</div>
-    </div>
+    <UsersProvider>
+      <div className={classes.root}>
+        <TopBar />
+        <SideBar />
+        <div className={classes.wrapper}>{renderRoutes(route!.routes)}</div>
+      </div>
+    </UsersProvider>
   );
 };
 
-export default auth0Hoc(MainLayout);
+export default auth0Hoc(ProjectLayout);

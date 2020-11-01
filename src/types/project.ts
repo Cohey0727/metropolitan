@@ -1,3 +1,5 @@
+import {User} from './user';
+
 export type List = {
   id: string;
   title: string;
@@ -10,14 +12,10 @@ export type Board = {
   lists: List[];
 };
 
-export type Ticket = {
+export type Project = {
   id: string;
-  projectId: string;
-  currentPosition: {
-    board: Board['id'];
-    list: List['id'];
-  };
-  author: string;
   title: string;
   description: string;
+  boards: Board[];
+  members: User['sub'][];
 };

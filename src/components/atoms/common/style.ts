@@ -4,6 +4,8 @@ import {Theme} from '@material-ui/core';
 
 export type CssProps = {
   color: CSSProperties['color'];
+  fontSize: CSSProperties['fontSize'];
+  fontWeight: CSSProperties['fontWeight'];
   backgroundColor: CSSProperties['backgroundColor'];
   width: number | string;
   minWidth: number | string;
@@ -35,6 +37,8 @@ type CssCreator = (
 export const cssCreator: CssCreator = ({theme, ...props}) => {
   const {
     color,
+    fontSize,
+    fontWeight,
     backgroundColor,
     width,
     minWidth,
@@ -52,6 +56,8 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
   } = props;
   return {
     color: color || 'inherits',
+    fontSize: typeof fontSize === 'number' ? `${fontSize}em` : fontSize,
+    fontWeight,
     backgroundColor: backgroundColor || 'inherits',
     width: typeof width === 'number' ? `${width}px` : width,
     minWidth: typeof minWidth === 'number' ? `${minWidth}px` : minWidth,
