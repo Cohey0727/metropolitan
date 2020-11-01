@@ -13,7 +13,6 @@ import {Spinner} from '../../atoms/spinner';
 import {updateTicket} from '../../../api/ticket/operations';
 import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
-import _ from 'lodash';
 
 const Board: React.FC = () => {
   const {tickets, loading} = useTickets('projectId');

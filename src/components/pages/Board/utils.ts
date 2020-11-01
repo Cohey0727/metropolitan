@@ -13,7 +13,7 @@ export function calcNewOrder(
   const base = isSameList ? excludeSelfTickets : originalList;
   const count = base.length;
   if (count === 0) return orderUnit;
-  
+
   const preOrder = base[newIndex - 1]?.order || 0;
   const nextOrder = base[newIndex]?.order || base[count - 1].order + orderUnit;
   return (preOrder + nextOrder) / 2.0;

@@ -8,7 +8,7 @@ import {
 } from 'react-beautiful-dnd';
 
 import {Ticket} from '../../../types';
-import {Column, Paper, Row} from '../../atoms/containers';
+import {Paper, Row} from '../../atoms/containers';
 import {useUsers} from '../../../api/user/hooks';
 
 type Props = {
@@ -53,7 +53,12 @@ const Body = React.forwardRef(
   (props: React.ComponentProps<typeof Row>, ref) => {
     const {palette} = useTheme();
     return (
-      <Row {...props} flex={'1 1 0'} padding={[0.5, 0]} color={palette.grey.A700}>
+      <Row
+        {...props}
+        flex={'1 1 0'}
+        padding={[0.5, 0]}
+        color={palette.grey.A700}
+      >
         {props.children}
       </Row>
     );
@@ -73,7 +78,7 @@ const Card = ({ticket, index}: Props) => {
   const classes = useStyles();
   const user = useMemo(
     () => users.find((_user) => _user.sub === ticket.author),
-    [users]
+    [users, ticket.author]
   );
 
   return (

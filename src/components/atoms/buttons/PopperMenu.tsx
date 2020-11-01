@@ -70,7 +70,7 @@ const PopperMenu: React.FC<Props> = (props) => {
       handleSelect,
       handleListKeyDown,
     };
-  }, []);
+  }, [onSelect]);
 
   const prevOpen = React.useRef(open);
   React.useEffect(() => {

@@ -23,7 +23,7 @@ export type ResponsiveInfo = {
 
 function calculate(width: number): ResponsiveInfo {
   const newInfo = {} as ResponsiveInfo;
-  Object.entries(responsiveConfig).map(([key, value]) => {
+  Object.entries(responsiveConfig).forEach(([key, value]) => {
     newInfo[key as keyof ResponsiveConfig] = width >= value;
   });
   return newInfo;
