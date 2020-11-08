@@ -10,9 +10,10 @@ const getLocalStorageKey = (projectId: string) =>
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export const getTickets = async (projectId: string) => {
-  // const url = `${TICKET_API_URL}/projects/${projectId}/tickets`
-  // const res = await axios.get(url);
-  // console.debug({res});
+  const url = `${TICKET_API_URL}/projects/${projectId}/tickets`;
+  console.debug({projectId, url});
+  const res = await axios.get(url);
+  console.debug({res});
   const localData = localStorage.getItem(getLocalStorageKey(projectId));
   return localData ? (JSON.parse(localData) as Ticket[]) : ticketsData;
 };
