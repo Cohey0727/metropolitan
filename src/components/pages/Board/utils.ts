@@ -8,7 +8,7 @@ export function calcNewOrder(
   newIndex: number
 ) {
   const excludeSelfTickets = originalList.filter(
-    (_ticket) => _ticket.id !== target.id
+    (_ticket) => _ticket.ticketId !== target.ticketId
   );
   const isSameList = excludeSelfTickets.length !== originalList.length;
   const base = isSameList ? excludeSelfTickets : originalList;

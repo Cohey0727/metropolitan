@@ -4,7 +4,7 @@ import {
   DraggableLocation,
   DropResult,
 } from 'react-beautiful-dnd';
-import {boardData} from '../../../samples';
+import {projectData} from '../../../samples';
 import List from './List';
 import {Ticket} from '../../../types';
 import {Row} from '../../atoms/containers';
@@ -15,7 +15,9 @@ import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
 
 const Board: React.FC = () => {
-  const {tickets, loading} = useTickets('projectId');
+  const project = projectData[0]
+  const board = project.boards[0]
+  const {tickets, loading} = useTickets(project.projectId);
   const ticketsByList = useMemo(
     () =>
       tickets!.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
@@ -29,14 +31,14 @@ const Board: React.FC = () => {
       }, {} as {[key: string]: Ticket[]}),
     [tickets]
   );
-  const board = boardData;
+
 
   function onDragEnd(result: DropResult) {
     if (!result.destination) return;
     const source: DraggableLocation = result.source;
     const destination: DraggableLocation = result.destination;
     const ticket = tickets!.find(
-      (_ticket) => _ticket.id === result.draggableId
+      (_ticket) => _ticket.ticketId === result.draggableId
     );
     const listTickets = ticketsByList[destination.droppableId] || [];
     if (

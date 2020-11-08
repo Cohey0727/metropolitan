@@ -1,21 +1,25 @@
 import {ticketsData} from '../../samples';
 import {Ticket} from '../../types';
 import {replace} from '../../utils/array';
+import {TICKET_API_URL, TICKET_WS_URL} from './constants';
+import axios from 'axios';
 
 const getLocalStorageKey = (projectId: string) =>
   `project:${projectId}/tickets`;
 
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+
 export const getTickets = async (projectId: string) => {
-  /**
-   * @TODO change localStorage → api
-   **/
+  // const url = `${TICKET_API_URL}/projects/${projectId}/tickets`
+  // const res = await axios.get(url);
+  // console.debug({res});
   const localData = localStorage.getItem(getLocalStorageKey(projectId));
   return localData ? (JSON.parse(localData) as Ticket[]) : ticketsData;
 };
 
 export const updateTicket = async (newTicket: Ticket) => {
   const tickets = await getTickets(newTicket.projectId);
-  replace(tickets, newTicket, {id: newTicket.id});
+  replace(tickets, newTicket, {ticketId: newTicket.ticketId});
   /**
    * @TODO change localStorage → api
    **/
@@ -25,23 +29,21 @@ export const updateTicket = async (newTicket: Ticket) => {
   );
 };
 
-export const connectBoardTickets = (
+export const connectProjectTickets = (
   projectId: string,
   callBack: (tickets: Ticket[]) => void
 ) => {
   /**
    * @TODO change listen localStorage → web socket
    **/
-  const originalSetItem = window.localStorage.setItem.bind(window.localStorage);
-  window.localStorage.setItem = function (key, value) {
-    callBack(JSON.parse(value));
-    originalSetItem(key, value);
-  };
+  const socket = new WebSocket(`${TICKET_WS_URL}?project_id=${projectId}`);
+  socket.addEventListener('message', function (event) {
+    callBack(JSON.parse(event.data));
+  });
+
   getTickets(projectId).then((tickets) => {
     callBack(tickets);
   });
-  function disconnect() {
-    window.localStorage.setItem = originalSetItem;
-  }
-  return disconnect;
+
+  return socket.close;
 };

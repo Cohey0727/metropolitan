@@ -6,14 +6,14 @@ export type List = {
 };
 
 export type Board = {
-  id: string;
+  boardId: string;
   title: string;
   description: string;
   lists: List[];
 };
 
 export type Project = {
-  id: string;
+  projectId: string;
   title: string;
   description: string;
   boards: Board[];
