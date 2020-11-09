@@ -9,44 +9,24 @@ const getLocalStorageKey = (projectId: string) =>
 
 export const getTickets = async (projectId: string) => {
   const url = `${TICKET_API_URL}/projects/${projectId}/tickets`;
-
-  try {
-    const res = await axios.get(
-      'https://7f2mz6dtf0.execute-api.ap-northeast-1.amazonaws.com/Prod/hello'
-    );
-    console.debug({res});
-    await axios.get(url);
-  } catch (e) {
-    console.debug({e});
-  }
-  const localData = localStorage.getItem(getLocalStorageKey(projectId));
-  return localData ? (JSON.parse(localData) as Ticket[]) : ticketsData;
+  const res = await axios.get(url);
+  return res.data;
 };
 
 export const updateTicket = async (newTicket: Ticket) => {
-  const tickets = await getTickets(newTicket.projectId);
-  replace(tickets, newTicket, {ticketId: newTicket.ticketId});
-  /**
-   * @TODO change localStorage → api
-   **/
-  localStorage.setItem(
-    getLocalStorageKey(newTicket.projectId),
-    JSON.stringify(tickets)
-  );
+  const url = `${TICKET_API_URL}/projects/${newTicket.projectId}/tickets/${newTicket.ticketId}`;
+  const res = await axios.put(url, newTicket);
+  return res.data;
 };
 
 export const connectProjectTickets = (
   projectId: string,
   callBack: (tickets: Ticket[]) => void
 ) => {
-  /**
-   * @TODO change listen localStorage → web socket
-   **/
   const socket = new WebSocket(`${TICKET_WS_URL}?project_id=${projectId}`);
   socket.addEventListener('message', function (event) {
     callBack(JSON.parse(event.data));
   });
-
   getTickets(projectId).then((tickets) => {
     callBack(tickets);
   });
