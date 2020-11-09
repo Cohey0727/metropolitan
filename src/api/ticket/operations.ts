@@ -7,13 +7,18 @@ import axios from 'axios';
 const getLocalStorageKey = (projectId: string) =>
   `project:${projectId}/tickets`;
 
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
 export const getTickets = async (projectId: string) => {
   const url = `${TICKET_API_URL}/projects/${projectId}/tickets`;
-  console.debug({projectId, url});
-  const res = await axios.get(url);
-  console.debug({res});
+
+  try {
+    const res = await axios.get(
+      'https://7f2mz6dtf0.execute-api.ap-northeast-1.amazonaws.com/Prod/hello'
+    );
+    console.debug({res});
+    await axios.get(url);
+  } catch (e) {
+    console.debug({e});
+  }
   const localData = localStorage.getItem(getLocalStorageKey(projectId));
   return localData ? (JSON.parse(localData) as Ticket[]) : ticketsData;
 };
@@ -45,6 +50,4 @@ export const connectProjectTickets = (
   getTickets(projectId).then((tickets) => {
     callBack(tickets);
   });
-
-  return socket.close;
 };

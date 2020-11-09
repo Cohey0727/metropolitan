@@ -7,13 +7,11 @@ export const useTickets = (projectId: string) => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
 
   useEffect(() => {
-    const disconnect = connectProjectTickets(projectId, (tickets) => {
+    connectProjectTickets(projectId, (tickets) => {
       setTickets(tickets);
       setLoading(false);
     });
-    return () => {
-      disconnect();
-    };
+    return () => {};
   }, [projectId]);
 
   return {tickets, loading};
