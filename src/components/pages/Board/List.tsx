@@ -51,7 +51,7 @@ const ListComponent: React.FC<Props> = (props) => {
             flex={'1 1 auto'}
           >
             {tickets.map((ticket, ticketIndex) => (
-              <Card key={ticket.id} ticket={ticket} index={ticketIndex} />
+              <Card key={ticket.ticketId} ticket={ticket} index={ticketIndex} />
             ))}
             {provided.placeholder}
           </Column>

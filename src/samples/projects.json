@@ -1,31 +1,33 @@
-{
-  "boards": [
-    {
-      "id": "board1",
-      "title": "Development",
-      "description": "Development Board",
-      "lists": [
-        {
-          "id": "list1",
-          "title": "Draft"
-        },
-        {
-          "id": "list2",
-          "title": "On Progress"
-        },
-        {
-          "id": "list3",
-          "title": "Review"
-        },
-        {
-          "id": "list4",
-          "title": "Finish"
-        }
-      ]
-    }
-  ],
-  "id": "project1",
-  "title": "開発フェーズ",
-  "description": "開発フェーズ",
-  "members": ["google-oauth2|105675009773641077796", "github|29517743"]
-}
+[
+  {
+    "projectId": "project1",
+    "title": "開発フェーズ",
+    "description": "開発フェーズ",
+    "members": ["google-oauth2|105675009773641077796", "github|29517743"],
+    "boards": [
+      {
+        "boardId": "board1",
+        "title": "Development",
+        "description": "Development Board",
+        "lists": [
+          {
+            "id": "list1",
+            "title": "Draft"
+          },
+          {
+            "id": "list2",
+            "title": "On Progress"
+          },
+          {
+            "id": "list3",
+            "title": "Review"
+          },
+          {
+            "id": "list4",
+            "title": "Finish"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -2,10 +2,10 @@ import {Board, List, Project} from './project';
 import {User} from './user';
 
 export type Ticket = {
-  id: string;
-  projectId: Project['id'];
+  projectId: Project['projectId'];
+  ticketId: string;
   currentPosition: {
-    board: Board['id'];
+    board: Board['boardId'];
     list: List['id'];
   };
   order: number;

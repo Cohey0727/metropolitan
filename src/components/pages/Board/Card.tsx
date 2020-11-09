@@ -82,7 +82,7 @@ const Card = ({ticket, index}: Props) => {
   );
 
   return (
-    <Draggable draggableId={ticket.id} index={index} key={ticket.id}>
+    <Draggable draggableId={ticket.ticketId} index={index} key={ticket.ticketId}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
         <Container
           ref={provided.innerRef}

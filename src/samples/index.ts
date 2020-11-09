@@ -1,8 +1,8 @@
 import tickets from './tickets.json';
 import users from './users.json';
-import board from './board.json';
-import {Board, Ticket, User} from '../types';
+import projects from './projects.json';
+import {Project, Ticket, User} from '../types';
 
 export const ticketsData = tickets as Ticket[];
-export const boardData = board as Board;
 export const usersData = users as User[];
+export const projectData = projects as Project[];

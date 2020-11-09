@@ -1,6 +1,6 @@
 [
   {
-    "id": "ticket1",
+    "ticketId": "ticket1",
     "projectId": "projectId",
     "currentPosition": {
       "board": "board1",
@@ -15,7 +15,7 @@
     "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
-    "id": "ticket2",
+    "ticketId": "ticket2",
     "projectId": "projectId",
     "currentPosition": {
       "board": "board1",
@@ -30,7 +30,7 @@
     "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
-    "id": "ticket3",
+    "ticketId": "ticket3",
     "projectId": "projectId",
     "currentPosition": {
       "board": "board1",
@@ -45,7 +45,7 @@
     "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
-    "id": "ticket4",
+    "ticketId": "ticket4",
     "projectId": "projectId",
     "currentPosition": {
       "board": "board1",
@@ -60,7 +60,7 @@
     "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
-    "id": "ticket5",
+    "ticketId": "ticket5",
     "projectId": "projectId",
     "currentPosition": {
       "board": "board1",
@@ -75,7 +75,7 @@
     "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
-    "id": "ticket6",
+    "ticketId": "ticket6",
     "projectId": "projectId",
     "currentPosition": {
       "board": "board1",
@@ -90,7 +90,7 @@
     "dueDate": "2020-10-31T16:19:03.635Z"
   },
   {
-    "id": "ticket7",
+    "ticketId": "ticket7",
     "projectId": "projectId",
     "currentPosition": {
       "board": "board1",
