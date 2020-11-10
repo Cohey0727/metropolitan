@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {
   DragDropContext,
   DraggableLocation,
@@ -15,12 +15,18 @@ import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
 
 const Board: React.FC = () => {
-  const project = projectData[0]
-  const board = project.boards[0]
+  const project = projectData[0];
+  const board = project.boards[0];
   const {tickets, loading} = useTickets(project.projectId);
+  const [localTickets, setLocalTickets] = useState(tickets);
+
+  useEffect(() => {
+    setLocalTickets(tickets);
+  }, [tickets]);
+
   const ticketsByList = useMemo(
     () =>
-      tickets!.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
+      localTickets!.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
         const listId = ticket.currentPosition.list;
         if (acc[listId] === undefined) {
           acc[listId] = [ticket];
@@ -29,11 +35,10 @@ const Board: React.FC = () => {
         inject(acc[listId], ticket, (_ticket) => _ticket.order > ticket.order);
         return acc;
       }, {} as {[key: string]: Ticket[]}),
-    [tickets]
+    [localTickets]
   );
 
-
-  function onDragEnd(result: DropResult) {
+  const onDragEnd = async (result: DropResult) => {
     if (!result.destination) return;
     const source: DraggableLocation = result.source;
     const destination: DraggableLocation = result.destination;
@@ -50,8 +55,9 @@ const Board: React.FC = () => {
 
     ticket.currentPosition.list = destination.droppableId;
     ticket.order = calcNewOrder(listTickets, ticket, destination.index);
-    updateTicket(ticket);
-  }
+    setLocalTickets([...localTickets]);
+    await updateTicket(ticket);
+  };
 
   if (loading) return <Spinner />;
   return (

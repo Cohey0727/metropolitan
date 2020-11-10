@@ -1,11 +1,6 @@
-import {ticketsData} from '../../samples';
 import {Ticket} from '../../types';
-import {replace} from '../../utils/array';
 import {TICKET_API_URL, TICKET_WS_URL} from './constants';
 import axios from 'axios';
-
-const getLocalStorageKey = (projectId: string) =>
-  `project:${projectId}/tickets`;
 
 export const getTickets = async (projectId: string) => {
   const url = `${TICKET_API_URL}/projects/${projectId}/tickets`;
