@@ -1,6 +1,5 @@
 import {ticketsData} from '../../samples';
 import {Ticket} from '../../types';
-import {replace} from '../../utils/array';
 
 const getLocalStorageKey = (projectId: string) =>
   `project:${projectId}/tickets`;
@@ -13,17 +12,6 @@ export const getTickets = async (projectId: string) => {
   return localData ? (JSON.parse(localData) as Ticket[]) : ticketsData;
 };
 
-export const updateTicket = async (newTicket: Ticket) => {
-  const tickets = await getTickets(newTicket.projectId);
-  replace(tickets, newTicket, {ticketId: newTicket.ticketId});
-  /**
-   * @TODO change localStorage → api
-   **/
-  localStorage.setItem(
-    getLocalStorageKey(newTicket.projectId),
-    JSON.stringify(tickets)
-  );
-};
 
 export const connectBoardTickets = (
   projectId: string,
