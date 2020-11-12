@@ -9,7 +9,7 @@ import {ResponsiveInfo} from '../../../theme/useResponsive';
 import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
 
 export function getSideBarWidth(responsiveInfo: ResponsiveInfo) {
-  return 96;
+  return responsiveInfo.md ? 96 : 0;
 }
 
 const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
@@ -24,6 +24,7 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
+    zIndex: 1,
   },
   menuList: {
     alignItems: 'center',

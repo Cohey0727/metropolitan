@@ -37,7 +37,8 @@ const ListComponent: React.FC<Props> = (props) => {
     <Container
       padding={[1, 1, 0, 1]}
       margin={1}
-      width={320}
+      minWidth={'max(16vw, 216px)'}
+      width={'min(32vw, 324px)'}
       display={'flex'}
       flexDirection={'column'}
       index={index}
