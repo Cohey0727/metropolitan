@@ -20,6 +20,7 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     width: '100vw',
     height: '100vh',
     boxSizing: 'border-box',
+    overflowX: 'auto',
   },
 }));
 

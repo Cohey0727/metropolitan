@@ -26,6 +26,7 @@ a:-webkit-any-link {
 /* Works on Chrome/Edge/Safari */
 *::-webkit-scrollbar {
   width: 4px;
+  height: 4px;
 }
 
 *::-webkit-scrollbar-track {
