@@ -13,6 +13,9 @@ export type CssProps = {
   height: number | string;
   minHeight: number | string;
   maxHeight: number | string;
+  overflow: CSSProperties['overflow'];
+  overflowX: CSSProperties['overflowX'];
+  overflowY: CSSProperties['overflowY'];
   padding: number | number[];
   margin: number | number[];
   display: CSSProperties['display'];
@@ -46,6 +49,9 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     height,
     minHeight,
     maxHeight,
+    overflow,
+    overflowX,
+    overflowY,
     padding,
     margin,
     display,
@@ -65,6 +71,9 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     height: typeof height === 'number' ? `${height}px` : height,
     minHeight: typeof height === 'number' ? `${minHeight}px` : minHeight,
     maxHeight: typeof height === 'number' ? `${maxHeight}px` : maxHeight,
+    overflow,
+    overflowX,
+    overflowY,
     padding: spaceCreator(padding),
     margin: spaceCreator(margin),
     display,
