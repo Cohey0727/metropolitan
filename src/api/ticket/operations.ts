@@ -1,7 +1,6 @@
 import {Ticket} from '../../types';
 import {TICKET_API_URL, TICKET_WS_URL} from './constants';
 import axios from 'axios';
-import {useEffect, useState} from 'react';
 
 export const getTickets = async (projectId: string) => {
   const url = `${TICKET_API_URL}/projects/${projectId}/tickets`;

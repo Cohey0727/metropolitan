@@ -7,7 +7,7 @@ import {
 import {projectData} from '../../../samples';
 import List from './List';
 import {Ticket} from '../../../types';
-import {Container, Row} from '../../atoms/containers';
+import {Row} from '../../atoms/containers';
 import {useTickets} from '../../../api/ticket/hooks';
 import {Spinner} from '../../atoms/spinner';
 import {updateTicket} from '../../../api/ticket/operations';
