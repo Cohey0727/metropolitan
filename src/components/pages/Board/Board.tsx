@@ -7,7 +7,7 @@ import {
 import {projectData} from '../../../samples';
 import List from './List';
 import {Ticket} from '../../../types';
-import {Row} from '../../atoms/containers';
+import {Container, Row} from '../../atoms/containers';
 import {useTickets} from '../../../api/ticket/hooks';
 import {Spinner} from '../../atoms/spinner';
 import {updateTicket} from '../../../api/ticket/operations';
@@ -62,7 +62,12 @@ const Board: React.FC = () => {
   if (loading) return <Spinner />;
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Row padding={[0, 2]} height={'100%'} overflowX={'auto'}>
+      <Row
+        height={'100%'}
+        width={'100%'}
+        overflowX={'auto'}
+        padding={[0, 0, 0, 1]}
+      >
         {board.lists.map((list, index) => (
           <List
             key={list.id}
@@ -71,6 +76,7 @@ const Board: React.FC = () => {
             tickets={ticketsByList[list.id]}
           />
         ))}
+        <Container minWidth={96} height={'100%'} />
       </Row>
     </DragDropContext>
   );

@@ -10,6 +10,7 @@ type Props = OwnProps & Partial<CssProps>;
 const Column = styled(Container)<Theme, Props>({
   display: 'flex',
   flexDirection: 'column',
+  height: '100%',
 });
 
 export default Column;
