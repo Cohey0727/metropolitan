@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   Droppable,
   DroppableProvided,
@@ -6,7 +6,7 @@ import {
 } from 'react-beautiful-dnd';
 import {Theme} from '@material-ui/core';
 import {List, Ticket} from '../../../types';
-import {Column, Paper, Row} from '../../atoms/containers';
+import {Column, Container, Paper, Row} from '../../atoms/containers';
 import Card from './Card';
 import {styled} from '@material-ui/styles';
 
@@ -22,9 +22,8 @@ type StyleProps = {
 
 const listColors = ['#9999ff', '#05aa9d', '#d5e524', '#deccff', '#76f7ea'];
 
-const Container = styled(Paper)<Theme, StyleProps>({
+const ListPaper = styled(Paper)<Theme, StyleProps>({
   borderTop: ({index}) => `4px solid ${listColors[index % listColors.length]}`,
-  overflow: 'scroll',
 });
 
 const Title = styled(Row)<Theme, any>(({theme}) => ({
@@ -33,9 +32,10 @@ const Title = styled(Row)<Theme, any>(({theme}) => ({
 
 const ListComponent: React.FC<Props> = (props) => {
   const {list, tickets = [], index} = props;
+
   return (
-    <Container
-      padding={[1, 1, 0, 1]}
+    <ListPaper
+      padding={[1, 0, 0, 0]}
       margin={1}
       minWidth={'max(16vw, 216px)'}
       width={'min(32vw, 324px)'}
@@ -43,22 +43,33 @@ const ListComponent: React.FC<Props> = (props) => {
       flexDirection={'column'}
       index={index}
     >
-      <Title flex={'0 0 auto'}>{list.title}</Title>
+      <Title flex={'0 0 auto'} padding={[0, 1]}>
+        {list.title}
+      </Title>
       <Droppable droppableId={list.id}>
-        {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
-          <Column
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            flex={'1 1 auto'}
-          >
-            {tickets.map((ticket, ticketIndex) => (
-              <Card key={ticket.ticketId} ticket={ticket} index={ticketIndex} />
-            ))}
-            {provided.placeholder}
-          </Column>
-        )}
+        {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => {
+          return (
+            <Column
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              padding={[0, 1]}
+              flex={'1 1 auto'}
+              height={'100%'}
+              overflow={'scroll'}
+            >
+              {tickets.map((ticket, ticketIndex) => (
+                <Card
+                  key={ticket.ticketId}
+                  ticket={ticket}
+                  index={ticketIndex}
+                />
+              ))}
+              {provided.placeholder}
+            </Column>
+          );
+        }}
       </Droppable>
-    </Container>
+    </ListPaper>
   );
 };
 
