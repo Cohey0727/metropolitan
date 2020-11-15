@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {ThemeProvider as MuiThemeProvider} from '@material-ui/styles';
 import _ from 'lodash';
 import {Theme} from '@material-ui/core';
-import defaultTheme from '../../theme';
+import theme from '../../theme';
 
 const mountPoint: any = document.getElementById('modal-root');
 
@@ -15,15 +15,21 @@ export type ModalProps<S = undefined, F = undefined> = {
   };
 };
 
-type Option = {
-  theme: Theme;
-};
+const globaModalStack = [];
+
+class Modal<P> {
+  Component: React.FC<P>;
+  props: P;
+  constructor(Component: React.FC<P>, props: P) {
+    this.Component = Component;
+    this.props = props;
+  }
+}
 
 const modalHandler = {
-  open: function <P>(
+  open: function <P extends ModalProps>(
     Component: React.FC<P>,
-    props: Omit<P, keyof ModalProps>,
-    option?: Partial<Option>
+    props: Omit<P, keyof ModalProps>
   ) {
     return new Promise<any>((resolve, reject) => {
       const handleResolve = (res: any) => {
@@ -75,13 +81,7 @@ const modalHandler = {
   },
 };
 
-function ProviderContainer({
-  children,
-  theme = defaultTheme,
-}: {
-  children: React.ReactNode;
-  theme?: Theme;
-}) {
+function ProviderContainer({children}: {children: React.ReactNode}) {
   return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
 }
 
