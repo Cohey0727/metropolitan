@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import {
   Dialog,
   DialogActions,
@@ -7,7 +7,6 @@ import {
 } from '../../../atoms/dialogs';
 import Editor from 'rich-markdown-editor';
 import {User} from '../../../../types';
-import {Button} from '@material-ui/core';
 import getInitialTicket from './getInitialTicket';
 import TextField from '@material-ui/core/TextField';
 import './editor.css';
@@ -15,13 +14,18 @@ import {Column} from '../../../atoms/containers';
 import makeResponsiveStyle from '../../../../theme/makeResponsiveStyle';
 import {createTicket} from '../../../../api/ticket/operations';
 import {useModalContext} from '../../../../utils/ui/modal/modalHandler';
+import {Button} from '../../../atoms/buttons';
+import BaseDialog from '@material-ui/core/Dialog';
+import RichMarkdownEditor from 'rich-markdown-editor';
 
 type Props = {
   user: User;
 };
 
 const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
-  title: {},
+  title: {
+    flex: '0 0 auto',
+  },
   editorContainer: {
     overflow: 'scroll',
     maxHeight: 'calc(100vh - 320px)',
@@ -31,6 +35,7 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     padding: theme.spacing(0.5, 1),
     margin: theme.spacing(1, 0.5),
     borderColor: theme.palette.primary.main,
+    flex: '1 1 auto',
   },
 }));
 
@@ -54,20 +59,29 @@ const NewTicketDialog: React.FC<Props> = (props) => {
     context.actions.resolve(res);
   };
 
+  const editorRef = useRef<RichMarkdownEditor>(null);
+  const onClickEditorArea = () => {
+    editorRef?.current?.focusAtEnd();
+  };
+
   return (
-    <Dialog>
+    <Dialog maxWidth={'md'} fullWidth={true}>
       <DialogHeader>{'New Ticket'}</DialogHeader>
       <DialogBody>
-        <Column padding={1}>
+        <Column padding={1} minHeight={'45vh'}>
           <TextField
             className={classes.title}
-            placeholder={'Task: Add a site to form...'}
+            placeholder={'Ticket title'}
             label={'Title'}
             onChange={(e) => handleChange('title')(e.target.value)}
           />
-          <Column className={classes.editorContainer}>
+          <Column
+            className={classes.editorContainer}
+            onClick={onClickEditorArea}
+          >
             <Editor
-              placeholder={'Ticket Description'}
+              ref={editorRef}
+              placeholder={'Ticket description'}
               defaultValue=''
               onChange={(value) => handleChange('description')(value())}
             />
