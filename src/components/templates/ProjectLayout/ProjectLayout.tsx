@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import TopBar, {getTopBarHeight} from './TopBar';
 import SideBar, {getSideBarWidth} from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
@@ -8,6 +8,9 @@ import UsersProvider from '../../../api/user/providers';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom/Zoom';
 import Add from '@material-ui/icons/Add';
+import modalHandler from '../../../utils/ui/modal/modalHandler';
+import NewTicketDialog from '../../organisms/ticket/TicketDialog';
+import {useCurrentUser} from '../../../api/user/hooks';
 
 const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   root: {
@@ -36,7 +39,12 @@ type Props = {} & RouteConfigComponentProps<any>;
 
 const ProjectLayout = (props: Props) => {
   const {route} = props;
+  const user = useCurrentUser();
   const classes = useStyles();
+
+  const openNewTicket = useCallback(() => {
+    modalHandler.open(NewTicketDialog, {user});
+  }, [user]);
 
   return (
     <UsersProvider>
@@ -50,6 +58,7 @@ const ProjectLayout = (props: Props) => {
           className={classes.fab}
           aria-label={'New Ticket'}
           color={'primary'}
+          onClick={openNewTicket}
         >
           <Add />
         </Fab>
