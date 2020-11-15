@@ -12,7 +12,7 @@ const Container = styled('div')(({theme}) => ({
   flexWrap: 'nowrap',
   alignItems: 'center',
   justifyContent: 'space-between',
-  minWidth: 320,
+  minWidth: 240,
   padding: theme.spacing(0, 1, 0.5, 2),
 }));
 
