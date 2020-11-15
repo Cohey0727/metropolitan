@@ -5,6 +5,9 @@ import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
 import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
 import auth0Hoc from '../../../auth/auth0Hoc';
 import UsersProvider from '../../../api/user/providers';
+import Fab from '@material-ui/core/Fab';
+import Zoom from '@material-ui/core/Zoom/Zoom';
+import Add from '@material-ui/icons/Add';
 
 const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   root: {
@@ -12,6 +15,7 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     height: '100%',
     overflow: 'hidden',
     width: '100%',
+    position: 'relative',
   },
   wrapper: {
     overflow: 'hidden',
@@ -20,6 +24,11 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     width: '100vw',
     height: '100vh',
     boxSizing: 'border-box',
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(4),
   },
 }));
 
@@ -36,6 +45,15 @@ const ProjectLayout = (props: Props) => {
         <SideBar />
         <div className={classes.wrapper}>{renderRoutes(route!.routes)}</div>
       </div>
+      <Zoom in={true}>
+        <Fab
+          className={classes.fab}
+          aria-label={'New Ticket'}
+          color={'primary'}
+        >
+          <Add />
+        </Fab>
+      </Zoom>
     </UsersProvider>
   );
 };
