@@ -15,8 +15,6 @@ import makeResponsiveStyle from '../../../../theme/makeResponsiveStyle';
 import {createTicket} from '../../../../api/ticket/operations';
 import {useModalContext} from '../../../../utils/ui/modal/modalHandler';
 import {Button} from '../../../atoms/buttons';
-import BaseDialog from '@material-ui/core/Dialog';
-import RichMarkdownEditor from 'rich-markdown-editor';
 
 type Props = {
   user: User;
@@ -27,6 +25,7 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     flex: '0 0 auto',
   },
   editorContainer: {
+    boxSizing: 'border-box',
     overflow: 'scroll',
     maxHeight: 'calc(100vh - 320px)',
     borderWidth: 'thin',
@@ -35,6 +34,15 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     padding: theme.spacing(0.5, 1),
     margin: theme.spacing(1, 0.5),
     borderColor: theme.palette.primary.main,
+    '&:hover': {
+      borderWidth: 2,
+    },
+    '&>div, &>div>div, &>div>div>div': {
+      minHeight: 240,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+    },
   },
 }));
 
