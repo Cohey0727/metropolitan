@@ -16,7 +16,7 @@ const Container = styled('div')(({theme}) => ({
   padding: theme.spacing(0, 1, 0.5, 2),
 }));
 
-const Title = styled('h2')<Theme, any>((theme) => ({}));
+const Title = styled('h3')<Theme, any>((theme) => ({}));
 
 const DialogHeader: React.FC<Props> = ({children}) => {
   const context = useModalContext();

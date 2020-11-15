@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React from 'react';
 import {
   Droppable,
   DroppableProvided,
@@ -6,7 +6,7 @@ import {
 } from 'react-beautiful-dnd';
 import {Theme} from '@material-ui/core';
 import {List, Ticket} from '../../../types';
-import {Column, Container, Paper, Row} from '../../atoms/containers';
+import {Column, Paper, Row} from '../../atoms/containers';
 import Card from './Card';
 import {styled} from '@material-ui/styles';
 

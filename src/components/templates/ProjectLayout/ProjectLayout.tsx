@@ -9,7 +9,8 @@ import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom/Zoom';
 import Add from '@material-ui/icons/Add';
 import modalHandler from '../../../utils/ui/modal/modalHandler';
-import TicketDialog from "../../organisms/ticket/TicketDialog";
+import NewTicketDialog from '../../organisms/ticket/TicketDialog';
+import {useCurrentUser} from '../../../api/user/hooks';
 
 const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   root: {
@@ -38,10 +39,13 @@ type Props = {} & RouteConfigComponentProps<any>;
 
 const ProjectLayout = (props: Props) => {
   const {route} = props;
+  const user = useCurrentUser();
   const classes = useStyles();
+
   const openNewTicket = useCallback(() => {
-    modalHandler.open(TicketDialog, {});
-  }, []);
+    modalHandler.open(NewTicketDialog, {user});
+  }, [user]);
+
   return (
     <UsersProvider>
       <div className={classes.root}>

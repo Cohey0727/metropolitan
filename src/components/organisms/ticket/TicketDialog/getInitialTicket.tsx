@@ -3,11 +3,12 @@ import {Ticket} from '../../../../types';
 const getInitialTicket = (
   projectId: string,
   boardId: string,
-  listId: string
+  listId: string,
+  author: string
 ) => {
   return {
     assignees: {},
-    author: '',
+    author: author,
     createDate: '',
     currentPosition: {board: boardId, list: listId},
     description: '',
