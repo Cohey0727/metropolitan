@@ -35,7 +35,6 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     padding: theme.spacing(0.5, 1),
     margin: theme.spacing(1, 0.5),
     borderColor: theme.palette.primary.main,
-    flex: '1 1 auto',
   },
 }));
 
@@ -59,28 +58,19 @@ const NewTicketDialog: React.FC<Props> = (props) => {
     context.actions.resolve(res);
   };
 
-  const editorRef = useRef<RichMarkdownEditor>(null);
-  const onClickEditorArea = () => {
-    editorRef?.current?.focusAtEnd();
-  };
-
   return (
     <Dialog maxWidth={'md'} fullWidth={true}>
       <DialogHeader>{'New Ticket'}</DialogHeader>
       <DialogBody>
-        <Column padding={1} minHeight={'45vh'}>
+        <Column padding={1}>
           <TextField
             className={classes.title}
             placeholder={'Ticket title'}
             label={'Title'}
             onChange={(e) => handleChange('title')(e.target.value)}
           />
-          <Column
-            className={classes.editorContainer}
-            onClick={onClickEditorArea}
-          >
+          <Column className={classes.editorContainer}>
             <Editor
-              ref={editorRef}
               placeholder={'Ticket description'}
               defaultValue=''
               onChange={(value) => handleChange('description')(value())}
