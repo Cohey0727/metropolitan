@@ -1,12 +1,12 @@
 {
-	"name":				"",
-	"short_name":		"",
-	"description":		"",
+	"name":				"Metropolitan",
+	"short_name":		"Metropolitan",
+	"description":		"Metropolitan",
 	"start_url":		"/",
 	"display":			"standalone",
 	"orientation":		"any",
 	"background_color":	"#fff",
-	"theme_color":		"#fff",
+	"theme_color":		"#1A237E",
 	"icons": [
 		{
 			"src": "/assets/images/android-chrome-36x36.png",
