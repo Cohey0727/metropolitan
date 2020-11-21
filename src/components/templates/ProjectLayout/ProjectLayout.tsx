@@ -1,8 +1,7 @@
 import React, {useCallback} from 'react';
-import TopBar, {getTopBarHeight} from './TopBar';
-import SideBar, {getSideBarWidth} from './SideBar';
+import TopBar from './TopBar';
+import SideBar from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
-import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
 import auth0Hoc from '../../../auth/auth0Hoc';
 import UsersProvider from '../../../api/user/providers';
 import Fab from '@material-ui/core/Fab';
@@ -11,8 +10,9 @@ import Add from '@material-ui/icons/Add';
 import modalHandler from '../../../utils/ui/modal/modalHandler';
 import NewTicketDialog from '../../organisms/ticket/TicketDialog';
 import {useCurrentUser} from '../../../api/user/hooks';
+import {makeStyles} from '@material-ui/core';
 
-const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
     height: '100%',
@@ -22,8 +22,11 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
   },
   wrapper: {
     overflow: 'hidden',
-    paddingTop: getTopBarHeight(responsiveInfo),
-    paddingLeft: getSideBarWidth(responsiveInfo),
+    paddingTop: 48,
+    paddingLeft: 96,
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+    },
     width: '100vw',
     height: '100vh',
     boxSizing: 'border-box',
