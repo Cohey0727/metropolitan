@@ -5,19 +5,14 @@ import {OverridableComponent} from '@material-ui/core/OverridableComponent';
 import {SvgIconTypeMap} from '@material-ui/core/SvgIcon/SvgIcon';
 import Dashboard from '@material-ui/icons/Dashboard';
 import Settings from '@material-ui/icons/Settings';
-import {ResponsiveInfo} from '../../../theme/useResponsive';
-import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
+import {makeStyles} from '@material-ui/core';
 
-export function getSideBarWidth(responsiveInfo: ResponsiveInfo) {
-  return responsiveInfo.md ? 96 : 0;
-}
-
-const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
+const useStyles = makeStyles((theme) => ({
   sidebar: {
-    display: responsiveInfo.md ? 'flex' : 'none',
+    display: 'flex',
     alignItems: 'flex-start',
     position: 'fixed',
-    width: getSideBarWidth(responsiveInfo),
+    width: 96,
     padding: theme.spacing(6, 0, 0, 0),
     height: '100vh',
     background: theme.palette.secondary.dark,
@@ -25,6 +20,9 @@ const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
     justifyContent: 'space-between',
     boxSizing: 'border-box',
     zIndex: 1,
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   menuList: {
     alignItems: 'center',

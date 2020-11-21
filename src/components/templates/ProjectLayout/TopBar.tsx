@@ -1,18 +1,12 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
-import {AppBar} from '@material-ui/core';
-import makeResponsiveStyle from '../../../theme/makeResponsiveStyle';
-import {ResponsiveInfo} from '../../../theme/useResponsive';
+import {AppBar, makeStyles} from '@material-ui/core';
 import {Container} from '../../atoms/containers';
 import {AccountUser} from '../../organisms/account';
 
-export function getTopBarHeight(responsiveInfo: ResponsiveInfo) {
-  return 48;
-}
-
-const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    height: getTopBarHeight(responsiveInfo),
+    height: 48,
     display: 'flex',
     padding: theme.spacing(0, 4, 0, 2),
     flexDirection: 'row',

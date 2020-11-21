@@ -11,16 +11,16 @@ import getInitialTicket from './getInitialTicket';
 import TextField from '@material-ui/core/TextField';
 import './editor.css';
 import {Column} from '../../../atoms/containers';
-import makeResponsiveStyle from '../../../../theme/makeResponsiveStyle';
 import {createTicket} from '../../../../api/ticket/operations';
 import {useModalContext} from '../../../../utils/ui/modal/modalHandler';
 import {Button} from '../../../atoms/buttons';
+import {makeStyles} from '@material-ui/core';
 
 type Props = {
   user: User;
 };
 
-const useStyles = makeResponsiveStyle((theme, responsiveInfo) => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     flex: '0 0 auto',
   },
