@@ -4,14 +4,11 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import theme from './theme';
-import {ThemeProvider} from '@material-ui/core';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+
       <App />
-    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

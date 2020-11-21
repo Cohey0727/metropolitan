@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     width: 96,
     padding: theme.spacing(6, 0, 0, 0),
     height: '100vh',
-    background: theme.palette.secondary.dark,
+    background: theme.palette.primary.light,
     flexDirection: 'column',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
