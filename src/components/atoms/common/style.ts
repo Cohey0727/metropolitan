@@ -20,9 +20,11 @@ export type CssProps = {
   margin: number | number[];
   display: CSSProperties['display'];
   flex: CSSProperties['flex'];
+  flexWrap: CSSProperties['flexWrap'];
   flexDirection: CSSProperties['flexDirection'];
   justifyContent: CSSProperties['justifyContent'];
   alignItems: CSSProperties['alignItems'];
+  boxSizing: CSSProperties['boxSizing'];
 };
 
 const spaceUnit = 8;
@@ -56,9 +58,11 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     margin,
     display,
     flex,
+    flexWrap,
     flexDirection,
     justifyContent,
     alignItems,
+    boxSizing,
   } = props;
   return {
     color: color || 'inherits',
@@ -78,8 +82,10 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     margin: spaceCreator(margin),
     display,
     flex,
+    flexWrap,
     flexDirection,
     justifyContent,
     alignItems,
+    boxSizing,
   };
 };

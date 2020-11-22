@@ -73,13 +73,13 @@ const NewTicketDialog: React.FC<Props> = (props) => {
         <Column padding={1}>
           <TextField
             className={classes.title}
-            placeholder={'Ticket title'}
-            label={'Title'}
+            placeholder='Ticket title'
+            label='Title'
             onChange={(e) => handleChange('title')(e.target.value)}
           />
           <Column className={classes.editorContainer}>
             <Editor
-              placeholder={'Ticket description'}
+              placeholder='Ticket description'
               defaultValue=''
               onChange={(value) => handleChange('description')(value())}
             />
@@ -87,7 +87,7 @@ const NewTicketDialog: React.FC<Props> = (props) => {
         </Column>
       </DialogBody>
       <DialogActions>
-        <Button color={'primary'} variant={'contained'} onClick={handleSubmit}>
+        <Button color='primary' variant='contained' onClick={handleSubmit}>
           Save
         </Button>
       </DialogActions>
