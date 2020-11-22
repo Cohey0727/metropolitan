@@ -12,9 +12,9 @@ import TextField from '@material-ui/core/TextField';
 import './editor.css';
 import {Column} from '../../../atoms/containers';
 import {createTicket} from '../../../../api/ticket/operations';
-import {useModalContext} from '../../../../utils/ui/modal/modalHandler';
 import {Button} from '../../../atoms/buttons';
 import {makeStyles} from '@material-ui/core';
+import {useModalContext} from '../../../../providers/ModalProvider';
 
 type Props = {
   user: User;
