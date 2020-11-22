@@ -1,5 +1,3 @@
-import {User} from './user';
-
 export type List = {
   id: string;
   title: string;
@@ -17,5 +15,4 @@ export type Project = {
   title: string;
   description: string;
   boards: Board[];
-  members: User['sub'][];
 };
