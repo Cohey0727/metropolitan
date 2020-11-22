@@ -64,7 +64,7 @@ export const useModal = <C extends React.ComponentType<any>, R extends unknown>(
   );
 };
 
-const ModalContext = createContext<ModalContextType<any>>(defaultContext);
+const ModalContext = createContext<ModalContextType>(defaultContext);
 
 const ModalProvider: React.FC = ({children}) => {
   const [{Component, props}] = useRecoilState(modalComponent);
@@ -77,5 +77,7 @@ const ModalProvider: React.FC = ({children}) => {
   );
 };
 
-export const useModalContext = () => useContext(ModalContext);
+export const useModalContext = <R extends unknown = void>() =>
+  useContext(ModalContext) as ModalContextType<R>;
+
 export default ModalProvider;

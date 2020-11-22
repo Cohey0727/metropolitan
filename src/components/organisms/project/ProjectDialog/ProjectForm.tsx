@@ -22,8 +22,8 @@ function ProjectForm(props: Props) {
   const {submitForm} = props;
   return (
     <Form>
-      <TextField label='代理店名' name='title' />
-      <TextField label='Email' name='description' />
+      <TextField label='Title' name='title' />
+      <TextField label='Description' name='description' multiline />
       <ActionContainer>
         <Button variant='contained' color='primary' onClick={submitForm}>
           Submit

@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 const NewTicketDialog: React.FC<Props> = (props) => {
   const {user} = props;
   const classes = useStyles();
-  const context = useModalContext();
+  const context = useModalContext<any>();
   const [formValues, setFormValues] = useState(
     getInitialTicket('project1', 'board1', 'list1', user.sub)
   );
