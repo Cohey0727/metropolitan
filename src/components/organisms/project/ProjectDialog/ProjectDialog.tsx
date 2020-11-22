@@ -6,7 +6,6 @@ import {
 } from '../../../atoms/dialogs';
 import {User} from '../../../../types';
 import './editor.css';
-import {useModalContext} from '../../../../utils/ui/modal/modalHandler';
 import {makeStyles} from '@material-ui/core';
 import {Formik} from 'formik';
 import ProjectForm from './ProjectForm';

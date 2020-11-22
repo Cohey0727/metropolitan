@@ -6,10 +6,10 @@ import UsersProvider from '../../../api/user/providers';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom/Zoom';
 import Add from '@material-ui/icons/Add';
-import modalHandler from '../../../utils/ui/modal/modalHandler';
 import NewTicketDialog from '../../organisms/ticket/TicketDialog';
 import {useCurrentUser} from '../../../api/user/hooks';
 import {makeStyles} from '@material-ui/core';
+import {useModal} from '../../../providers/ModalProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,10 +42,11 @@ type Props = {} & RouteConfigComponentProps<any>;
 const ProjectLayout = (props: Props) => {
   const {route} = props;
   const user = useCurrentUser();
+  const openDialog = useModal(NewTicketDialog);
   const classes = useStyles();
 
-  const openNewTicket = useCallback(() => {
-    modalHandler.open(NewTicketDialog, {user});
+  const openNewTicket = useCallback(async () => {
+    await openDialog({user});
   }, [user]);
 
   return (
