@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {MouseEventHandler, useMemo} from 'react';
 import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type Props = {
   project: Project;
-  onClick: (project: Project) => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 export default function ProjectCard(props: Props) {
@@ -41,8 +41,8 @@ export default function ProjectCard(props: Props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} onClick={() => onClick(project)}>
-      <CardActionArea>
+    <Card className={classes.root}>
+      <CardActionArea onClick={onClick}>
         <CardHeader
           avatar={
             <Avatar aria-label='recipe' className={classes.avatar}>

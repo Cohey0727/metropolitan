@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {MouseEventHandler} from 'react';
 import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import {Container} from '../../atoms/containers';
 import Add from '@material-ui/icons/Add';
+import {Project} from '../../../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,13 +37,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-type Props = {};
+type Props = {
+  onClick: MouseEventHandler<HTMLButtonElement>;
+};
 
 function ProjectNewCard(props: Props) {
+  const {onClick} = props;
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardActionArea className={classes.actionArea}>
+      <CardActionArea className={classes.actionArea} onClick={onClick}>
         <div className={classes.iconContainer}>
           <Add className={classes.icon} />
         </div>

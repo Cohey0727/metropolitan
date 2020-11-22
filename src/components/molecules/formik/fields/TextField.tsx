@@ -11,9 +11,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(1),
     minWidth: '42%',
-    [theme.breakpoints.down('sm')]: {minWidth: '84%'},
+    [theme.breakpoints.down('sm')]: {
+      minWidth: '84%',
+    },
   },
-  textField: {minWidth: '92%'},
+  textField: {
+    minWidth: '92%',
+  },
 }));
 
 export function TextField(props: Props) {
@@ -29,7 +33,9 @@ export function TextField(props: Props) {
         variant="outlined"
         inputProps={{
           autoComplete: 'new-password',
-          form: {autoComplete: 'off'},
+          form: {
+            autoComplete: 'off',
+          },
         }}
       />
     </div>

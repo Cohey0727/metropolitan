@@ -1,68 +1,36 @@
-import React, {useCallback, useState} from 'react';
-import {Dialog, DialogBody, DialogHeader} from '../../../atoms/dialogs';
-import {User} from '../../../../types';
-import getInitialTicket from './getInitialTicket';
-import './editor.css';
-import {createTicket} from '../../../../api/ticket/operations';
-import {useModalContext} from '../../../../utils/ui/modal/modalHandler';
-import {makeStyles} from '@material-ui/core';
+import React from 'react';
+import {FormikProps} from 'formik/dist/types';
+import {Form} from 'formik';
+import {TextField} from '../../../molecules/formik/fields';
+import {Button, styled} from '@material-ui/core';
 
-type Props = {
-  user: User;
-};
+type FormValues = {};
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    flex: '0 0 auto',
-  },
-  editorContainer: {
-    boxSizing: 'border-box',
-    overflow: 'scroll',
-    maxHeight: 'calc(100vh - 320px)',
-    borderWidth: 'thin',
-    borderStyle: 'solid',
-    borderRadius: 4,
-    padding: theme.spacing(0.5, 1),
-    margin: theme.spacing(1, 0.5),
-    borderColor: theme.palette.primary.main,
-    '&:hover': {
-      borderWidth: 2,
-    },
-    '&>div, &>div>div, &>div>div>div': {
-      minHeight: 240,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-    },
+type Props = FormikProps<FormValues>;
+
+const ActionContainer = styled('div')(({theme}) => ({
+  padding: theme.spacing(0, 4),
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(2),
   },
 }));
 
-const ProjectDialog: React.FC<Props> = (props) => {
-  const {user} = props;
-  const classes = useStyles();
-  const context = useModalContext();
-  const [formValues, setFormValues] = useState(
-    getInitialTicket('project1', 'board1', 'list1', user.sub)
-  );
-  const handleChange = useCallback(
-    (key: string) =>
-      function (value: any) {
-        setFormValues((currentValues) => ({...currentValues, [key]: value}));
-      },
-    []
-  );
-
-  const handleSubmit = async () => {
-    const res = await createTicket(formValues);
-    context.actions.resolve(res);
-  };
-
+function ProjectForm(props: Props) {
+  const {submitForm} = props;
   return (
-    <Dialog maxWidth={'md'} fullWidth={true}>
-      <DialogHeader>New Project</DialogHeader>
-      <DialogBody></DialogBody>
-    </Dialog>
+    <Form>
+      <TextField label='代理店名' name='title' />
+      <TextField label='Email' name='description' />
+      <ActionContainer>
+        <Button variant='contained' color='primary' onClick={submitForm}>
+          Submit
+        </Button>
+      </ActionContainer>
+    </Form>
   );
-};
+}
 
-export default ProjectDialog;
+export default ProjectForm;

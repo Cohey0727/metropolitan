@@ -4,7 +4,12 @@ import {Project} from '../../types';
 
 export const getProjects = async (userId: string) => {
   const url = `${REST_API_URL}/projects`;
-  const params = {user_id: userId}
+  console.debug({
+    url,
+    REST_API_URL,
+    userId,
+  });
+  const params = {user_id: userId};
   const res = await axios.get(url, {params});
   return res.data as Project[];
 };

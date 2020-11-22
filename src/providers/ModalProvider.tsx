@@ -1,31 +1,81 @@
-import React from 'react';
-import {Auth0Provider, useAuth0} from '@auth0/auth0-react';
-import {useAsync} from 'react-use';
-import {Spinner} from '../components/atoms/spinner';
+import React, {
+  ComponentType,
+  ComponentProps,
+  useCallback,
+  createContext,
+  useContext,
+} from 'react';
+import {atom, useRecoilState} from 'recoil';
 
-const AuthProvider: React.FC = ({children}) => {
-  return (
-    <Auth0Provider
-      domain={process.env.REACT_APP_AUTH0_DOMAIN as string}
-      clientId={process.env.REACT_APP_AUTH0_CLIENT_ID as string}
-      useRefreshTokens={true}
-      redirectUri={window.location.origin}
-      cacheLocation={'localstorage'}
-    >
-      <Auth0Authentication>{children}</Auth0Authentication>
-    </Auth0Provider>
+type ModalComponent<C extends ComponentType> = {
+  Component: C;
+  props: ComponentProps<C>;
+};
+
+const Empty = () => <></>;
+const defaultComponent: ModalComponent<any> = {Component: Empty, props: {}};
+const modalComponent = atom<ModalComponent<any>>({
+  key: 'modalComponent',
+  default: defaultComponent,
+});
+
+type ModalContextType<R = void> = {
+  open: boolean;
+  actions: {
+    resolve: (res: R) => void;
+    reject: () => void;
+  };
+};
+
+const defaultContext: ModalContextType = {
+  open: false,
+  actions: {resolve: () => {}, reject: () => {}},
+};
+
+const modalContext = atom<ModalContextType<any>>({
+  key: 'modalContext',
+  default: defaultContext,
+});
+
+export const useModal = <C extends React.ComponentType<any>, R extends unknown>(
+  Component: C
+) => {
+  const [, setModalComponent] = useRecoilState(modalComponent);
+  const [, setModalState] = useRecoilState(modalContext);
+  return useCallback(
+    (props: ComponentProps<C>) => {
+      return new Promise<R>((resolve, reject) => {
+        const handleResolve = (successResponse: R) => {
+          resolve(successResponse);
+          setModalComponent(defaultComponent);
+          setModalState(defaultContext);
+        };
+        const handleReject = () => {
+          reject();
+          setModalComponent(defaultComponent);
+          setModalState(defaultContext);
+        };
+        const actions = {resolve: handleResolve, reject: handleReject};
+        setModalState({open: true, actions});
+        setModalComponent({Component, props});
+      });
+    },
+    [Component, setModalComponent, setModalState]
   );
 };
 
-export default AuthProvider;
+const ModalContext = createContext<ModalContextType<any>>(defaultContext);
 
-const Auth0Authentication: React.FC = ({children}) => {
-  const {isAuthenticated, loginWithRedirect, isLoading} = useAuth0();
-
-  useAsync(async () => {
-    if (!isLoading && !isAuthenticated) await loginWithRedirect();
-  }, [isLoading, isAuthenticated]);
-
-  if (isLoading) return <Spinner />;
-  return <>{isAuthenticated && children}</>;
+const ModalProvider: React.FC = ({children}) => {
+  const [{Component, props}] = useRecoilState(modalComponent);
+  const [{open, actions}] = useRecoilState(modalContext);
+  return (
+    <ModalContext.Provider value={{open, actions}}>
+      <Component {...props} />
+      {children}
+    </ModalContext.Provider>
+  );
 };
+
+export const useModalContext = () => useContext(ModalContext);
+export default ModalProvider;

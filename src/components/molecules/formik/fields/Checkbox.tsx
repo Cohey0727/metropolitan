@@ -1,15 +1,15 @@
 import React, {ComponentType} from 'react';
 import {FieldProps} from 'formik';
-import BaseSwitch, {SwitchProps} from '@material-ui/core/Switch';
+import BaseCheckbox, {CheckboxProps} from '@material-ui/core/Checkbox';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import wrapField from './wrapField';
 import {FormControlLabel} from '@material-ui/core';
 
-type Props = FieldProps<boolean> & SwitchProps & {label: string};
+type Props = FieldProps<boolean> & CheckboxProps & {label: string};
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(1, 1, 1, 2),
     minWidth: '42%',
     alignItems: 'center',
     display: 'flex',
@@ -20,16 +20,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   switch: {},
 }));
 
-export function Switch(props: Props) {
+export function Checkbox(props: Props) {
   const {field, label, ...rest} = props;
   const classes = useStyles();
-  console.debug({field});
   return (
     <div className={classes.root}>
       <FormControlLabel
         {...field}
         control={
-          <BaseSwitch
+          <BaseCheckbox
             {...rest}
             className={classes.switch}
             checked={field.value}
@@ -37,10 +36,10 @@ export function Switch(props: Props) {
           />
         }
         label={label}
-        labelPlacement="start"
+        labelPlacement="end"
       />
     </div>
   );
 }
 
-export default wrapField(Switch as ComponentType<FieldProps>);
+export default wrapField(Checkbox as ComponentType<FieldProps>);

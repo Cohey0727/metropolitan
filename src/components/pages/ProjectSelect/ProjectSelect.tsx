@@ -9,11 +9,14 @@ import {Project} from '../../../types';
 import {useCurrentUser} from '../../../api/user/hooks';
 import {Spinner} from '../../atoms/spinner';
 import ProjectNewCard from './ProjectNewCard';
+import ProjectDialog from '../../organisms/project/ProjectDialog';
+import {useModal} from '../../../providers/ModalProvider';
 
 const cardWidth = 377;
 
 const ProjectSelect: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const openModal = useModal(ProjectDialog);
   const user = useCurrentUser();
   const history = useHistory();
   const [isLoading, setLoading] = useState(true);
@@ -26,13 +29,13 @@ const ProjectSelect: React.FC = () => {
   }, []);
 
   const handleClick = useCallback(
-    (project: Project) => history.push(`/projects/${project.projectId}`),
+    (project: Project) => () => history.push(`/projects/${project.projectId}`),
     [history]
   );
 
-  const handleClickNew = useCallback((project: Project) => {
-
-  }, [history]);
+  const handleClickNew = useCallback(async () => {
+    await openModal({user});
+  }, [user, openModal]);
 
   if (isLoading) return <Spinner />;
   return (
@@ -44,7 +47,7 @@ const ProjectSelect: React.FC = () => {
           boxSizing='border-box'
           width={cardWidth}
         >
-          <ProjectNewCard />
+          <ProjectNewCard onClick={handleClickNew} />
         </Container>,
         ...projects.map((project) => {
           return (
@@ -54,7 +57,7 @@ const ProjectSelect: React.FC = () => {
               boxSizing='border-box'
               width={cardWidth}
             >
-              <ProjectCard project={project} onClick={handleClick} />
+              <ProjectCard project={project} onClick={handleClick(project)} />
             </Container>
           );
         }),

@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseDialog, {DialogProps} from '@material-ui/core/Dialog';
-import {useModalContext} from '../../../utils/ui/modal/modalHandler';
+import {useModalContext} from '../../../providers/ModalProvider';
 
 const Dialog: React.FC<Omit<DialogProps, 'open'>> = (props) => {
   const context = useModalContext();

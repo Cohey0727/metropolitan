@@ -1,16 +1,12 @@
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import {
   Dialog,
-  DialogActions,
   DialogBody,
   DialogHeader,
 } from '../../../atoms/dialogs';
 import {User} from '../../../../types';
-import getInitialTicket from './getInitialTicket';
 import './editor.css';
-import {createTicket} from '../../../../api/ticket/operations';
 import {useModalContext} from '../../../../utils/ui/modal/modalHandler';
-import {Button} from '../../../atoms/buttons';
 import {makeStyles} from '@material-ui/core';
 import {Formik} from 'formik';
 import ProjectForm from './ProjectForm';
@@ -46,11 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProjectDialog: React.FC<Props> = (props) => {
-  const {user} = props;
-  const classes = useStyles();
-  const context = useModalContext();
   const handleSubmit = async () => {};
-
   return (
     <Dialog maxWidth={'md'} fullWidth={true}>
       <DialogHeader>{'New Ticket'}</DialogHeader>

@@ -30,19 +30,15 @@ const modalHandler = {
       };
       const actions = {resolve: handleResolve, reject: handleReject};
       ReactDOM.render(
-        <ModalContext.Provider value={{open: false, actions}}>
-          <ProviderContainer>
-            <Component {...props} />
-          </ProviderContainer>
-        </ModalContext.Provider>,
+        <ProviderContainer open={false} actions={actions}>
+          <Component {...props} />
+        </ProviderContainer>,
         mountPoint,
         () => {
           ReactDOM.render(
-            <ModalContext.Provider value={{open: true, actions}}>
-              <ProviderContainer>
-                <Component {...props} />
-              </ProviderContainer>
-            </ModalContext.Provider>,
+            <ProviderContainer open={true} actions={actions}>
+              <Component {...props} />
+            </ProviderContainer>,
             mountPoint
           );
         }
@@ -56,11 +52,9 @@ const modalHandler = {
     };
     return new Promise<any>((resolve) => {
       ReactDOM.render(
-        <ModalContext.Provider value={{open: false, actions}}>
-          <ProviderContainer>
-            <Component {...props} />
-          </ProviderContainer>
-        </ModalContext.Provider>,
+        <ProviderContainer open={false} actions={actions}>
+          <Component {...props} />
+        </ProviderContainer>,
         mountPoint,
         () => {
           _.delay(() => {
@@ -73,8 +67,16 @@ const modalHandler = {
   },
 };
 
-function ProviderContainer({children}: {children: React.ReactNode}) {
-  return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
+type ProviderProps = {
+  children: React.ReactElement;
+} & ModalProps<any, any>;
+
+function ProviderContainer({children, open, actions}: ProviderProps) {
+  return (
+    <ModalContext.Provider value={{open, actions}}>
+      <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
+    </ModalContext.Provider>
+  );
 }
 
 export default modalHandler;
