@@ -1,9 +1,9 @@
-import React, {ComponentType} from 'react';
+import React from 'react';
 import {Auth0Provider, useAuth0} from '@auth0/auth0-react';
 import {useAsync} from 'react-use';
 import {Spinner} from '../components/atoms/spinner';
 
-const auth0Hoc = (Component: ComponentType<any>) => (props: any) => {
+const AuthProvider: React.FC = ({children}) => {
   return (
     <Auth0Provider
       domain={process.env.REACT_APP_AUTH0_DOMAIN as string}
@@ -12,14 +12,12 @@ const auth0Hoc = (Component: ComponentType<any>) => (props: any) => {
       redirectUri={window.location.origin}
       cacheLocation={'localstorage'}
     >
-      <Auth0Authentication>
-        <Component {...props} />
-      </Auth0Authentication>
+      <Auth0Authentication>{children}</Auth0Authentication>
     </Auth0Provider>
   );
 };
 
-export default auth0Hoc;
+export default AuthProvider;
 
 const Auth0Authentication: React.FC = ({children}) => {
   const {isAuthenticated, loginWithRedirect, isLoading} = useAuth0();

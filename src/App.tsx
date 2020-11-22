@@ -5,11 +5,14 @@ import './App.css';
 import routes from './routes';
 import {ThemeProvider} from '@material-ui/core';
 import theme from './theme';
+import Providers from './providers';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
+      <Providers>
+        <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
+      </Providers>
     </ThemeProvider>
   );
 }

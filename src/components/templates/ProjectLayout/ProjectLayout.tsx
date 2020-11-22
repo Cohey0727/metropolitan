@@ -2,7 +2,6 @@ import React, {useCallback} from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
-import auth0Hoc from '../../../auth/auth0Hoc';
 import UsersProvider from '../../../api/user/providers';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom/Zoom';
@@ -70,4 +69,4 @@ const ProjectLayout = (props: Props) => {
   );
 };
 
-export default auth0Hoc(ProjectLayout);
+export default ProjectLayout;
