@@ -8,8 +8,9 @@ import {useAsync} from 'react-use';
 import {Project} from '../../../types';
 import {useCurrentUser} from '../../../api/user/hooks';
 import {Spinner} from '../../atoms/spinner';
+import ProjectNewCard from './ProjectNewCard';
 
-const cardWidth = 345;
+const cardWidth = 377;
 
 const ProjectSelect: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -29,21 +30,35 @@ const ProjectSelect: React.FC = () => {
     [history]
   );
 
+  const handleClickNew = useCallback((project: Project) => {
+
+  }, [history]);
+
   if (isLoading) return <Spinner />;
   return (
     <CardUIContainer itemWidth={cardWidth}>
-      {projects.map((project) => {
-        return (
-          <Container
-            key={project.projectId}
-            padding={[2, 1]}
-            boxSizing='border-box'
-            width={cardWidth}
-          >
-            <ProjectCard project={project} onClick={handleClick} />
-          </Container>
-        );
-      })}
+      {[
+        <Container
+          key={'new-project-card'}
+          padding={2}
+          boxSizing='border-box'
+          width={cardWidth}
+        >
+          <ProjectNewCard />
+        </Container>,
+        ...projects.map((project) => {
+          return (
+            <Container
+              key={project.projectId}
+              padding={2}
+              boxSizing='border-box'
+              width={cardWidth}
+            >
+              <ProjectCard project={project} onClick={handleClick} />
+            </Container>
+          );
+        }),
+      ]}
     </CardUIContainer>
   );
 };
