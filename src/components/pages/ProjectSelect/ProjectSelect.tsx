@@ -29,7 +29,9 @@ const ProjectSelect: React.FC = () => {
   }, []);
 
   const handleClick = useCallback(
-    (project: Project) => () => history.push(`/projects/${project.projectId}`),
+    (project: Project) => () => {
+      history.push(`/projects/${project.projectId}`, {project});
+    },
     [history]
   );
 

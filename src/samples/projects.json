@@ -3,7 +3,6 @@
     "projectId": "project1",
     "title": "開発フェーズ",
     "description": "開発フェーズ",
-    "members": ["google-oauth2|105675009773641077796", "github|29517743"],
     "boards": [
       {
         "boardId": "board1",

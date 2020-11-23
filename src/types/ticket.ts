@@ -6,7 +6,7 @@ export type Ticket = {
   ticketId: string;
   currentPosition: {
     board: Board['boardId'];
-    list: List['id'];
+    list: List['listId'];
   };
   order: number;
   author: User['sub'];

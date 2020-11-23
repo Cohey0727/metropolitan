@@ -46,7 +46,7 @@ const ListComponent: React.FC<Props> = (props) => {
       <Title flex={'0 0 auto'} padding={[0, 1]}>
         {list.title}
       </Title>
-      <Droppable droppableId={list.id}>
+      <Droppable droppableId={list.listId}>
         {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => {
           return (
             <Column
