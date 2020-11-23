@@ -52,11 +52,22 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 0,
       paddingTop: '56.25%', // 16:9
     },
-    avatar: {
-      backgroundColor: red[500],
-    },
+    avatar: {},
   })
 );
+
+const stringToColour = (str: string) => {
+  let hash = 0;
+  [...Array(str.length)].forEach((_, index) => {
+    hash = str.charCodeAt(index) + ((hash << 5) - hash);
+  });
+  let color = '#';
+  [...Array(3)].forEach((_, index) => {
+    const value = (hash >> (index * 4)) & 0xff;
+    color += ('00' + value.toString(16)).substr(-2);
+  });
+  return color;
+};
 
 type Props = {
   project: Project;
@@ -73,6 +84,7 @@ const popperMenuItems = [
 export default function ProjectCard(props: Props) {
   const {project, onClick} = props;
   const avatarChar = useMemo(() => project.title[0].toUpperCase(), [project]);
+  const avatarColor = useMemo(() => stringToColour(project.title), [project]);
   const classes = useStyles();
 
   return (
@@ -80,7 +92,7 @@ export default function ProjectCard(props: Props) {
       <CardActionArea onClick={onClick} className={classes.button}>
         <CardHeader
           avatar={
-            <Avatar aria-label='recipe' className={classes.avatar}>
+            <Avatar aria-label='recipe' style={{backgroundColor: avatarColor}}>
               {avatarChar}
             </Avatar>
           }
