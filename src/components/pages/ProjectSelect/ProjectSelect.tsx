@@ -12,7 +12,7 @@ import ProjectNewCard from './ProjectNewCard';
 import ProjectDialog from '../../organisms/project/ProjectDialog';
 import {useModal} from '../../../providers/ModalProvider';
 
-const cardWidth = 377;
+const cardWidth = 360;
 
 const ProjectSelect: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -47,7 +47,6 @@ const ProjectSelect: React.FC = () => {
           key={'new-project-card'}
           padding={2}
           boxSizing='border-box'
-          width={cardWidth}
         >
           <ProjectNewCard onClick={handleClickNew} />
         </Container>,
@@ -57,7 +56,6 @@ const ProjectSelect: React.FC = () => {
               key={project.projectId}
               padding={2}
               boxSizing='border-box'
-              width={cardWidth}
             >
               <ProjectCard project={project} onClick={handleClick(project)} />
             </Container>
