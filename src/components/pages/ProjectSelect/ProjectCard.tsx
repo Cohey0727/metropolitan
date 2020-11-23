@@ -17,7 +17,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: 345,
+      width: `min(90vw, ${345}px)`,
       height: 188,
     },
     media: {

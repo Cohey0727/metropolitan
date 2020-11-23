@@ -13,7 +13,7 @@ const CardUIContainer = (props: Props) => {
 
   useEffect(() => {
     const clientWidth = ref.current!.clientWidth;
-    const countPerRow = Math.floor(clientWidth / itemWidth);
+    const countPerRow = Math.max(Math.floor(clientWidth / itemWidth), 1);
     const extraItemCount = countPerRow - (children.length % countPerRow);
     const extraItems = [...Array(extraItemCount)].map((_, index) => (
       <div key={`dummy-${index}`} style={{width: itemWidth}} />

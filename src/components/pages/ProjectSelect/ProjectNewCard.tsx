@@ -7,7 +7,7 @@ import Add from '@material-ui/icons/Add';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: 345,
+      width: `min(88vw, ${328}px)`,
       height: 188,
     },
     actionArea: {
