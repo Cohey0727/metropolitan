@@ -18,6 +18,8 @@ import {useCurrentUser} from '../../../../api/user/hooks';
 
 type Props = {
   projectId: string;
+  boardId: string;
+  listId: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -47,12 +49,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewTicketDialog: React.FC<Props> = (props) => {
-  const {projectId} = props;
+  const {projectId, boardId, listId} = props;
   const user = useCurrentUser();
   const classes = useStyles();
   const context = useModalContext<any>();
   const [formValues, setFormValues] = useState(
-    getInitialTicket(projectId, 'board1', 'list1', user.sub)
+    getInitialTicket(projectId, boardId, listId, user.sub)
   );
   const handleChange = useCallback(
     (key: string) =>
