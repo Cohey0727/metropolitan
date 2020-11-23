@@ -4,9 +4,8 @@ import {
   DraggableLocation,
   DropResult,
 } from 'react-beautiful-dnd';
-import {projectData} from '../../../samples';
 import List from './List';
-import {Ticket} from '../../../types';
+import {Project, Ticket} from '../../../types';
 import {Container, Row} from '../../atoms/containers';
 import {useTickets} from '../../../api/ticket/hooks';
 import {Spinner} from '../../atoms/spinner';
@@ -20,6 +19,11 @@ import Zoom from '@material-ui/core/Zoom/Zoom';
 import Fab from '@material-ui/core/Fab';
 import Add from '@material-ui/icons/Add';
 import {makeStyles} from '@material-ui/core';
+import {Location} from 'history';
+import useOnlyOnce from '../../../utils/hooks/useOnlyOnce';
+import {getProject} from '../../../api/project/operations';
+
+type LocationState = Location<{project: Project} | undefined>;
 
 type Props = RouteConfigComponentProps<{projectId: string}>;
 
@@ -32,12 +36,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Board: React.FC<Props> = (props) => {
-  const {match} = props;
+  const {match, location} = props;
+  const projectId = match.params.projectId;
+  const locationState = location as LocationState;
+
+  const [project, setProject] = useState(locationState.state?.project);
+  useOnlyOnce(async () => {
+    const res = await getProject(projectId);
+    setProject(res);
+  }, project !== undefined);
+
   const classes = useStyles();
   const openDialog = useModal(NewTicketDialog);
-  const project = projectData[0];
-  const projectId = match.params.projectId;
-  const board = project.boards[0];
+
   const {tickets, loading} = useTickets(projectId);
   const [localTickets, setLocalTickets] = useState(tickets);
 
@@ -84,7 +95,9 @@ const Board: React.FC<Props> = (props) => {
     await updateTicket(ticket);
   };
 
-  if (loading) return <Spinner />;
+  if (loading || project === undefined) return <Spinner />;
+
+  const board = project.boards[0];
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -96,10 +109,10 @@ const Board: React.FC<Props> = (props) => {
         >
           {board.lists.map((list, index) => (
             <List
-              key={list.id}
+              key={list.listId}
               list={list}
               index={index}
-              tickets={ticketsByList[list.id]}
+              tickets={ticketsByList[list.listId]}
             />
           ))}
           <Container minWidth={96} height={'100%'} />
