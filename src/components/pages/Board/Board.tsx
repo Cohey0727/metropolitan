@@ -57,8 +57,11 @@ const Board: React.FC<Props> = (props) => {
   }, [tickets]);
 
   const openNewTicket = useCallback(async () => {
-    await openDialog({projectId});
-  }, [openDialog, projectId]);
+    if (!project) return;
+    const boardId = project.boards[0].boardId;
+    const listId = project.boards[0].lists[0].listId;
+    await openDialog({projectId, boardId, listId});
+  }, [openDialog, project]);
 
   const ticketsByList = useMemo(
     () =>
