@@ -1,8 +1,9 @@
 import React from 'react';
 import {FormikProps} from 'formik/dist/types';
 import {Form} from 'formik';
-import {TextField} from '../../../molecules/formik/fields';
+import {MultiLineTextField, TextField} from '../../../molecules/formik/fields';
 import {Button, styled} from '@material-ui/core';
+import {Column} from '../../../atoms/containers';
 
 type FormValues = {};
 
@@ -22,13 +23,15 @@ function ProjectForm(props: Props) {
   const {submitForm} = props;
   return (
     <Form>
-      <TextField label='Title' name='title' />
-      <TextField label='Description' name='description' multiline />
-      <ActionContainer>
-        <Button variant='contained' color='primary' onClick={submitForm}>
-          Submit
-        </Button>
-      </ActionContainer>
+      <Column padding={2}>
+        <TextField label='Title' name='title' />
+        <MultiLineTextField label='Description' name='description' rows={4} />
+        <ActionContainer>
+          <Button variant='contained' color='primary' onClick={submitForm}>
+            Submit
+          </Button>
+        </ActionContainer>
+      </Column>
     </Form>
   );
 }
