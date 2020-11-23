@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Formik} from 'formik';
 import {Dialog, DialogBody, DialogHeader} from '../../../atoms/dialogs';
-import './editor.css';
 import ProjectForm from './ProjectForm';
 import {useModalContext} from '../../../../providers/ModalProvider';
 import {createProject} from '../../../../api/project/operations';

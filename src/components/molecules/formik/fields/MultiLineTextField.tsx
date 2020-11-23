@@ -30,7 +30,8 @@ export function TextField(props: Props) {
         {...rest}
         {...field}
         className={classes.textField}
-        variant="standard"
+        variant="outlined"
+        multiline
         inputProps={{
           autoComplete: 'new-password',
           form: {
