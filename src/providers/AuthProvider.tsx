@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 import {Auth0Provider, useAuth0} from '@auth0/auth0-react';
 import {useAsync} from 'react-use';
 import {Spinner} from '../components/atoms/spinner';
+import useOnlyOnce from '../utils/hooks/useOnlyOnce';
 
 const AuthProvider: React.FC = ({children}) => {
   return (
@@ -20,12 +22,25 @@ const AuthProvider: React.FC = ({children}) => {
 export default AuthProvider;
 
 const Auth0Authentication: React.FC = ({children}) => {
-  const {isAuthenticated, loginWithRedirect, isLoading} = useAuth0();
+  const {
+    isAuthenticated,
+    loginWithRedirect,
+    isLoading,
+    getIdTokenClaims,
+  } = useAuth0();
+  const [innerLoading, setInnerLoading] = useState(true);
 
   useAsync(async () => {
     if (!isLoading && !isAuthenticated) await loginWithRedirect();
   }, [isLoading, isAuthenticated]);
 
-  if (isLoading) return <Spinner />;
+  useOnlyOnce(async () => {
+    const idToken = await getIdTokenClaims();
+    axios.defaults.headers.common['Authorization'] = `Bearer ${idToken.__raw}`;
+    // axios.defaults.headers.common['Cache-Control'] = `no-cache`;
+    setInnerLoading(false);
+  }, isAuthenticated);
+
+  if (isLoading || innerLoading) return <Spinner />;
   return <>{isAuthenticated && children}</>;
 };

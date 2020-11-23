@@ -7,8 +7,8 @@ import Add from '@material-ui/icons/Add';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: `min(88vw, ${328}px)`,
-      height: 188,
+      width: `min(88vw, ${345}px)`,
+      height: 240,
     },
     actionArea: {
       display: 'flex',
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     iconContainer: {
       width: 160,
-      height: 120,
+      height: 160,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

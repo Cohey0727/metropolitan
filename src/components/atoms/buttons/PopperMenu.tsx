@@ -41,7 +41,8 @@ const PopperMenu: React.FC<Props> = (props) => {
     handleSelect,
     handleListKeyDown,
   } = useMemo(() => {
-    const handleToggle = () => {
+    const handleToggle = (event: React.MouseEvent<EventTarget>) => {
+      event.stopPropagation();
       setOpen((prevOpen) => !prevOpen);
     };
     const handleClose = (event: React.MouseEvent<EventTarget>) => {
@@ -55,6 +56,7 @@ const PopperMenu: React.FC<Props> = (props) => {
     const handleSelect = (item: MenuItemType) => (
       event: React.MouseEvent<EventTarget>
     ) => {
+      event.stopPropagation();
       handleClose(event);
       onSelect && onSelect(item);
     };
@@ -94,7 +96,6 @@ const PopperMenu: React.FC<Props> = (props) => {
         anchorEl={anchorRef.current}
         role={undefined}
         transition
-        disablePortal
       >
         {({TransitionProps, placement}) => (
           <Grow
