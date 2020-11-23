@@ -1,7 +1,6 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import TopBar from './TopBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
-import auth0Hoc from '../../../auth/auth0Hoc';
 import UsersProvider from '../../../api/user/providers';
 import {makeStyles} from '@material-ui/core';
 
@@ -43,4 +42,4 @@ const InitialLayout = (props: Props) => {
   );
 };
 
-export default auth0Hoc(InitialLayout);
+export default InitialLayout;

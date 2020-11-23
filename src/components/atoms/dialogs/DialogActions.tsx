@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import {styled} from '@material-ui/core';
 import {Button} from '../buttons';
-import {useModalContext} from '../../../utils/ui/modal/modalHandler';
+import {useModalContext} from '../../../providers/ModalProvider';
 
 const Container = styled('div')(({theme}) => ({
   display: 'flex',

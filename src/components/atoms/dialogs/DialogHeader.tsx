@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import {useModalContext} from '../../../utils/ui/modal/modalHandler';
+import {useModalContext} from '../../../providers/ModalProvider';
 import {styled, Theme} from '@material-ui/core';
 
 type Props = {};
