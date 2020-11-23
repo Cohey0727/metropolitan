@@ -3,9 +3,6 @@ import TopBar from './TopBar';
 import SideBar from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
 import UsersProvider from '../../../api/user/providers';
-import Fab from '@material-ui/core/Fab';
-import Zoom from '@material-ui/core/Zoom/Zoom';
-import Add from '@material-ui/icons/Add';
 import NewTicketDialog from '../../organisms/ticket/TicketDialog';
 import {useCurrentUser} from '../../../api/user/hooks';
 import {makeStyles} from '@material-ui/core';
@@ -30,24 +27,14 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     boxSizing: 'border-box',
   },
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(4),
-  },
 }));
 
 type Props = {} & RouteConfigComponentProps<any>;
 
 const ProjectLayout = (props: Props) => {
   const {route} = props;
-  const user = useCurrentUser();
-  const openDialog = useModal(NewTicketDialog);
   const classes = useStyles();
 
-  const openNewTicket = useCallback(async () => {
-    await openDialog({user});
-  }, [user]);
 
   return (
     <UsersProvider>
@@ -56,16 +43,6 @@ const ProjectLayout = (props: Props) => {
         <SideBar />
         <div className={classes.wrapper}>{renderRoutes(route!.routes)}</div>
       </div>
-      <Zoom in={true}>
-        <Fab
-          className={classes.fab}
-          aria-label={'New Ticket'}
-          color={'primary'}
-          onClick={openNewTicket}
-        >
-          <Add />
-        </Fab>
-      </Zoom>
     </UsersProvider>
   );
 };

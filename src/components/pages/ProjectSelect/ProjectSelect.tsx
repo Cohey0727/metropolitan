@@ -35,7 +35,9 @@ const ProjectSelect: React.FC = () => {
 
   const handleClickNew = useCallback(async () => {
     await openModal({});
-  }, [user, openModal]);
+    const res = await getProjects(user.sub);
+    setProjects(res);
+  }, [openModal, setProjects, user]);
 
   if (isLoading) return <Spinner />;
   return (

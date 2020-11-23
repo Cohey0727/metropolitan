@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
   DragDropContext,
   DraggableLocation,
@@ -13,16 +13,43 @@ import {Spinner} from '../../atoms/spinner';
 import {updateTicket} from '../../../api/ticket/operations';
 import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
+import {RouteConfigComponentProps} from 'react-router-config';
+import {useCurrentUser} from '../../../api/user/hooks';
+import {useModal} from '../../../providers/ModalProvider';
+import NewTicketDialog from '../../organisms/ticket/TicketDialog';
+import Zoom from '@material-ui/core/Zoom/Zoom';
+import Fab from '@material-ui/core/Fab';
+import Add from '@material-ui/icons/Add';
+import {makeStyles} from '@material-ui/core';
 
-const Board: React.FC = () => {
+type Props = RouteConfigComponentProps<{projectId: string}>;
+
+const useStyles = makeStyles((theme) => ({
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    right: theme.spacing(4),
+  },
+}));
+
+const Board: React.FC<Props> = (props) => {
+  const {match} = props;
+  const user = useCurrentUser();
+  const classes = useStyles();
+  const openDialog = useModal(NewTicketDialog);
   const project = projectData[0];
+  const projectId = match.params.projectId;
   const board = project.boards[0];
-  const {tickets, loading} = useTickets(project.projectId);
+  const {tickets, loading} = useTickets(projectId);
   const [localTickets, setLocalTickets] = useState(tickets);
 
   useEffect(() => {
     setLocalTickets(tickets);
   }, [tickets]);
+
+  const openNewTicket = useCallback(async () => {
+    await openDialog({user});
+  }, [user, openDialog]);
 
   const ticketsByList = useMemo(
     () =>
@@ -61,24 +88,36 @@ const Board: React.FC = () => {
 
   if (loading) return <Spinner />;
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Row
-        height={'100%'}
-        width={'100%'}
-        overflowX={'auto'}
-        padding={[0, 0, 0, 1]}
-      >
-        {board.lists.map((list, index) => (
-          <List
-            key={list.id}
-            list={list}
-            index={index}
-            tickets={ticketsByList[list.id]}
-          />
-        ))}
-        <Container minWidth={96} height={'100%'} />
-      </Row>
-    </DragDropContext>
+    <>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Row
+          height={'100%'}
+          width={'100%'}
+          overflowX={'auto'}
+          padding={[0, 0, 0, 1]}
+        >
+          {board.lists.map((list, index) => (
+            <List
+              key={list.id}
+              list={list}
+              index={index}
+              tickets={ticketsByList[list.id]}
+            />
+          ))}
+          <Container minWidth={96} height={'100%'} />
+        </Row>
+      </DragDropContext>
+      <Zoom in={true}>
+        <Fab
+          className={classes.fab}
+          aria-label={'New Ticket'}
+          color={'primary'}
+          onClick={openNewTicket}
+        >
+          <Add />
+        </Fab>
+      </Zoom>
+    </>
   );
 };
 
