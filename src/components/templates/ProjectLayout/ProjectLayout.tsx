@@ -1,12 +1,9 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
 import UsersProvider from '../../../api/user/providers';
-import NewTicketDialog from '../../organisms/ticket/TicketDialog';
-import {useCurrentUser} from '../../../api/user/hooks';
 import {makeStyles} from '@material-ui/core';
-import {useModal} from '../../../providers/ModalProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {

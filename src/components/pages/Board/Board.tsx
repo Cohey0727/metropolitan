@@ -14,7 +14,6 @@ import {updateTicket} from '../../../api/ticket/operations';
 import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
 import {RouteConfigComponentProps} from 'react-router-config';
-import {useCurrentUser} from '../../../api/user/hooks';
 import {useModal} from '../../../providers/ModalProvider';
 import NewTicketDialog from '../../organisms/ticket/TicketDialog';
 import Zoom from '@material-ui/core/Zoom/Zoom';
@@ -34,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Board: React.FC<Props> = (props) => {
   const {match} = props;
-  const user = useCurrentUser();
   const classes = useStyles();
   const openDialog = useModal(NewTicketDialog);
   const project = projectData[0];
@@ -48,8 +46,8 @@ const Board: React.FC<Props> = (props) => {
   }, [tickets]);
 
   const openNewTicket = useCallback(async () => {
-    await openDialog({user});
-  }, [user, openDialog]);
+    await openDialog({projectId});
+  }, [openDialog, projectId]);
 
   const ticketsByList = useMemo(
     () =>

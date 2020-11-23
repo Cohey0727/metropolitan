@@ -2,9 +2,7 @@ import React, {MouseEventHandler} from 'react';
 import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import {Container} from '../../atoms/containers';
 import Add from '@material-ui/icons/Add';
-import {Project} from '../../../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

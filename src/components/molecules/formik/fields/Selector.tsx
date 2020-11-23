@@ -37,7 +37,7 @@ export function Selector(props: Props) {
     <div className={classes.root}>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel>{label}</InputLabel>
-        <Select {...field} label={label}>
+        <Select {...field} {...rest} label={label}>
           {options.map((option) => (
             <MenuItem value={option.value}>{option.label}</MenuItem>
           ))}

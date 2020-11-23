@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   Dialog,
   DialogActions,
@@ -6,7 +6,6 @@ import {
   DialogHeader,
 } from '../../../atoms/dialogs';
 import Editor from 'rich-markdown-editor';
-import {User} from '../../../../types';
 import getInitialTicket from './getInitialTicket';
 import TextField from '@material-ui/core/TextField';
 import './editor.css';
@@ -15,9 +14,10 @@ import {createTicket} from '../../../../api/ticket/operations';
 import {Button} from '../../../atoms/buttons';
 import {makeStyles} from '@material-ui/core';
 import {useModalContext} from '../../../../providers/ModalProvider';
+import {useCurrentUser} from '../../../../api/user/hooks';
 
 type Props = {
-  user: User;
+  projectId: string;
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -47,11 +47,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewTicketDialog: React.FC<Props> = (props) => {
-  const {user} = props;
+  const {projectId} = props;
+  const user = useCurrentUser();
   const classes = useStyles();
   const context = useModalContext<any>();
   const [formValues, setFormValues] = useState(
-    getInitialTicket('project1', 'board1', 'list1', user.sub)
+    getInitialTicket(projectId, 'board1', 'list1', user.sub)
   );
   const handleChange = useCallback(
     (key: string) =>
