@@ -26,12 +26,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export type ProjectPathParams = {projectId: string};
+export type ProjectRouteProps = RouteConfigComponentProps<ProjectPathParams>;
 type Props = {} & RouteConfigComponentProps<any>;
 
 const ProjectLayout = (props: Props) => {
   const {route} = props;
   const classes = useStyles();
-
 
   return (
     <UsersProvider>
