@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {REST_API_URL} from '../ticket/constants';
+import {REST_API_URL} from '../constants';
 import {Project} from '../../types';
 
 const baseUrl = `${REST_API_URL}/projects`;

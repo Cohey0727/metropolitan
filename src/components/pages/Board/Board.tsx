@@ -12,7 +12,6 @@ import {Spinner} from '../../atoms/spinner';
 import {updateTicket} from '../../../api/ticket/operations';
 import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
-import {RouteConfigComponentProps} from 'react-router-config';
 import {useModal} from '../../../providers/ModalProvider';
 import NewTicketDialog from '../../organisms/ticket/TicketDialog';
 import Zoom from '@material-ui/core/Zoom/Zoom';
@@ -22,10 +21,11 @@ import {makeStyles} from '@material-ui/core';
 import {Location} from 'history';
 import useOnlyOnce from '../../../utils/hooks/useOnlyOnce';
 import {getProject} from '../../../api/project/operations';
+import {ProjectRouteProps} from '../../templates/ProjectLayout/ProjectLayout';
 
 type LocationState = Location<{project: Project} | undefined>;
 
-type Props = RouteConfigComponentProps<{projectId: string}>;
+type Props = ProjectRouteProps;
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -44,7 +44,7 @@ const Board: React.FC<Props> = (props) => {
   useOnlyOnce(async () => {
     const res = await getProject(projectId);
     setProject(res);
-  }, project !== undefined);
+  }, project === undefined);
 
   const classes = useStyles();
   const openDialog = useModal(NewTicketDialog);

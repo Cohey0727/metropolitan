@@ -1,5 +1,5 @@
 import {Ticket} from '../../types';
-import {REST_API_URL, TICKET_WS_URL} from './constants';
+import {REST_API_URL, TICKET_WS_URL} from '../constants';
 import axios from 'axios';
 
 export const getTickets = async (projectId: string) => {
