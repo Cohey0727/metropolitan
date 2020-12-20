@@ -77,12 +77,16 @@ const Card = ({ticket, index}: Props) => {
   const users = useUsers();
   const classes = useStyles();
   const user = useMemo(
-    () => users.find((_user) => _user.sub === ticket.author),
+    () => users.find((_user) => _user.email === ticket.author),
     [users, ticket.author]
   );
 
   return (
-    <Draggable draggableId={ticket.ticketId} index={index} key={ticket.ticketId}>
+    <Draggable
+      draggableId={ticket.ticketId}
+      index={index}
+      key={ticket.ticketId}
+    >
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
         <Container
           ref={provided.innerRef}

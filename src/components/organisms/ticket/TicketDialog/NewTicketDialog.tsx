@@ -54,7 +54,7 @@ const NewTicketDialog: React.FC<Props> = (props) => {
   const classes = useStyles();
   const context = useModalContext<any>();
   const [formValues, setFormValues] = useState(
-    getInitialTicket(projectId, boardId, listId, user.sub)
+    getInitialTicket(projectId, boardId, listId, user.email)
   );
   const handleChange = useCallback(
     (key: string) =>

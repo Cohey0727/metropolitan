@@ -10,8 +10,8 @@ const ProjectDialog: React.FC = (props) => {
   const user = useCurrentUser();
   const {actions} = useModalContext();
   const [initialValues] = useState({
-    author: user.sub,
-    rootUser: user.sub,
+    author: user.email,
+    rootUser: user.email,
   });
 
   const handleSubmit = async (values: any) => {
