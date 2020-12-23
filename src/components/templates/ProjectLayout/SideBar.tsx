@@ -69,14 +69,14 @@ const sideBarContents: SideBarContent[] = [
     Icon: ViewWeek,
   },
   {
-    label: 'Members',
-    link: (projectId: string) => `/projects/${projectId}/members`,
-    Icon: People,
-  },
-  {
     label: 'Boards',
     link: (projectId: string) => `/projects/${projectId}/boards`,
     Icon: Dashboard,
+  },
+  {
+    label: 'Members',
+    link: (projectId: string) => `/projects/${projectId}/members`,
+    Icon: People,
   },
 ];
 
