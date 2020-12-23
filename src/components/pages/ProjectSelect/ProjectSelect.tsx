@@ -23,7 +23,7 @@ const ProjectSelect: React.FC = () => {
 
   useAsync(async () => {
     setLoading(true);
-    const res = await getProjects(user.email);
+    const res = await getProjects(user.sub);
     setProjects(res);
     setLoading(false);
   }, []);
@@ -37,7 +37,7 @@ const ProjectSelect: React.FC = () => {
 
   const handleClickNew = useCallback(async () => {
     await openModal({});
-    const res = await getProjects(user.email);
+    const res = await getProjects(user.sub);
     setProjects(res);
   }, [openModal, setProjects, user]);
 

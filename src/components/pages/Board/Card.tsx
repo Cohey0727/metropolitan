@@ -77,7 +77,7 @@ const Card = ({ticket, index}: Props) => {
   const users = useUsers();
   const classes = useStyles();
   const user = useMemo(
-    () => users.find((_user) => _user.email === ticket.author),
+    () => users.find((_user) => _user.sub === ticket.author),
     [users, ticket.author]
   );
 

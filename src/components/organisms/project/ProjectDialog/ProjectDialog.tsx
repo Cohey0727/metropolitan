@@ -6,12 +6,12 @@ import {useModalContext} from '../../../../providers/ModalProvider';
 import {createProject} from '../../../../api/project/operations';
 import {useCurrentUser} from '../../../../api/user/hooks';
 
-const ProjectDialog: React.FC = (props) => {
+const ProjectDialog: React.FC = () => {
   const user = useCurrentUser();
   const {actions} = useModalContext();
   const [initialValues] = useState({
-    author: user.email,
-    rootUser: user.email,
+    author: user.sub,
+    rootUser: user.sub,
   });
 
   const handleSubmit = async (values: any) => {
