@@ -9,8 +9,8 @@ export type Ticket = {
     list: List['listId'];
   };
   order: number;
-  author: User['sub'];
-  assignees: {[BoardId: string]: User['sub']};
+  author: User['email'];
+  assignees: {[BoardId: string]: User['email']};
   title: string;
   description: string;
   createDate: string;
