@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  Droppable,
-  DroppableProvided,
-  DroppableStateSnapshot,
-} from 'react-beautiful-dnd';
+import {Droppable, DroppableProvided, DroppableStateSnapshot} from 'react-beautiful-dnd';
 import {Theme} from '@material-ui/core';
 import {List, Ticket} from '../../../types';
 import {Column, Paper, Row} from '../../atoms/containers';
@@ -58,11 +54,7 @@ const ListComponent: React.FC<Props> = (props) => {
               overflow={'scroll'}
             >
               {tickets.map((ticket, ticketIndex) => (
-                <Card
-                  key={ticket.ticketId}
-                  ticket={ticket}
-                  index={ticketIndex}
-                />
+                <Card key={ticket.ticketId} ticket={ticket} index={ticketIndex} />
               ))}
               {provided.placeholder}
             </Column>

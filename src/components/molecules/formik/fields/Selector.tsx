@@ -12,8 +12,7 @@ type Option = {
   value: string | number;
 };
 
-type Props = {label: string; options: Option[]} & FieldProps<boolean> &
-  SelectProps;
+type Props = {label: string; options: Option[]} & FieldProps<boolean> & SelectProps;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -35,7 +34,7 @@ export function Selector(props: Props) {
 
   return (
     <div className={classes.root}>
-      <FormControl variant="outlined" className={classes.formControl}>
+      <FormControl variant='outlined' className={classes.formControl}>
         <InputLabel>{label}</InputLabel>
         <Select {...field} {...rest} label={label}>
           {options.map((option) => (

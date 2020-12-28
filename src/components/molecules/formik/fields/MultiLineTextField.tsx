@@ -4,8 +4,7 @@ import BaseTextField, {TextFieldProps} from '@material-ui/core/TextField';
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import wrapField from './wrapField';
 
-type Props = FieldProps<string> &
-  Omit<TextFieldProps, 'onChange' | 'variant' | 'className'>;
+type Props = FieldProps<string> & Omit<TextFieldProps, 'onChange' | 'variant' | 'className'>;
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,7 +29,7 @@ export function TextField(props: Props) {
         {...rest}
         {...field}
         className={classes.textField}
-        variant="outlined"
+        variant='outlined'
         multiline
         inputProps={{
           autoComplete: 'new-password',

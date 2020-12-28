@@ -2,14 +2,8 @@ import {Ticket} from '../../../types';
 
 const orderUnit = 65536;
 
-export function calcNewOrder(
-  originalList: Ticket[],
-  target: Ticket,
-  newIndex: number
-) {
-  const excludeSelfTickets = originalList.filter(
-    (_ticket) => _ticket.ticketId !== target.ticketId
-  );
+export function calcNewOrder(originalList: Ticket[], target: Ticket, newIndex: number) {
+  const excludeSelfTickets = originalList.filter((_ticket) => _ticket.ticketId !== target.ticketId);
   const isSameList = excludeSelfTickets.length !== originalList.length;
   const base = isSameList ? excludeSelfTickets : originalList;
   const count = base.length;

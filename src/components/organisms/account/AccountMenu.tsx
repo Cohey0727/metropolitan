@@ -41,11 +41,7 @@ const AccountMenu = () => {
   );
   return (
     <PopperMenu itemsList={accountMenu} onSelect={handleSelect}>
-      <Avatar
-        src={user.picture}
-        alt={user.nickname}
-        className={classes.avatar}
-      />
+      <Avatar src={user.picture} alt={user.nickname} className={classes.avatar} />
     </PopperMenu>
   );
 };

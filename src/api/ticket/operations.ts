@@ -26,10 +26,7 @@ export const deleteTicket = async (newTicket: Ticket) => {
   return res.data;
 };
 
-export const connectProjectTickets = (
-  projectId: string,
-  callBack: (tickets: Ticket[]) => void
-) => {
+export const connectProjectTickets = (projectId: string, callBack: (tickets: Ticket[]) => void) => {
   const socket = new WebSocket(`${TICKET_WS_URL}?project_id=${projectId}`);
   socket.addEventListener('message', function (event) {
     callBack(JSON.parse(event.data));

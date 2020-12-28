@@ -1,9 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {
-  DragDropContext,
-  DraggableLocation,
-  DropResult,
-} from 'react-beautiful-dnd';
+import {DragDropContext, DraggableLocation, DropResult} from 'react-beautiful-dnd';
 import List from './List';
 import {Project, Ticket} from '../../../types';
 import {Container, Row} from '../../atoms/containers';
@@ -81,13 +77,10 @@ const Board: React.FC<Props> = (props) => {
     if (!result.destination) return;
     const source: DraggableLocation = result.source;
     const destination: DraggableLocation = result.destination;
-    const ticket = tickets!.find(
-      (_ticket) => _ticket.ticketId === result.draggableId
-    );
+    const ticket = tickets!.find((_ticket) => _ticket.ticketId === result.draggableId);
     const listTickets = ticketsByList[destination.droppableId] || [];
     if (
-      (source.droppableId === destination.droppableId &&
-        source.index === destination.index) ||
+      (source.droppableId === destination.droppableId && source.index === destination.index) ||
       !ticket
     )
       return;
@@ -104,12 +97,7 @@ const Board: React.FC<Props> = (props) => {
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Row
-          height={'100%'}
-          width={'100%'}
-          overflowX={'auto'}
-          padding={[0, 0, 0, 1]}
-        >
+        <Row height={'100%'} width={'100%'} overflowX={'auto'} padding={[0, 0, 0, 1]}>
           {board.lists.map((list, index) => (
             <List
               key={list.listId}

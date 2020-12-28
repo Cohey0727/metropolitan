@@ -45,20 +45,12 @@ const ProjectSelect: React.FC = () => {
   return (
     <CardUIContainer itemWidth={cardWidth}>
       {[
-        <Container
-          key={'new-project-card'}
-          margin={[2, 1]}
-          boxSizing='border-box'
-        >
+        <Container key={'new-project-card'} margin={[2, 1]} boxSizing='border-box'>
           <ProjectNewCard onClick={handleClickNew} />
         </Container>,
         ...projects.map((project) => {
           return (
-            <Container
-              key={project.projectId}
-              margin={[2, 1]}
-              boxSizing='border-box'
-            >
+            <Container key={project.projectId} margin={[2, 1]} boxSizing='border-box'>
               <ProjectCard project={project} onClick={handleClick(project)} />
             </Container>
           );

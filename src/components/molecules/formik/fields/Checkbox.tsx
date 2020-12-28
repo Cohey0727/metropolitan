@@ -32,11 +32,11 @@ export function Checkbox(props: Props) {
             {...rest}
             className={classes.switch}
             checked={field.value}
-            color="primary"
+            color='primary'
           />
         }
         label={label}
-        labelPlacement="end"
+        labelPlacement='end'
       />
     </div>
   );

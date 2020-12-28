@@ -22,12 +22,7 @@ const AuthProvider: React.FC = ({children}) => {
 export default AuthProvider;
 
 const Auth0Authentication: React.FC = ({children}) => {
-  const {
-    isAuthenticated,
-    loginWithRedirect,
-    isLoading,
-    getIdTokenClaims,
-  } = useAuth0();
+  const {isAuthenticated, loginWithRedirect, isLoading, getIdTokenClaims} = useAuth0();
   const [innerLoading, setInnerLoading] = useState(true);
 
   useAsync(async () => {

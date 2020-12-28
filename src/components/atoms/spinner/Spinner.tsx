@@ -7,18 +7,8 @@ import {Row} from '../containers';
 const Spinner = () => {
   const {palette} = useTheme();
   return (
-    <Row
-      alignItems={'center'}
-      justifyContent={'center'}
-      width={'100%'}
-      height={'100%'}
-    >
-      <Loader
-        type='Puff'
-        color={palette.primary.main}
-        height={100}
-        width={100}
-      />
+    <Row alignItems={'center'} justifyContent={'center'} width={'100%'} height={'100%'}>
+      <Loader type='Puff' color={palette.primary.main} height={100} width={100} />
     </Row>
   );
 };
