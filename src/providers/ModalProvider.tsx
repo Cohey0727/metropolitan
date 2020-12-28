@@ -1,10 +1,4 @@
-import React, {
-  ComponentType,
-  ComponentProps,
-  useCallback,
-  createContext,
-  useContext,
-} from 'react';
+import React, {ComponentType, ComponentProps, useCallback, createContext, useContext} from 'react';
 import {atom, useRecoilState} from 'recoil';
 
 type ModalComponent<C extends ComponentType> = {
@@ -37,9 +31,7 @@ const modalContext = atom<ModalContextType<any>>({
   default: defaultContext,
 });
 
-export const useModal = <C extends React.ComponentType<any>, R extends unknown>(
-  Component: C
-) => {
+export const useModal = <C extends React.ComponentType<any>, R extends unknown>(Component: C) => {
   const [, setModalComponent] = useRecoilState(modalComponent);
   const [, setModalState] = useRecoilState(modalContext);
   return useCallback(

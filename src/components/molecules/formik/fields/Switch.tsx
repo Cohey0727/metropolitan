@@ -29,15 +29,10 @@ export function Switch(props: Props) {
       <FormControlLabel
         {...field}
         control={
-          <BaseSwitch
-            {...rest}
-            className={classes.switch}
-            checked={field.value}
-            color="primary"
-          />
+          <BaseSwitch {...rest} className={classes.switch} checked={field.value} color='primary' />
         }
         label={label}
-        labelPlacement="start"
+        labelPlacement='start'
       />
     </div>
   );

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogBody,
-  DialogActions,
-  DialogHeader,
-} from '../../atoms/dialogs';
+import {Dialog, DialogBody, DialogActions, DialogHeader} from '../../atoms/dialogs';
 
 type Props = {};
 

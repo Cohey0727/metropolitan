@@ -1,10 +1,5 @@
 import React, {useCallback, useState} from 'react';
-import {
-  Dialog,
-  DialogActions,
-  DialogBody,
-  DialogHeader,
-} from '../../../atoms/dialogs';
+import {Dialog, DialogActions, DialogBody, DialogHeader} from '../../../atoms/dialogs';
 import Editor from 'rich-markdown-editor';
 import getInitialTicket from './getInitialTicket';
 import TextField from '@material-ui/core/TextField';

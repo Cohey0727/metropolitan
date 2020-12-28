@@ -35,27 +35,16 @@ const PopperMenu: React.FC<Props> = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
-  const {
-    handleToggle,
-    handleClose,
-    handleSelect,
-    handleListKeyDown,
-  } = useMemo(() => {
+  const {handleToggle, handleClose, handleSelect, handleListKeyDown} = useMemo(() => {
     const handleToggle = (event: React.MouseEvent<EventTarget>) => {
       event.stopPropagation();
       setOpen((prevOpen) => !prevOpen);
     };
     const handleClose = (event: React.MouseEvent<EventTarget>) => {
-      if (
-        anchorRef.current &&
-        anchorRef.current.contains(event.target as HTMLElement)
-      )
-        return;
+      if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) return;
       setOpen(false);
     };
-    const handleSelect = (item: MenuItemType) => (
-      event: React.MouseEvent<EventTarget>
-    ) => {
+    const handleSelect = (item: MenuItemType) => (event: React.MouseEvent<EventTarget>) => {
       event.stopPropagation();
       handleClose(event);
       onSelect && onSelect(item);
@@ -91,35 +80,23 @@ const PopperMenu: React.FC<Props> = (props) => {
       >
         {children}
       </div>
-      <Popper
-        open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        transition
-      >
+      <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition>
         {({TransitionProps, placement}) => (
           <Grow
             {...TransitionProps}
             style={{
-              transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom',
+              transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
             }}
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id='menu-list-grow'
-                  onKeyDown={handleListKeyDown}
-                >
+                <MenuList autoFocusItem={open} id='menu-list-grow' onKeyDown={handleListKeyDown}>
                   {injectInterval<any>(
                     itemsList.map((items) =>
                       items.map((item) => (
                         <MenuItem onClick={handleSelect(item)} key={item.key}>
                           {item.icon && (
-                            <ListItemIcon>
-                              {React.createElement(item.icon, {})}
-                            </ListItemIcon>
+                            <ListItemIcon>{React.createElement(item.icon, {})}</ListItemIcon>
                           )}
                           {item.label}
                         </MenuItem>

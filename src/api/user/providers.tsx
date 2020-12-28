@@ -6,9 +6,7 @@ export const UsersContext = createContext<User[]>([]);
 
 const UsersProvider: React.FC = ({children}) => {
   const users = usersData;
-  return (
-    <UsersContext.Provider value={users}>{children}</UsersContext.Provider>
-  );
+  return <UsersContext.Provider value={users}>{children}</UsersContext.Provider>;
 };
 
 export default UsersProvider;
