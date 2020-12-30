@@ -50,7 +50,7 @@ const AddMemberDialog: React.FC<Props> = (props) => {
   const handleSubmit = async () => {};
 
   return (
-    <Dialog maxWidth={'md'} fullWidth={true}>
+    <Dialog maxWidth={'sm'} fullWidth={true}>
       <DialogHeader>Add Member</DialogHeader>
       <DialogBody>
         {/* <TextField /> */}
