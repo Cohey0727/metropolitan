@@ -1,5 +1,5 @@
 import {Board, List, Project} from './project';
-import {User} from './user';
+import {AuthUser} from './user';
 
 export type Ticket = {
   projectId: Project['projectId'];
@@ -9,8 +9,8 @@ export type Ticket = {
     list: List['listId'];
   };
   order: number;
-  author: User['email'];
-  assignees: {[BoardId: string]: User['email']};
+  author: AuthUser['email'];
+  assignees: {[BoardId: string]: AuthUser['email']};
   title: string;
   description: string;
   createDate: string;

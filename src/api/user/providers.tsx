@@ -1,8 +1,8 @@
 import React, {createContext} from 'react';
 import {usersData} from '../../samples';
-import {User} from '../../types';
+import {AuthUser} from '../../types';
 
-export const UsersContext = createContext<User[]>([]);
+export const UsersContext = createContext<AuthUser[]>([]);
 
 const UsersProvider: React.FC = ({children}) => {
   const users = usersData;

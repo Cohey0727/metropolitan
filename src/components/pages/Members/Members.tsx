@@ -48,9 +48,11 @@ const Members: React.FC<Props> = (props) => {
   }, []);
 
   const openDialog = useModal(AddMemberDialog);
-  const handleOpenDialog = useCallback(() => {
-    openDialog({});
+  const handleOpenDialog = useCallback(async () => {
+    const user = (await openDialog({projectId})) as User;
+    setUsers((_users) => [..._users, user]);
   }, []);
+
   return (
     <>
       <Column padding={[2]}>

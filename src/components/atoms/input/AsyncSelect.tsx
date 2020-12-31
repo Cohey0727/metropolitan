@@ -1,16 +1,27 @@
-import React, {Component, useCallback} from 'react';
+import React, {Component, ComponentProps, useCallback} from 'react';
 import BaseAsyncSelect from 'react-select/async';
 
-export type SelectorOption = {
+export type SelectorOption<T> = {
   label: string;
-  value: number | string;
+  value: T;
 };
 
-type Props = {
-  loadOptions: (inputValue: string) => Promise<SelectorOption[]>;
-};
+type Props<T> = {
+  loadOptions: (inputValue: string) => Promise<SelectorOption<T>[]>;
+  onSelect: (option: SelectorOption<T>) => void;
+} & ComponentProps<typeof BaseAsyncSelect>;
 
-export default function AsyncSelect(props: Props) {
-  const {loadOptions} = props;
-  return <BaseAsyncSelect cacheOptions defaultOptions loadOptions={loadOptions} />;
+export default function AsyncSelect<T>(props: Props<T>) {
+  const {loadOptions, onSelect} = props;
+  const handleChange: ComponentProps<typeof BaseAsyncSelect>['onChange'] = (option, actionMeta) => {
+    onSelect(option as SelectorOption<T>);
+  };
+  return (
+    <BaseAsyncSelect
+      cacheOptions
+      defaultOptions
+      loadOptions={loadOptions}
+      onChange={handleChange}
+    />
+  );
 }

@@ -1,4 +1,4 @@
-export type User = {
+export type AuthUser = {
   sub: string;
   email: string;
   name: string;
@@ -9,4 +9,17 @@ export type User = {
   locale?: string;
   given_name?: string;
   family_name?: string;
+};
+
+export type User = {
+  user_id: string;
+  name: string;
+  family_name: string;
+  given_name: string;
+  nickname: string;
+  email: string;
+  locale: string;
+  picture: string;
+  created_at: Date;
+  updated_at: Date;
 };

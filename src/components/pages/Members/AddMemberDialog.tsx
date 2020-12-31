@@ -1,62 +1,48 @@
 import React, {useCallback, useState} from 'react';
 import {Dialog, DialogActions, DialogBody, DialogHeader} from '../../atoms/dialogs';
-import Editor from 'rich-markdown-editor';
-import TextField from '@material-ui/core/TextField';
-import {Column} from '../../atoms/containers';
-import {createTicket} from '../../../api/ticket/operations';
 import {Button} from '../../atoms/buttons';
-import {makeStyles} from '@material-ui/core';
+import {AsyncSelect} from '../../atoms/input';
+import {addProjectUser, searchUsers} from '../../../api/user/operations';
+import {SelectorOption} from '../../atoms/input/AsyncSelect';
 import {useModalContext} from '../../../providers/ModalProvider';
-import {useCurrentUser} from '../../../api/user/hooks';
+import {Column} from '../../atoms/containers';
+import {User} from '../../../types';
 
-type Props = {};
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    flex: '0 0 auto',
-  },
-  editorContainer: {
-    boxSizing: 'border-box',
-    overflow: 'scroll',
-    maxHeight: 'calc(100vh - 320px)',
-    borderWidth: 'thin',
-    borderStyle: 'solid',
-    borderRadius: 4,
-    padding: theme.spacing(0.5, 1),
-    margin: theme.spacing(1, 0.5),
-    borderColor: theme.palette.primary.main,
-    '&:hover': {
-      borderWidth: 2,
-    },
-    '&>div, &>div>div, &>div>div>div': {
-      minHeight: 240,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-    },
-  },
-}));
+type Props = {
+  projectId: string;
+};
 
 const AddMemberDialog: React.FC<Props> = (props) => {
-  const {} = props;
-  const handleChange = useCallback(
-    (key: string) =>
-      function (value: any) {
-        // setFormValues((currentValues) => ({...currentValues, [key]: value}));
-      },
-    []
-  );
+  const {projectId} = props;
+  const context = useModalContext<any>();
 
-  const handleSubmit = async () => {};
+  const [user, setUser] = useState<User | null>(null);
+
+  const searchUser = async (inputValue: string) => {
+    if (inputValue.length < 3) return [];
+    const users = await searchUsers(inputValue);
+    return users.map((user) => ({label: `${user.name}(${user.email})`, value: user}));
+  };
+
+  const handleSelect = (user: SelectorOption<User>) => {
+    setUser(user!.value);
+  };
+
+  const handleSubmit = async () => {
+    await addProjectUser(projectId, user!.user_id);
+    context.actions.resolve(user);
+  };
 
   return (
     <Dialog maxWidth={'sm'} fullWidth={true}>
       <DialogHeader>Add Member</DialogHeader>
       <DialogBody>
-        {/* <TextField /> */}
+        <Column padding={1}>
+          <AsyncSelect loadOptions={searchUser} onSelect={handleSelect} />
+        </Column>
       </DialogBody>
       <DialogActions>
-        <Button color='primary' variant='contained' onClick={handleSubmit}>
+        <Button color='primary' variant='contained' onClick={handleSubmit} disabled={!user}>
           Add
         </Button>
       </DialogActions>
