@@ -38,7 +38,12 @@ const AddMemberDialog: React.FC<Props> = (props) => {
       <DialogHeader>Add Member</DialogHeader>
       <DialogBody>
         <Column padding={1}>
-          <AsyncSelect loadOptions={searchUser} onSelect={handleSelect} />
+          <AsyncSelect
+            loadOptions={searchUser}
+            onSelect={handleSelect}
+            autoFocus
+            menuPosition='fixed'
+          />
         </Column>
       </DialogBody>
       <DialogActions>
