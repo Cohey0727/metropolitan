@@ -69,8 +69,7 @@ function registerValidSW(swUrl: string, config?: Config) {
       registration.onupdatefound = () => {
         window.alert('バージョンアップを発見しました。');
         const installingWorker = registration.installing;
-        window.alert('installingWorker');
-        window.alert(installingWorker);
+        unregister();
         if (installingWorker == null) {
           return;
         }
