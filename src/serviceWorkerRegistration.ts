@@ -69,11 +69,12 @@ function registerValidSW(swUrl: string, config?: Config) {
     .then((registration) => {
       registration.onupdatefound = () => {
         window.alert('バージョンアップを発見しました。');
+        unregister();
         const installingWorker = registration.installing;
         if (installingWorker == null) {
           return;
         }
-        unregister();
+
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
