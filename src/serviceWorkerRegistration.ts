@@ -24,6 +24,7 @@ type Config = {
 };
 
 export function register(config?: Config) {
+  window.alert('これは鼻くそです。1');
   window.alert('process.env.NODE_ENV');
   window.alert(process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
@@ -68,12 +69,12 @@ function registerValidSW(swUrl: string, config?: Config) {
     .then((registration) => {
       registration.onupdatefound = () => {
         window.alert('バージョンアップを発見しました。');
+        unregister();
         const installingWorker = registration.installing;
-        window.alert('installingWorker');
-        window.alert(installingWorker);
         if (installingWorker == null) {
           return;
         }
+        
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
