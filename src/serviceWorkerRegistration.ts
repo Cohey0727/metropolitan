@@ -24,19 +24,13 @@ type Config = {
 };
 
 export function register(config?: Config) {
-  window.alert('これは鼻くそです。1');
-  window.alert('process.env.NODE_ENV');
-  window.alert(process.env.NODE_ENV);
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
-    window.alert('publicUrl');
-    window.alert(publicUrl);
     if (publicUrl.origin !== window.location.origin) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
       // from what our page is served on. This might happen if a CDN is used to
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
-      window.alert('publicUrl.origin !== window.location.origin');
       return;
     }
 
@@ -68,13 +62,10 @@ function registerValidSW(swUrl: string, config?: Config) {
     .register(swUrl)
     .then((registration) => {
       registration.onupdatefound = () => {
-        window.alert('バージョンアップを発見しました。');
-        unregister();
         const installingWorker = registration.installing;
         if (installingWorker == null) {
           return;
         }
-        
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
