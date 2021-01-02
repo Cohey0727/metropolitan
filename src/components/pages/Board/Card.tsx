@@ -57,12 +57,9 @@ const Footer = React.forwardRef((props: React.ComponentProps<typeof Row>, ref) =
 ));
 
 const Card = ({ticket, index}: Props) => {
-  const {users} = useUsersContext();
+  const {findUserById} = useUsersContext();
   const classes = useStyles();
-  const user = useMemo(() => users.find((_user) => _user.user_id === ticket.author), [
-    users,
-    ticket.author,
-  ]);
+  const user = findUserById(ticket.author);
 
   return (
     <Draggable draggableId={ticket.ticketId} index={index} key={ticket.ticketId}>
