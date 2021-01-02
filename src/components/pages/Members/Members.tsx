@@ -64,7 +64,7 @@ const Members: React.FC<Props> = (props) => {
       <Zoom in={true}>
         <Fab
           className={classes.fab}
-          aria-label={'New Ticket'}
+          aria-label={'Add Member'}
           color={'primary'}
           onClick={handleOpenDialog}
         >
