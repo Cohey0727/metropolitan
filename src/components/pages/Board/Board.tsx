@@ -9,7 +9,7 @@ import {updateTicket} from '../../../api/ticket/operations';
 import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
 import {useModal} from '../../../providers/ModalProvider';
-import NewTicketDialog from '../../organisms/ticket/TicketDialog';
+import TicketDialog from '../../organisms/ticket/TicketDialog';
 import Zoom from '@material-ui/core/Zoom/Zoom';
 import Fab from '@material-ui/core/Fab';
 import Add from '@material-ui/icons/Add';
@@ -43,7 +43,7 @@ const Board: React.FC<Props> = (props) => {
   }, project === undefined);
 
   const classes = useStyles();
-  const openDialog = useModal(NewTicketDialog);
+  const openDialog = useModal(TicketDialog);
 
   const {tickets, loading} = useTickets(projectId);
   const [localTickets, setLocalTickets] = useState(tickets);

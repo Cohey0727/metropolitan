@@ -5,17 +5,28 @@ import getInitialTicket from './getInitialTicket';
 import TextField from '@material-ui/core/TextField';
 import './editor.css';
 import {Column} from '../../../atoms/containers';
-import {createTicket} from '../../../../api/ticket/operations';
+import {createTicket, updateTicket} from '../../../../api/ticket/operations';
 import {Button} from '../../../atoms/buttons';
 import {makeStyles} from '@material-ui/core';
 import {useModalContext} from '../../../../providers/ModalProvider';
 import {useCurrentUser} from '../../../../api/user/hooks';
+import {Ticket} from '../../../../types';
 
-type Props = {
+type NewProps = {
   projectId: string;
   boardId: string;
   listId: string;
 };
+
+type EditProps = {
+  ticket: Ticket;
+};
+
+function isEdit(props: any): props is EditProps {
+  return !!props.ticket;
+}
+
+type Props = NewProps | EditProps;
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -43,14 +54,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewTicketDialog: React.FC<Props> = (props) => {
-  const {projectId, boardId, listId} = props;
+const TicketDialog: React.FC<Props> = (props) => {
   const user = useCurrentUser();
   const classes = useStyles();
+
   const context = useModalContext<any>();
-  const [formValues, setFormValues] = useState(
-    getInitialTicket(projectId, boardId, listId, user.sub)
-  );
+  const [formValues, setFormValues] = useState(() => {
+    if (isEdit(props)) {
+      const {ticket} = props;
+      return ticket;
+    } else {
+      const {projectId, boardId, listId} = props;
+      return getInitialTicket(projectId, boardId, listId, user.sub);
+    }
+  });
   const handleChange = useCallback(
     (key: string) =>
       function (value: any) {
@@ -58,18 +75,23 @@ const NewTicketDialog: React.FC<Props> = (props) => {
       },
     []
   );
-
   const handleSubmit = async () => {
-    const res = await createTicket(formValues);
+    let res;
+    if (isEdit(props)) {
+      res = await updateTicket(formValues);
+    } else {
+      res = await createTicket(formValues);
+    }
     context.actions.resolve(res);
   };
-
+  console.debug({formValues});
   return (
     <Dialog maxWidth={'md'} fullWidth={true}>
       <DialogHeader>{'New Ticket'}</DialogHeader>
       <DialogBody>
         <Column padding={1}>
           <TextField
+            defaultValue={formValues.title}
             className={classes.title}
             placeholder='Ticket title'
             label='Title'
@@ -77,8 +99,8 @@ const NewTicketDialog: React.FC<Props> = (props) => {
           />
           <Column className={classes.editorContainer}>
             <Editor
+              defaultValue={formValues.description}
               placeholder='Ticket description'
-              defaultValue=''
               onChange={(value) => handleChange('description')(value())}
             />
           </Column>
@@ -93,4 +115,4 @@ const NewTicketDialog: React.FC<Props> = (props) => {
   );
 };
 
-export default NewTicketDialog;
+export default TicketDialog;

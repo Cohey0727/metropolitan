@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import {Draggable, DraggableProvided, DraggableStateSnapshot} from 'react-beautiful-dnd';
@@ -6,6 +6,8 @@ import {Draggable, DraggableProvided, DraggableStateSnapshot} from 'react-beauti
 import {Ticket} from '../../../types';
 import {Paper, Row} from '../../atoms/containers';
 import {useUsersContext} from '../../../api/user/hooks';
+import {useModal} from '../../../providers/ModalProvider';
+import TicketDialog from '../../organisms/ticket/TicketDialog';
 
 type Props = {
   ticket: Ticket;
@@ -60,6 +62,11 @@ const Card = ({ticket, index}: Props) => {
   const {findUserById} = useUsersContext();
   const classes = useStyles();
   const user = findUserById(ticket.author);
+  const openDialog = useModal(TicketDialog);
+
+  const hadnleClick = useCallback(() => {
+    openDialog({ticket});
+  }, [ticket]);
 
   return (
     <Draggable draggableId={ticket.ticketId} index={index} key={ticket.ticketId}>
@@ -68,6 +75,7 @@ const Card = ({ticket, index}: Props) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          onClick={hadnleClick}
         >
           <Header>{ticket.title}</Header>
           <Body>{ticket.description}</Body>

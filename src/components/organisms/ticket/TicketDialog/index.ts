@@ -1,1 +1,1 @@
-export {default} from './NewTicketDialog';
+export {default} from './TicketDialog';
