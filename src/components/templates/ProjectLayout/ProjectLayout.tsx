@@ -2,7 +2,7 @@ import React from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
-import UsersProvider from '../../../api/user/providers';
+import {ProjectUsersProvider} from '../../../api/user/providers';
 import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,13 +35,13 @@ const ProjectLayout = (props: Props) => {
   const classes = useStyles();
 
   return (
-    <UsersProvider>
+    <ProjectUsersProvider>
       <div className={classes.root}>
         <TopBar />
         <SideBar />
         <div className={classes.wrapper}>{renderRoutes(route!.routes)}</div>
       </div>
-    </UsersProvider>
+    </ProjectUsersProvider>
   );
 };
 

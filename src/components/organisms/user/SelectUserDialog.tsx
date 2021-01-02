@@ -1,19 +1,16 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import {Dialog, DialogActions, DialogBody, DialogHeader} from '../../atoms/dialogs';
 import {Button} from '../../atoms/buttons';
 import {AsyncSelect} from '../../atoms/input';
-import {addProjectUser, searchUsers} from '../../../api/user/operations';
+import {searchUsers} from '../../../api/user/operations';
 import {SelectorOption} from '../../atoms/input/AsyncSelect';
 import {useModalContext} from '../../../providers/ModalProvider';
 import {Column} from '../../atoms/containers';
 import {User} from '../../../types';
 
-type Props = {
-  projectId: string;
-};
+type Props = {};
 
 const AddMemberDialog: React.FC<Props> = (props) => {
-  const {projectId} = props;
   const context = useModalContext<any>();
 
   const [user, setUser] = useState<User | null>(null);
@@ -28,10 +25,7 @@ const AddMemberDialog: React.FC<Props> = (props) => {
     setUser(user!.value);
   };
 
-  const handleSubmit = async () => {
-    await addProjectUser(projectId, user!.user_id);
-    context.actions.resolve(user);
-  };
+  const handleSubmit = () => context.actions.resolve(user);
 
   return (
     <Dialog maxWidth={'sm'} fullWidth={true}>

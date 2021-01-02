@@ -10,7 +10,12 @@ export const getProjectUsers = async (projectId: string) => {
 
 export const addProjectUser = async (projectId: string, userId: string) => {
   const url = `${REST_API_URL}/projects/${projectId}/users`;
-  const res = await axios.post(url, {user_id: userId, type: 'Member'});
+  return await axios.post(url, {user_id: userId, type: 'Member'});
+};
+
+export const removeProjectUser = async (projectId: string, userId: string) => {
+  const url = `${REST_API_URL}/projects/${projectId}/users`;
+  return await axios.delete(url, {params: {user_id: userId, type: 'Member'}});
 };
 
 export const searchUsers = async (email: string) => {

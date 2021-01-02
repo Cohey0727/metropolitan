@@ -13,7 +13,8 @@ import {BasicTable} from '../../molecules/table';
 import {TableColumn} from '../../molecules/table/BasicTable';
 import {ProjectRouteProps} from '../../templates/ProjectLayout/ProjectLayout';
 import {useModal} from '../../../providers/ModalProvider';
-import AddMemberDialog from './AddMemberDialog';
+import SelectUserDialog from '../../organisms/user/SelectUserDialog';
+import {useUsersContext} from '../../../api/user/hooks';
 
 type Props = {} & ProjectRouteProps;
 
@@ -37,20 +38,13 @@ const columns: TableColumn<User>[] = [
 ];
 
 const Members: React.FC<Props> = (props) => {
-  const {projectId} = props.match.params;
   const classes = useStyles();
-  const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState<User[]>([]);
-  useAsync(async () => {
-    const data = await getProjectUsers(projectId);
-    setUsers(data);
-    setLoading(false);
-  }, []);
+  const {users, addUser} = useUsersContext();
 
-  const openDialog = useModal(AddMemberDialog);
+  const openDialog = useModal(SelectUserDialog);
   const handleOpenDialog = useCallback(async () => {
-    const user = (await openDialog({projectId})) as User;
-    setUsers((_users) => [..._users, user]);
+    const user = (await openDialog({})) as User;
+    addUser(user);
   }, []);
 
   return (
@@ -59,7 +53,7 @@ const Members: React.FC<Props> = (props) => {
         <Typography variant='h3' color={'primary'}>
           Members
         </Typography>
-        {loading ? (
+        {users.length === 0 ? (
           <Spinner />
         ) : (
           <Column padding={[2, 0]}>

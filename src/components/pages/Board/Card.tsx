@@ -5,7 +5,7 @@ import {Draggable, DraggableProvided, DraggableStateSnapshot} from 'react-beauti
 
 import {Ticket} from '../../../types';
 import {Paper, Row} from '../../atoms/containers';
-import {useUsers} from '../../../api/user/hooks';
+import {useUsersContext} from '../../../api/user/hooks';
 
 type Props = {
   ticket: Ticket;
@@ -57,9 +57,9 @@ const Footer = React.forwardRef((props: React.ComponentProps<typeof Row>, ref) =
 ));
 
 const Card = ({ticket, index}: Props) => {
-  const users = useUsers();
+  const {users} = useUsersContext();
   const classes = useStyles();
-  const user = useMemo(() => users.find((_user) => _user.sub === ticket.author), [
+  const user = useMemo(() => users.find((_user) => _user.user_id === ticket.author), [
     users,
     ticket.author,
   ]);
