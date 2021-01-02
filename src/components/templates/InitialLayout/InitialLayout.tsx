@@ -1,7 +1,6 @@
 import React from 'react';
 import TopBar from './TopBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
-import UsersProvider from '../../../api/user/providers';
 import {makeStyles} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,12 +32,10 @@ const InitialLayout = (props: Props) => {
   const classes = useStyles();
 
   return (
-    <UsersProvider>
-      <div className={classes.root}>
-        <TopBar />
-        <div className={classes.wrapper}>{renderRoutes(route!.routes)}</div>
-      </div>
-    </UsersProvider>
+    <div className={classes.root}>
+      <TopBar />
+      <div className={classes.wrapper}>{renderRoutes(route!.routes)}</div>
+    </div>
   );
 };
 
