@@ -3,7 +3,7 @@ import {Link, useRouteMatch} from 'react-router-dom';
 import People from '@material-ui/icons/People';
 import {OverridableComponent} from '@material-ui/core/OverridableComponent';
 import {SvgIconTypeMap} from '@material-ui/core/SvgIcon/SvgIcon';
-import Dashboard from '@material-ui/icons/Dashboard';
+import Timeline from '@material-ui/icons/Timeline';
 import Settings from '@material-ui/icons/Settings';
 import ViewWeek from '@material-ui/icons/ViewWeek';
 import {makeStyles} from '@material-ui/core';
@@ -69,9 +69,9 @@ const sideBarContents: SideBarContent[] = [
     Icon: ViewWeek,
   },
   {
-    label: 'Boards',
-    link: (projectId: string) => `/projects/${projectId}/boards`,
-    Icon: Dashboard,
+    label: 'Flow',
+    link: (projectId: string) => `/projects/${projectId}/flow`,
+    Icon: Timeline,
   },
   {
     label: 'Members',
