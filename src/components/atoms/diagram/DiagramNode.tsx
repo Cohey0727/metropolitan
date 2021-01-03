@@ -1,5 +1,4 @@
 import React from 'react';
-import Diagram, {createSchema, useSchema} from 'beautiful-react-diagrams';
 
 const DiagramNode = (props: any) => {
   const {inputs} = props;

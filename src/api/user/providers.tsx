@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useMemo} from 'react';
+import React, {createContext, useMemo} from 'react';
 import _ from 'lodash';
 import {useRouteMatch} from 'react-router-dom';
 import {useAsync} from 'react-use';
@@ -14,14 +14,7 @@ type UsersContextValue = {
   getUserById: (userId: string) => undefined | User;
 };
 
-const initialValues: UsersContextValue = {
-  users: [],
-  addUser: (user: User) => {},
-  removeUser: (user: User) => {},
-  getUserById: (userId: string) => undefined,
-};
-
-export const UsersContext = createContext<UsersContextValue>(initialValues);
+export const UsersContext = createContext<UsersContextValue>({} as any);
 const ttl = 1000 * 60 * 10;
 
 type Props = {};
@@ -53,7 +46,7 @@ export const ProjectUsersProvider: React.FC<Props> = (props) => {
         setUsers(valueUsers.filter((_user) => _user !== user));
       },
     };
-  }, [users]);
+  }, [users, projectId, setUsers]);
 
   return <UsersContext.Provider value={contextValue}>{children}</UsersContext.Provider>;
 };
