@@ -1,5 +1,5 @@
-import _ from 'lodash';
 import React, {createContext, useEffect, useMemo} from 'react';
+import _ from 'lodash';
 import {useRouteMatch} from 'react-router-dom';
 import {useAsync} from 'react-use';
 import {ProjectPathParams} from '../../components/templates/ProjectLayout/ProjectLayout';
@@ -11,14 +11,14 @@ type UsersContextValue = {
   users: User[];
   addUser: (user: User) => void;
   removeUser: (user: User) => void;
-  findUserById: (userId: string) => undefined | User;
+  getUserById: (userId: string) => undefined | User;
 };
 
 const initialValues: UsersContextValue = {
   users: [],
   addUser: (user: User) => {},
   removeUser: (user: User) => {},
-  findUserById: (userId: string) => undefined,
+  getUserById: (userId: string) => undefined,
 };
 
 export const UsersContext = createContext<UsersContextValue>(initialValues);
@@ -43,7 +43,7 @@ export const ProjectUsersProvider: React.FC<Props> = (props) => {
     const userMap = _.keyBy(valueUsers, 'user_id');
     return {
       users: valueUsers,
-      findUserById: (userId: string) => userMap[userId],
+      getUserById: (userId: string) => userMap[userId],
       addUser: (user: User) => {
         addProjectUser(projectId, user.user_id);
         setUsers([...valueUsers, user]);

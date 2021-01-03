@@ -1,10 +1,9 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {DragDropContext, DraggableLocation, DropResult} from 'react-beautiful-dnd';
 import List from './List';
-import {Project, Ticket} from '../../../types';
+import {Ticket} from '../../../types';
 import {Container, Row} from '../../atoms/containers';
 import {useTickets} from '../../../api/ticket/hooks';
-import {Spinner} from '../../atoms/spinner';
 import {updateTicket} from '../../../api/ticket/operations';
 import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
@@ -14,12 +13,8 @@ import Zoom from '@material-ui/core/Zoom/Zoom';
 import Fab from '@material-ui/core/Fab';
 import Add from '@material-ui/icons/Add';
 import {makeStyles} from '@material-ui/core';
-import {Location} from 'history';
-import useOnlyOnce from '../../../utils/hooks/useOnlyOnce';
-import {getProject} from '../../../api/project/operations';
 import {ProjectRouteProps} from '../../templates/ProjectLayout/ProjectLayout';
-
-type LocationState = Location<{project: Project} | undefined>;
+import {useProjectContext} from '../../../api/project/hooks';
 
 type Props = ProjectRouteProps;
 
@@ -32,20 +27,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Board: React.FC<Props> = (props) => {
-  const {match, location} = props;
-  const projectId = match.params.projectId;
-  const locationState = location as LocationState;
-
-  const [project, setProject] = useState(locationState.state?.project);
-  useOnlyOnce(async () => {
-    const res = await getProject(projectId);
-    setProject(res);
-  }, project === undefined);
+  const {project, projectId} = useProjectContext();
 
   const classes = useStyles();
   const openDialog = useModal(TicketDialog);
 
-  const {tickets, loading} = useTickets(projectId);
+  const {tickets} = useTickets(projectId);
   const [localTickets, setLocalTickets] = useState(tickets);
 
   useEffect(() => {
@@ -91,8 +78,6 @@ const Board: React.FC<Props> = (props) => {
     await updateTicket(ticket);
   };
 
-  if (loading || project === undefined) return <Spinner />;
-
   const board = project.boards[0];
   return (
     <>
@@ -101,7 +86,7 @@ const Board: React.FC<Props> = (props) => {
           {board.lists.map((list, index) => (
             <List
               key={list.listId}
-              list={list}
+              listId={list.listId}
               index={index}
               tickets={ticketsByList[list.listId]}
             />

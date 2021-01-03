@@ -5,10 +5,11 @@ import {List, Ticket} from '../../../types';
 import {Column, Paper, Row} from '../../atoms/containers';
 import Card from './Card';
 import {styled} from '@material-ui/styles';
+import {useProjectContext} from '../../../api/project/hooks';
 
 type Props = {
   tickets?: Ticket[];
-  list: List;
+  listId: List['listId'];
   index: number;
 };
 
@@ -27,8 +28,9 @@ const Title = styled(Row)<Theme, any>(({theme}) => ({
 }));
 
 const ListComponent: React.FC<Props> = (props) => {
-  const {list, tickets = [], index} = props;
-
+  const {listId, tickets = [], index} = props;
+  const {getListById} = useProjectContext();
+  const list = getListById(listId);
   return (
     <ListPaper
       padding={[1, 0, 0, 0]}
