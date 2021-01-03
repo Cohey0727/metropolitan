@@ -59,9 +59,9 @@ const Footer = React.forwardRef((props: React.ComponentProps<typeof Row>, ref) =
 ));
 
 const Card = ({ticket, index}: Props) => {
-  const {findUserById} = useUsersContext();
+  const {getUserById} = useUsersContext();
   const classes = useStyles();
-  const user = findUserById(ticket.author);
+  const user = getUserById(ticket.author);
   const openDialog = useModal(TicketDialog);
 
   const hadnleClick = useCallback(() => {

@@ -4,6 +4,10 @@ import SideBar from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
 import {ProjectUsersProvider} from '../../../api/user/providers';
 import {makeStyles} from '@material-ui/core';
+import {Project} from '../../../types';
+import {ProjectProvider} from '../../../api/project/providers';
+import {useProjectContext} from '../../../api/project/hooks';
+import {Column} from '../../atoms/containers';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,29 +24,42 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       paddingLeft: 0,
     },
-    width: '100vw',
-    height: '100vh',
     boxSizing: 'border-box',
+  },
+  title: {
+    ...theme.typography.h6,
+    padding: theme.spacing(1, 2, 0),
+    color: theme.palette.grey[700],
   },
 }));
 
 export type ProjectPathParams = {projectId: string};
 export type ProjectRouteProps = RouteConfigComponentProps<ProjectPathParams>;
+export type LocationState = {project?: Project};
 type Props = {} & RouteConfigComponentProps<any>;
+
+const ProjectProviders: React.FC<any>[] = [ProjectUsersProvider, ProjectProvider];
 
 const ProjectLayout = (props: Props) => {
   const {route} = props;
   const classes = useStyles();
-
+  const {project} = useProjectContext();
   return (
-    <ProjectUsersProvider>
-      <div className={classes.root}>
-        <TopBar />
-        <SideBar />
-        <div className={classes.wrapper}>{renderRoutes(route!.routes)}</div>
-      </div>
-    </ProjectUsersProvider>
+    <div className={classes.root}>
+      <TopBar />
+      <SideBar />
+      <Column className={classes.wrapper} width={'100vw'} height={'100vh'}>
+        <div className={classes.title}>{project.title}</div>
+        {renderRoutes(route!.routes)}
+      </Column>
+    </div>
   );
 };
 
-export default ProjectLayout;
+export default ProjectProviders.reduce((Acc, Provider) => {
+  return (props: any) => (
+    <Provider>
+      <Acc {...props} />
+    </Provider>
+  );
+}, ProjectLayout);
