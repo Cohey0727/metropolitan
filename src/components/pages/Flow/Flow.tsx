@@ -5,16 +5,25 @@ import {FlowDiagram} from '../../atoms/diagram';
 
 const Flow: React.FC = () => {
   const {project, projectId} = useProjectContext();
+
   const nodes = useMemo(() => {
     return project.boards.map((board, index) => ({
       id: board.boardId,
       content: board.title,
       coordinates: [100 * (index + 1), 100] as NodeCoordinates,
-      outputs: [{id: 'port-1', alignment: 'right'}] as Port[],
-      inputs: [{id: 'port-1', alignment: 'left'}] as Port[],
+      inputs: [{id: `input-${board.boardId}`, alignment: 'left'}] as Port[],
+      outputs: [{id: `output-${board.boardId}`, alignment: 'right'}] as Port[],
     }));
-  }, []);
-  return <FlowDiagram nodes={nodes} />;
+  }, [projectId]);
+
+  const links = useMemo(() => {
+    return project.flow.map((link) => ({
+      input: `input-${link.input}`,
+      output: `output-${link.output}`,
+    }));
+  }, [projectId]);
+
+  return <FlowDiagram nodes={nodes} links={links} />;
 };
 
 export default Flow;

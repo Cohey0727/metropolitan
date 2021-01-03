@@ -10,9 +10,8 @@ type Props<T> = {
 };
 
 function FlowDiagram<T>(props: Props<T>) {
-  // create diagrams schema
   const {nodes, links} = props;
-  const initialSchema = useMemo(() => createSchema({nodes}), []);
+  const initialSchema = useMemo(() => createSchema({nodes, links}), []);
   const [schema, {onChange}] = useSchema<T>(initialSchema);
   console.debug({schema, links});
   return (
