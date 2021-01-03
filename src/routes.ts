@@ -3,6 +3,7 @@ import Board from './components/pages/Board';
 import {InitialLayout, ProjectLayout} from './components/templates';
 import ProjectSelect from './components/pages/ProjectSelect';
 import Members from './components/pages/Members';
+import Flow from './components/pages/Flow';
 
 const routes: RouteConfig[] = [
   {
@@ -22,9 +23,14 @@ const routes: RouteConfig[] = [
     path: '/projects/:projectId',
     routes: [
       {
-        key: 'projectBoard',
+        key: 'projectMembers',
         component: Members,
         path: '/projects/:projectId/members',
+      },
+      {
+        key: 'projectFlow',
+        component: Flow,
+        path: '/projects/:projectId/flow',
       },
       {
         key: 'projectBoard',

@@ -44,7 +44,7 @@ const Board: React.FC<Props> = (props) => {
     const boardId = project.boards[0].boardId;
     const listId = project.boards[0].lists[0].listId;
     await openDialog({projectId, boardId, listId});
-  }, [openDialog, project]);
+  }, [openDialog, project, projectId]);
 
   const ticketsByList = useMemo(
     () =>

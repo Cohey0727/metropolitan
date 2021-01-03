@@ -1,4 +1,4 @@
-import React, {Component, ComponentProps, useCallback} from 'react';
+import React, {ComponentProps} from 'react';
 import BaseAsyncSelect from 'react-select/async';
 import {StylesConfig} from 'react-select/src/styles';
 
