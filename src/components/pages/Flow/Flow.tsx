@@ -4,7 +4,7 @@ import {NodeCoordinates, Port} from 'beautiful-react-diagrams/@types/DiagramSche
 import {FlowDiagram} from '../../atoms/diagram';
 
 const Flow: React.FC = () => {
-  const {project, projectId} = useProjectContext();
+  const {project} = useProjectContext();
 
   const nodes = useMemo(() => {
     return project.boards.map((board, index) => ({
@@ -14,14 +14,14 @@ const Flow: React.FC = () => {
       inputs: [{id: `input-${board.boardId}`, alignment: 'left'}] as Port[],
       outputs: [{id: `output-${board.boardId}`, alignment: 'right'}] as Port[],
     }));
-  }, [projectId]);
+  }, [project]);
 
   const links = useMemo(() => {
     return project.flow.map((link) => ({
       input: `input-${link.input}`,
       output: `output-${link.output}`,
     }));
-  }, [projectId]);
+  }, [project]);
 
   return <FlowDiagram nodes={nodes} links={links} />;
 };

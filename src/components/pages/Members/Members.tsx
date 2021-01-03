@@ -1,11 +1,9 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Fab from '@material-ui/core/Fab';
 import Zoom from '@material-ui/core/Zoom';
 import AddIcon from '@material-ui/icons/Add';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import {useAsync} from 'react-use';
-import {getProjectUsers} from '../../../api/user/operations';
 import {User} from '../../../types';
 import {Column} from '../../atoms/containers';
 import {Spinner} from '../../atoms/spinner';
@@ -45,7 +43,7 @@ const Members: React.FC<Props> = (props) => {
   const handleOpenDialog = useCallback(async () => {
     const user = (await openDialog({})) as User;
     addUser(user);
-  }, []);
+  }, [openDialog, addUser]);
 
   return (
     <>

@@ -1,5 +1,4 @@
 import {useCallback} from 'react';
-import {useEffect, useMemo, useState} from 'react';
 import {useLocalStorage} from 'react-use';
 
 type WrappedValue<T> = {

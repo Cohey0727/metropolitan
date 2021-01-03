@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo} from 'react';
+import React, {useCallback} from 'react';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import {Draggable, DraggableProvided, DraggableStateSnapshot} from 'react-beautiful-dnd';
@@ -66,7 +66,7 @@ const Card = ({ticket, index}: Props) => {
 
   const hadnleClick = useCallback(() => {
     openDialog({ticket});
-  }, [ticket]);
+  }, [ticket, openDialog]);
 
   return (
     <Draggable draggableId={ticket.ticketId} index={index} key={ticket.ticketId}>
