@@ -20,7 +20,7 @@ type Props = ProjectRouteProps;
 
 const useStyles = makeStyles((theme) => ({
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(4),
   },
