@@ -18,11 +18,6 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
     boxSizing: 'border-box',
   },
-  fab: {
-    position: 'absolute',
-    bottom: theme.spacing(2),
-    right: theme.spacing(4),
-  },
 }));
 
 type Props = {} & RouteConfigComponentProps<any>;
