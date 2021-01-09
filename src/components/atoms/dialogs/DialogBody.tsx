@@ -4,7 +4,11 @@ import {Column} from '../containers';
 type Props = {};
 
 const DialogBody: React.FC<Props> = ({children}) => {
-  return <Column>{children}</Column>;
+  return (
+    <Column padding={[3]} fontSize={'1.2rem'}>
+      {children}
+    </Column>
+  );
 };
 
 export default DialogBody;

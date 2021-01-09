@@ -33,9 +33,14 @@ const routes: RouteConfig[] = [
         path: '/projects/:projectId/flow',
       },
       {
+        key: 'projectBoardDetail',
+        component: Board,
+        path: '/projects/:projectId/boards/:boardId',
+      },
+      {
         key: 'projectBoard',
         component: Board,
-        path: '/projects/:projectId',
+        path: '/projects/:projectId/boards',
       },
     ],
   },

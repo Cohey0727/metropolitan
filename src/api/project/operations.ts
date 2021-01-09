@@ -19,3 +19,9 @@ export const createProject = async (values: any) => {
   const res = await axios.post(baseUrl, values);
   return res.data as Project;
 };
+
+export const finishBoard = async (projecId: string, boardId: string) => {
+  const url = `${baseUrl}/${projecId}/boards/${boardId}/finish`;
+  const res = await axios.post(url);
+  return res.data as Project;
+};

@@ -2,7 +2,7 @@ import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {DragDropContext, DraggableLocation, DropResult} from 'react-beautiful-dnd';
 import List from './List';
 import {Ticket} from '../../../types';
-import {Container, Row} from '../../atoms/containers';
+import {Column, Container, Row} from '../../atoms/containers';
 import {useTickets} from '../../../api/ticket/hooks';
 import {updateTicket} from '../../../api/ticket/operations';
 import {calcNewOrder} from './utils';
@@ -13,10 +13,15 @@ import Zoom from '@material-ui/core/Zoom/Zoom';
 import Fab from '@material-ui/core/Fab';
 import Add from '@material-ui/icons/Add';
 import {makeStyles} from '@material-ui/core';
-import {ProjectRouteProps} from '../../templates/ProjectLayout/ProjectLayout';
+import {ProjectPathParams} from '../../templates/ProjectLayout/ProjectLayout';
 import {useProjectContext} from '../../../api/project/hooks';
+import {RouteConfigComponentProps} from 'react-router-config';
+import {Spinner} from '../../atoms/spinner';
+import Header from './Header';
 
-type Props = ProjectRouteProps;
+export type BoardPathParams = {boardId?: string} & ProjectPathParams;
+export type BoardRouteProps = RouteConfigComponentProps<BoardPathParams>;
+type Props = BoardRouteProps;
 
 const useStyles = makeStyles((theme) => ({
   fab: {
@@ -24,10 +29,32 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(4),
   },
+  boardTitleContainer: {
+    padding: theme.spacing(0, 1),
+  },
 }));
 
 const Board: React.FC<Props> = (props) => {
+  const {match, history} = props;
+  const {boardId} = match.params;
+
   const {project, projectId} = useProjectContext();
+
+  const [board, setBoard] = useState(() => {
+    const find = project.boards.find((board) => board.boardId === boardId);
+    if (find) return find;
+    const _board = project.boards[0];
+    history.replace(`/projects/${projectId}/boards/${_board.boardId}`);
+    return _board;
+  });
+
+  useEffect(() => {
+    const find = project.boards.find((board) => board.boardId === boardId);
+    if (find) return setBoard(find);
+    const _board = project.boards[0];
+    history.replace(`/projects/${projectId}/boards/${_board.boardId}`);
+    setBoard(_board);
+  }, [boardId, projectId]);
 
   const classes = useStyles();
   const openDialog = useModal(TicketDialog);
@@ -77,23 +104,25 @@ const Board: React.FC<Props> = (props) => {
     setLocalTickets([...localTickets]);
     await updateTicket(ticket);
   };
-
-  const board = project.boards[0];
+  if (!board) return <Spinner />;
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Row height={'100%'} width={'100%'} overflowX={'auto'} padding={[0, 0, 0, 1]}>
-          {board.lists.map((list, index) => (
-            <List
-              key={list.listId}
-              listId={list.listId}
-              index={index}
-              tickets={ticketsByList[list.listId]}
-            />
-          ))}
-          <Container minWidth={96} height={'100%'} />
-        </Row>
-      </DragDropContext>
+      <Column>
+        <Header board={board} />
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Row height={'100%'} width={'100%'} overflowX={'auto'} padding={[0, 0, 0, 1]}>
+            {board.lists.map((list, index) => (
+              <List
+                key={list.listId}
+                listId={list.listId}
+                index={index}
+                tickets={ticketsByList[list.listId]}
+              />
+            ))}
+            <Container minWidth={96} height={'100%'} />
+          </Row>
+        </DragDropContext>
+      </Column>
       <Zoom in={true}>
         <Fab
           className={classes.fab}
