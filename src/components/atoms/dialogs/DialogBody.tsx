@@ -5,7 +5,7 @@ type Props = {};
 
 const DialogBody: React.FC<Props> = ({children}) => {
   return (
-    <Column padding={[3]} fontSize={'1.2rem'}>
+    <Column padding={[2]} fontSize={'1.2rem'}>
       {children}
     </Column>
   );
