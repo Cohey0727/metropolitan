@@ -84,7 +84,6 @@ const TicketDialog: React.FC<Props> = (props) => {
     }
     context.actions.resolve(res);
   };
-  console.debug({formValues});
   return (
     <Dialog maxWidth={'md'} fullWidth={true}>
       <DialogHeader>{isEdit(props) ? 'Edit Ticket' : 'New Ticket'}</DialogHeader>

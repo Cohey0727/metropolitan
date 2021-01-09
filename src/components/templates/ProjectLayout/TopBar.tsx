@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import {AppBar, makeStyles} from '@material-ui/core';
-import {Container} from '../../atoms/containers';
+import {Container, Row} from '../../atoms/containers';
 import {AccountUser} from '../../organisms/account';
 import {FullLogo} from '../../organisms/common';
+import {useProjectContext} from '../../../api/project/hooks';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,18 +16,29 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   toolbar: {},
-  leftContainer: {},
   rightContainer: {},
+  projectTitle: {
+    lineHeight: '1rem',
+    margin: theme.spacing(0, 4),
+  },
 }));
 
 const TopBar = () => {
   const classes = useStyles();
+  const {project} = useProjectContext();
   return (
     <AppBar className={classes.root} elevation={0}>
-      <Container className={classes.leftContainer}>
+      <Container
+        display={'flex'}
+        width={'auto'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        height={'100%'}
+      >
         <RouterLink to='/'>
           <FullLogo />
         </RouterLink>
+        <h3 className={classes.projectTitle}>{project.title}</h3>
       </Container>
       <Container className={classes.rightContainer}>
         <AccountUser />

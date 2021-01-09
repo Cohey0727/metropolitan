@@ -65,7 +65,7 @@ type SideBarContent = {
 const sideBarContents: SideBarContent[] = [
   {
     label: 'Board',
-    link: (projectId: string) => `/projects/${projectId}/board`,
+    link: (projectId: string) => `/projects/${projectId}/boards`,
     Icon: ViewWeek,
   },
   {

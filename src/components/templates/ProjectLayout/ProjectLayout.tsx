@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
@@ -26,11 +26,6 @@ const useStyles = makeStyles((theme) => ({
     },
     boxSizing: 'border-box',
   },
-  title: {
-    ...theme.typography.h6,
-    padding: theme.spacing(1, 2, 0),
-    color: theme.palette.grey[700],
-  },
 }));
 
 export type ProjectPathParams = {projectId: string};
@@ -43,13 +38,11 @@ const ProjectProviders: React.FC<any>[] = [ProjectUsersProvider, ProjectProvider
 const ProjectLayout = (props: Props) => {
   const {route} = props;
   const classes = useStyles();
-  const {project} = useProjectContext();
   return (
     <div className={classes.root}>
       <TopBar />
       <SideBar />
       <Column className={classes.wrapper} width={'100vw'} height={'100vh'}>
-        <div className={classes.title}>{project.title}</div>
         {renderRoutes(route!.routes)}
       </Column>
     </div>

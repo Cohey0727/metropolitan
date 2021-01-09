@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export function Switch(props: Props) {
   const {field, label, ...rest} = props;
   const classes = useStyles();
-  console.debug({field});
+
   return (
     <div className={classes.root}>
       <FormControlLabel

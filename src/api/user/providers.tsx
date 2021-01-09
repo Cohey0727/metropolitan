@@ -24,7 +24,7 @@ export const ProjectUsersProvider: React.FC<Props> = (props) => {
   const match = useRouteMatch<ProjectPathParams>();
   const {projectId} = match.params;
 
-  const [users, setUsers] = useTtlLocalStrage<User[]>('projectUsers', ttl);
+  const [users, setUsers] = useTtlLocalStrage<User[]>('projectUsers', ttl, []);
 
   useAsync(async () => {
     const users = await getProjectUsers(projectId);
