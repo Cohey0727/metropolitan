@@ -9,8 +9,6 @@ import {calcNewOrder} from './utils';
 import {inject} from '../../../utils/array';
 import {useModal} from '../../../providers/ModalProvider';
 import TicketDialog from '../../organisms/ticket/TicketDialog';
-import Zoom from '@material-ui/core/Zoom/Zoom';
-import Fab from '@material-ui/core/Fab';
 import Add from '@material-ui/icons/Add';
 import {makeStyles} from '@material-ui/core';
 import {ProjectPathParams} from '../../templates/ProjectLayout/ProjectLayout';
@@ -18,6 +16,7 @@ import {useProjectContext} from '../../../api/project/hooks';
 import {RouteConfigComponentProps} from 'react-router-config';
 import {Spinner} from '../../atoms/spinner';
 import Header from './Header';
+import {Fab} from '../../atoms/buttons';
 
 export type BoardPathParams = {boardId?: string} & ProjectPathParams;
 export type BoardRouteProps = RouteConfigComponentProps<BoardPathParams>;
@@ -123,16 +122,9 @@ const Board: React.FC<Props> = (props) => {
           </Row>
         </DragDropContext>
       </Column>
-      <Zoom in={true}>
-        <Fab
-          className={classes.fab}
-          aria-label={'New Ticket'}
-          color={'primary'}
-          onClick={openNewTicket}
-        >
-          <Add />
-        </Fab>
-      </Zoom>
+      <Fab aria-label={'New Ticket'} color={'primary'} onClick={openNewTicket}>
+        <Add />
+      </Fab>
     </>
   );
 };

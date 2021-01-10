@@ -1,10 +1,11 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import {AppBar, makeStyles} from '@material-ui/core';
-import {Container, Row} from '../../atoms/containers';
+import {Container} from '../../atoms/containers';
 import {AccountUser} from '../../organisms/account';
-import {FullLogo} from '../../organisms/common';
+import {FullLogo, WhiteLogo} from '../../organisms/common';
 import {useProjectContext} from '../../../api/project/hooks';
+import useIsMobile from '../../../utils/hooks/useIsMobile';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const TopBar = () => {
   const classes = useStyles();
   const {project} = useProjectContext();
+  const isMobile = useIsMobile();
   return (
     <AppBar className={classes.root} elevation={0}>
       <Container
@@ -35,9 +37,7 @@ const TopBar = () => {
         alignItems={'center'}
         height={'100%'}
       >
-        <RouterLink to='/'>
-          <FullLogo />
-        </RouterLink>
+        <RouterLink to='/'>{isMobile ? <WhiteLogo /> : <FullLogo />}</RouterLink>
         <h3 className={classes.projectTitle}>{project.title}</h3>
       </Container>
       <Container className={classes.rightContainer}>

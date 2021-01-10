@@ -1,7 +1,9 @@
-import React, {useMemo} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {useProjectContext} from '../../../api/project/hooks';
 import {NodeCoordinates, Port} from 'beautiful-react-diagrams/@types/DiagramSchema';
 import {FlowDiagram} from '../../atoms/diagram';
+import {Fab} from '../../atoms/buttons';
+import Add from '@material-ui/icons/Add';
 
 const Flow: React.FC = () => {
   const {project} = useProjectContext();
@@ -23,7 +25,16 @@ const Flow: React.FC = () => {
     }));
   }, [project]);
 
-  return <FlowDiagram nodes={nodes} links={links} />;
+  const hanldeAddNewBoard = useCallback(() => {}, []);
+
+  return (
+    <>
+      <FlowDiagram nodes={nodes} links={links} />
+      <Fab aria-label={'New Board'} color={'primary'} onClick={hanldeAddNewBoard}>
+        <Add />
+      </Fab>
+    </>
+  );
 };
 
 export default Flow;
