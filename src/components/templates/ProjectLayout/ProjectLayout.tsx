@@ -1,13 +1,14 @@
 import React, {useMemo} from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
+import MobileNavigation from './MobileNavigation';
 import {renderRoutes, RouteConfigComponentProps} from 'react-router-config';
 import {ProjectUsersProvider} from '../../../api/user/providers';
 import {makeStyles} from '@material-ui/core';
 import {Project} from '../../../types';
 import {ProjectProvider} from '../../../api/project/providers';
-import {useProjectContext} from '../../../api/project/hooks';
 import {Column} from '../../atoms/containers';
+import useIsMobile from '../../../utils/hooks/useIsMobile';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 96,
     [theme.breakpoints.down('sm')]: {
       paddingLeft: 0,
+      paddingBottom: 60,
     },
     boxSizing: 'border-box',
   },
@@ -38,10 +40,11 @@ const ProjectProviders: React.FC<any>[] = [ProjectUsersProvider, ProjectProvider
 const ProjectLayout = (props: Props) => {
   const {route} = props;
   const classes = useStyles();
+  const isMobile = useIsMobile();
   return (
     <div className={classes.root}>
       <TopBar />
-      <SideBar />
+      {isMobile ? <MobileNavigation /> : <SideBar />}
       <Column className={classes.wrapper} width={'100vw'} height={'100vh'}>
         {renderRoutes(route!.routes)}
       </Column>

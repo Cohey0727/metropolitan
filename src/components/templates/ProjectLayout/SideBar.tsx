@@ -1,13 +1,9 @@
 import React from 'react';
 import {Link, useRouteMatch} from 'react-router-dom';
-import People from '@material-ui/icons/People';
-import {OverridableComponent} from '@material-ui/core/OverridableComponent';
-import {SvgIconTypeMap} from '@material-ui/core/SvgIcon/SvgIcon';
-import Timeline from '@material-ui/icons/Timeline';
 import Settings from '@material-ui/icons/Settings';
-import ViewWeek from '@material-ui/icons/ViewWeek';
 import {makeStyles} from '@material-ui/core';
 import {ProjectPathParams} from './ProjectLayout';
+import {projectMenus} from './constants';
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {
@@ -56,30 +52,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type SideBarContent = {
-  label: string;
-  link: (projectId: string) => string;
-  Icon: OverridableComponent<SvgIconTypeMap>;
-};
-
-const sideBarContents: SideBarContent[] = [
-  {
-    label: 'Board',
-    link: (projectId: string) => `/projects/${projectId}/boards`,
-    Icon: ViewWeek,
-  },
-  {
-    label: 'Flow',
-    link: (projectId: string) => `/projects/${projectId}/flow`,
-    Icon: Timeline,
-  },
-  {
-    label: 'Members',
-    link: (projectId: string) => `/projects/${projectId}/members`,
-    Icon: People,
-  },
-];
-
 const SideBar = () => {
   const classes = useStyles();
   const match = useRouteMatch<ProjectPathParams>();
@@ -87,7 +59,7 @@ const SideBar = () => {
   return (
     <div className={classes.sidebar}>
       <div className={classes.menuList}>
-        {sideBarContents.map((sideBarContent) => {
+        {projectMenus.map((sideBarContent) => {
           const {label, Icon, link} = sideBarContent;
           return (
             <Link to={link(projectId)} key={label}>
