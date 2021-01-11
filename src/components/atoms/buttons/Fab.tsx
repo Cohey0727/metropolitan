@@ -8,6 +8,9 @@ const FabButton = styled(Fab)(({theme}) => ({
   position: 'fixed',
   bottom: theme.spacing(2),
   right: theme.spacing(4),
+  [theme.breakpoints.down('sm')]: {
+    bottom: theme.spacing(10),
+  },
 }));
 
 type Props = {} & ComponentProps<typeof FabButton>;
