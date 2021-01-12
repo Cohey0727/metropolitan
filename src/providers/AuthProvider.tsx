@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {Auth0Provider, useAuth0} from '@auth0/auth0-react';
 import {useAsync} from 'react-use';
-import {Spinner} from '../components/atoms/spinner';
+import {Spinner} from '../components/atoms/spinners';
 import useOnlyOnce from '../utils/hooks/useOnlyOnce';
 
 const AuthProvider: React.FC = ({children}) => {

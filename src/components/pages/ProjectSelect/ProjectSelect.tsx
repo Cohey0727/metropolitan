@@ -7,7 +7,7 @@ import {getProjects} from '../../../api/project/operations';
 import {useAsync} from 'react-use';
 import {Project} from '../../../types';
 import {useCurrentUser} from '../../../api/user/hooks';
-import {Spinner} from '../../atoms/spinner';
+import {Spinner} from '../../atoms/spinners';
 import ProjectNewCard from './ProjectNewCard';
 import ProjectDialog from '../../organisms/project/ProjectDialog';
 import {useModal} from '../../../providers/ModalProvider';

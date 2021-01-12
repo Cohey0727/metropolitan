@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import {User} from '../../../types';
 import {Column} from '../../atoms/containers';
-import {Spinner} from '../../atoms/spinner';
+import {Spinner} from '../../atoms/spinners';
 import {BasicTable} from '../../molecules/table';
 import {TableColumn} from '../../molecules/table/BasicTable';
 import {ProjectRouteProps} from '../../templates/ProjectLayout/ProjectLayout';
