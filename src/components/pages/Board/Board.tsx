@@ -14,7 +14,7 @@ import {makeStyles} from '@material-ui/core';
 import {ProjectPathParams} from '../../templates/ProjectLayout/ProjectLayout';
 import {useProjectContext} from '../../../api/project/hooks';
 import {RouteConfigComponentProps} from 'react-router-config';
-import {Spinner} from '../../atoms/spinner';
+import {Spinner} from '../../atoms/spinners';
 import Header from './Header';
 import {Fab} from '../../atoms/buttons';
 

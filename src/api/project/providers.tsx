@@ -7,7 +7,7 @@ import {
   ProjectPathParams,
 } from '../../components/templates/ProjectLayout/ProjectLayout';
 import {Board, List, Project} from '../../types';
-import {Spinner} from '../../components/atoms/spinner';
+import {Spinner} from '../../components/atoms/spinners';
 import useOnlyOnce from '../../utils/hooks/useOnlyOnce';
 import {getProject} from './operations';
 

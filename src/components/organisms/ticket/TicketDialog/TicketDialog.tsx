@@ -4,13 +4,14 @@ import Editor from 'rich-markdown-editor';
 import getInitialTicket from './getInitialTicket';
 import TextField from '@material-ui/core/TextField';
 import './editor.css';
-import {Column} from '../../../atoms/containers';
+import {Column, Row} from '../../../atoms/containers';
 import {createTicket, updateTicket} from '../../../../api/ticket/operations';
 import {Button} from '../../../atoms/buttons';
 import {makeStyles} from '@material-ui/core';
 import {useModalContext} from '../../../../providers/ModalProvider';
 import {useCurrentUser} from '../../../../api/user/hooks';
 import {Ticket} from '../../../../types';
+import useIsMobile from '../../../../utils/hooks/useIsMobile';
 
 type NewProps = {
   projectId: string;
@@ -57,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 const TicketDialog: React.FC<Props> = (props) => {
   const user = useCurrentUser();
   const classes = useStyles();
+  const isMobile = useIsMobile();
 
   const context = useModalContext<any>();
   const [formValues, setFormValues] = useState(() => {
@@ -84,8 +86,9 @@ const TicketDialog: React.FC<Props> = (props) => {
     }
     context.actions.resolve(res);
   };
+
   return (
-    <Dialog maxWidth={'md'} fullWidth={true}>
+    <Dialog maxWidth={'md'} fullWidth={!isMobile} fullScreen={isMobile}>
       <DialogHeader>{isEdit(props) ? 'Edit Ticket' : 'New Ticket'}</DialogHeader>
       <DialogBody>
         <Column padding={1}>

@@ -32,6 +32,7 @@ const Container = React.forwardRef((props: React.ComponentProps<typeof Paper>, r
     display={'flex'}
     flexDirection={'column'}
     {...props}
+    style={{cursor: 'pointer', ...props?.style}}
   >
     {props.children}
   </Paper>
@@ -78,7 +79,7 @@ const Card = ({ticket, index}: Props) => {
           onClick={hadnleClick}
         >
           <Header>{ticket.title}</Header>
-          <Body>{ticket.description}</Body>
+          <Body></Body>
           <Footer>
             <Avatar
               src={user?.picture}
