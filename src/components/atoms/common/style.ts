@@ -25,6 +25,7 @@ export type CssProps = {
   justifyContent: CSSProperties['justifyContent'];
   alignItems: CSSProperties['alignItems'];
   boxSizing: CSSProperties['boxSizing'];
+  cursor: CSSProperties['cursor'];
 };
 
 const spaceUnit = 8;
@@ -63,6 +64,7 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     justifyContent,
     alignItems,
     boxSizing,
+    cursor,
   } = props;
   return {
     color: color || 'inherits',
@@ -87,5 +89,6 @@ export const cssCreator: CssCreator = ({theme, ...props}) => {
     justifyContent,
     alignItems,
     boxSizing,
+    cursor,
   };
 };
