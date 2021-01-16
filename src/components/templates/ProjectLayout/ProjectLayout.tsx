@@ -44,10 +44,11 @@ const ProjectLayout = (props: Props) => {
   return (
     <div className={classes.root}>
       <TopBar />
-      {isMobile ? <MobileNavigation /> : <SideBar />}
+      {!isMobile && <SideBar />}
       <Column className={classes.wrapper} width={'100vw'} height={'100vh'}>
         {renderRoutes(route!.routes)}
       </Column>
+      {isMobile && <MobileNavigation />}
     </div>
   );
 };

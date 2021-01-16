@@ -14,7 +14,7 @@ type UsersContextValue = {
   getUserById: (userId: string) => undefined | User;
 };
 
-export const UsersContext = createContext<UsersContextValue>({} as any);
+export const ProjectUsersContext = createContext<UsersContextValue>({} as any);
 const ttl = 1000 * 60 * 10;
 
 type Props = {};
@@ -48,5 +48,5 @@ export const ProjectUsersProvider: React.FC<Props> = (props) => {
     };
   }, [users, projectId, setUsers]);
 
-  return <UsersContext.Provider value={contextValue}>{children}</UsersContext.Provider>;
+  return <ProjectUsersContext.Provider value={contextValue}>{children}</ProjectUsersContext.Provider>;
 };

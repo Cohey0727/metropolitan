@@ -5,7 +5,7 @@ import {Draggable, DraggableProvided, DraggableStateSnapshot} from 'react-beauti
 
 import {Ticket} from '../../../types';
 import {Paper, Row} from '../../atoms/containers';
-import {useUsersContext} from '../../../api/user/hooks';
+import {useProjectUsers} from '../../../api/user/hooks';
 import {useModal} from '../../../providers/ModalProvider';
 import TicketDialog from '../../organisms/ticket/TicketDialog';
 
@@ -60,7 +60,7 @@ const Footer = React.forwardRef((props: React.ComponentProps<typeof Row>, ref) =
 ));
 
 const Card = ({ticket, index}: Props) => {
-  const {getUserById} = useUsersContext();
+  const {getUserById} = useProjectUsers();
   const classes = useStyles();
   const user = getUserById(ticket.author);
   const openDialog = useModal(TicketDialog);

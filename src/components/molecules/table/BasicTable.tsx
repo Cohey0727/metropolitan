@@ -18,6 +18,7 @@ export type TableColumn<T> = {
   label: React.ReactNode;
   accessor: ((data: T) => React.ReactNode) | keyof T;
   align?: 'right' | 'left';
+  component?: React.ComponentType<{data: T; align?: 'right' | 'left'}>;
 };
 
 type Props<T> = {
@@ -45,13 +46,14 @@ export default function BasicTable<T>(props: Props<T>) {
           {rows.map((data, rowIndex) => (
             <TableRow key={rowIndex}>
               {columns.map((column, colIndex) => {
-                const {accessor, align} = column;
+                const {accessor, align, component: CellComponent = TableCell} = column;
                 const value =
                   typeof accessor === 'string' ? data[accessor] : (accessor as Function)(data);
+                const cellProps = {align, data} as any;
                 return (
-                  <TableCell key={`${rowIndex}@${colIndex}`} align={align}>
+                  <CellComponent key={`${rowIndex}@${colIndex}`} {...cellProps}>
                     {value}
-                  </TableCell>
+                  </CellComponent>
                 );
               })}
             </TableRow>

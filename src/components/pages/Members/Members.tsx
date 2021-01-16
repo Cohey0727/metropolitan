@@ -1,6 +1,7 @@
 import React, {useCallback} from 'react';
 import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 import {User} from '../../../types';
 import {Column} from '../../atoms/containers';
 import {Spinner} from '../../atoms/spinners';
@@ -9,12 +10,35 @@ import {TableColumn} from '../../molecules/table/BasicTable';
 import {ProjectRouteProps} from '../../templates/ProjectLayout/ProjectLayout';
 import {useModal} from '../../../providers/ModalProvider';
 import SelectUserDialog from '../../organisms/user/SelectUserDialog';
-import {useUsersContext} from '../../../api/user/hooks';
+import {useProjectUsers} from '../../../api/user/hooks';
 import {Fab} from '../../atoms/buttons';
+import TableCell from '@material-ui/core/TableCell';
+import {IconButton} from '@material-ui/core';
 
 type Props = {} & ProjectRouteProps;
 
+const ActionCell = ({data}: {data: User}) => {
+  const {removeUser} = useProjectUsers();
+
+  const hadnleDelete = useCallback(() => {
+    removeUser(data);
+  }, [data, removeUser]);
+
+  return (
+    <TableCell>
+      <IconButton onClick={hadnleDelete}>
+        <DeleteIcon />
+      </IconButton>
+    </TableCell>
+  );
+};
+
 const columns: TableColumn<User>[] = [
+  {
+    label: 'Actions',
+    accessor: () => '',
+    component: ActionCell,
+  },
   {
     label: 'Name',
     accessor: 'name',
@@ -26,7 +50,7 @@ const columns: TableColumn<User>[] = [
 ];
 
 const Members: React.FC<Props> = (props) => {
-  const {users, addUser} = useUsersContext();
+  const {users, addUser} = useProjectUsers();
 
   const openDialog = useModal(SelectUserDialog);
   const handleOpenDialog = useCallback(async () => {
@@ -36,14 +60,14 @@ const Members: React.FC<Props> = (props) => {
 
   return (
     <>
-      <Column padding={[2]}>
-        <Typography variant='h3' color={'primary'}>
+      <Column padding={[2]} boxSizing={'border-box'}>
+        <Typography variant='h4' color={'primary'}>
           Members
         </Typography>
         {users.length === 0 ? (
           <Spinner />
         ) : (
-          <Column padding={[2, 0]}>
+          <Column padding={[1, 0]} overflow={'auto'}>
             <BasicTable columns={columns} rows={users} />
           </Column>
         )}
