@@ -109,8 +109,8 @@
 
 .loader-ball-triangle-path {
   position: relative;
-  -webkit-transform: translate(-29.994px, -37.50938px);
-  transform: translate(-29.994px, -37.50938px);
+  -webkit-transform: translate(-40px, -37.50938px);
+  transform: translate(-46px, -48px);
 }
 .loader-ball-triangle-path > div:nth-child(1) {
   -webkit-animation-name: loader-ball-triangle-path-1;
