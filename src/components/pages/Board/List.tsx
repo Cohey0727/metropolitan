@@ -1,7 +1,7 @@
 import React from 'react';
 import {Droppable, DroppableProvided, DroppableStateSnapshot} from 'react-beautiful-dnd';
 import {Theme} from '@material-ui/core';
-import {List, Ticket} from '../../../types';
+import {List} from '../../../types';
 import {Column, Paper, Row} from '../../atoms/containers';
 import Card from './Card';
 import {styled} from '@material-ui/styles';

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import {useRouteMatch} from 'react-router-dom';
 import {ProjectPathParams} from '../../components/templates/ProjectLayout/ProjectLayout';
-import {List, Ticket} from '../../types';
+import {Board, List, Ticket} from '../../types';
 import {connectProjectTickets, updateTicket} from './operations';
 import {Spinner} from '../../components/atoms/spinners';
 import {keyListBy, replace} from '../../utils/array';
@@ -14,7 +14,13 @@ import useBeforeEffect from '../../utils/hooks/useBeforeEffect';
 type TicketsContextValue = {
   tickets: Ticket[];
   onMoveTicketStart: () => void;
-  moveTicket: (ticketId: Ticket['ticketId'], toListId: List['listId'], toIndex: number) => void;
+  moveTicket: (
+    ticketId: Ticket['ticketId'],
+    toBoardId: Board['boardId'],
+    toListId: List['listId'],
+    toIndex: number,
+    indexType: 'list' | 'board'
+  ) => void;
   getTicketsByBoard: (boardId: string) => Ticket[];
   getTicketsByList: (listId: string) => Ticket[];
   getTicketById: (ticket: string) => Optional<Ticket>;
@@ -66,18 +72,21 @@ export const TicketProvider: React.FC<Props> = (props) => {
     ticketRefs.current.listTickets = listTickets;
   }, [tickets]);
 
-  const moveTicket = useCallback(
-    (ticketId: Ticket['ticketId'], toListId: List['listId'], toIndex: number) => {
+  const moveTicket: TicketsContextValue['moveTicket'] = useCallback(
+    (ticketId, boardId, listId, index: number, indexType) => {
       clientPriority.current = true;
       setTimeout(() => (clientPriority.current = false), 1000);
       const ticket = ticketRefs.current.idTicket[ticketId];
-      const toListTickests = ticketRefs.current.listTickets[toListId] || [];
+      const sortTickets =
+        (indexType === 'list'
+          ? ticketRefs.current.listTickets[listId]
+          : ticketRefs.current.boardTickets[boardId]) || [];
       const allTickets = ticketRefs.current.allTickets;
-      const order = calcNewOrder(toListTickests, ticket, toIndex);
+      const order = calcNewOrder(sortTickets, ticket, index);
       const newTicket = {
         ...ticket,
         order,
-        currentPosition: {...ticket.currentPosition, list: toListId},
+        currentPosition: {board: boardId, list: listId},
       };
       const newTickets = replace(allTickets, newTicket, 'ticketId');
       setTickets(_.orderBy(newTickets, ['order']));
