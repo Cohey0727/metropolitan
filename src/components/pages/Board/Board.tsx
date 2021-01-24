@@ -49,13 +49,19 @@ const Board: React.FC<Props> = (props) => {
     await openDialog({projectId, boardId, listId});
   }, [openDialog, project, projectId]);
 
-  const onDragEnd = async (result: DropResult) => {
+  const handleDragEnd = async (result: DropResult) => {
     if (!result.destination) return;
     const source: DraggableLocation = result.source;
     const destination: DraggableLocation = result.destination;
     if (source.droppableId === destination.droppableId && source.index === destination.index)
       return;
-    moveTicket(result.draggableId, destination.droppableId, destination.index);
+    moveTicket(
+      result.draggableId,
+      board.boardId,
+      destination.droppableId,
+      destination.index,
+      'list'
+    );
   };
 
   if (!board) return <Spinner />;
@@ -63,7 +69,7 @@ const Board: React.FC<Props> = (props) => {
     <>
       <Column>
         <Header board={board} />
-        <DragDropContext onDragEnd={onDragEnd} onDragStart={onMoveTicketStart}>
+        <DragDropContext onDragEnd={handleDragEnd} onDragStart={onMoveTicketStart}>
           <Row height={'100%'} width={'100%'} overflowX={'auto'} padding={[0, 0, 0, 1]}>
             {board.lists.map((list, index) => (
               <List key={list.listId} listId={list.listId} index={index} />

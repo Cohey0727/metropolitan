@@ -4,6 +4,7 @@ import {InitialLayout, ProjectLayout} from './components/templates';
 import ProjectSelect from './components/pages/ProjectSelect';
 import Members from './components/pages/Members';
 import Flow from './components/pages/Flow';
+import TicketList from './components/pages/TicketList';
 
 const routes: RouteConfig[] = [
   {
@@ -26,6 +27,11 @@ const routes: RouteConfig[] = [
         key: 'projectMembers',
         component: Members,
         path: '/projects/:projectId/members',
+      },
+      {
+        key: 'projectTickets',
+        component: TicketList,
+        path: '/projects/:projectId/tickets',
       },
       {
         key: 'projectFlow',

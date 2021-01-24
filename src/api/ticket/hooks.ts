@@ -24,3 +24,8 @@ export const useTicketsByList = (listId: string) => {
   const {getTicketsByList} = useContext(TicketContext);
   return getTicketsByList(listId);
 };
+
+export const useTicketsByBoard = (boardId: string) => {
+  const {getTicketsByBoard} = useContext(TicketContext);
+  return getTicketsByBoard(boardId);
+};
