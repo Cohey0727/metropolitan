@@ -80,7 +80,7 @@ export const TicketProvider: React.FC<Props> = (props) => {
         currentPosition: {...ticket.currentPosition, list: toListId},
       };
       const newTickets = replace(allTickets, newTicket, 'ticketId');
-      setTickets(newTickets);
+      setTickets(_.orderBy(newTickets, ['order']));
       updateTicket(newTicket);
     },
     []
