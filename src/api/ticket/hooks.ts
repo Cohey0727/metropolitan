@@ -1,6 +1,7 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Ticket} from '../../types';
 import {connectProjectTickets} from './operations';
+import {TicketContext} from './provider';
 
 export const useTickets = (projectId: string) => {
   const [loading, setLoading] = useState(true);
@@ -15,4 +16,11 @@ export const useTickets = (projectId: string) => {
   }, [projectId]);
 
   return {tickets, loading};
+};
+
+export const useProjectTicket = () => useContext(TicketContext);
+
+export const useTicketsByList = (listId: string) => {
+  const {getTicketsByList} = useContext(TicketContext);
+  return getTicketsByList(listId);
 };

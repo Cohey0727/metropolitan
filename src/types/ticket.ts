@@ -4,10 +4,7 @@ import {AuthUser} from './user';
 export type Ticket = {
   projectId: Project['projectId'];
   ticketId: string;
-  currentPosition: {
-    board: Board['boardId'];
-    list: List['listId'];
-  };
+  currentPosition: TicketPosition;
   order: number;
   author: AuthUser['email'];
   assignees: {[BoardId: string]: AuthUser['email']};
@@ -15,4 +12,9 @@ export type Ticket = {
   description: string;
   createDate: string;
   dueDate: string;
+};
+
+export type TicketPosition = {
+  board: Board['boardId'];
+  list: List['listId'];
 };
