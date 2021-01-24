@@ -1,16 +1,11 @@
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {DragDropContext, DraggableLocation, DropResult} from 'react-beautiful-dnd';
 import List from './List';
-import {Ticket} from '../../../types';
 import {Column, Container, Row} from '../../atoms/containers';
-import {useTickets} from '../../../api/ticket/hooks';
-import {updateTicket} from '../../../api/ticket/operations';
-import {calcNewOrder} from './utils';
-import {inject} from '../../../utils/array';
+import {useProjectTicket} from '../../../api/ticket/hooks';
 import {useModal} from '../../../providers/ModalProvider';
 import TicketDialog from '../../organisms/ticket/TicketDialog';
 import Add from '@material-ui/icons/Add';
-import {makeStyles} from '@material-ui/core';
 import {ProjectPathParams} from '../../templates/ProjectLayout/ProjectLayout';
 import {useProjectContext} from '../../../api/project/hooks';
 import {RouteConfigComponentProps} from 'react-router-config';
@@ -22,22 +17,12 @@ export type BoardPathParams = {boardId?: string} & ProjectPathParams;
 export type BoardRouteProps = RouteConfigComponentProps<BoardPathParams>;
 type Props = BoardRouteProps;
 
-const useStyles = makeStyles((theme) => ({
-  fab: {
-    position: 'fixed',
-    bottom: theme.spacing(2),
-    right: theme.spacing(4),
-  },
-  boardTitleContainer: {
-    padding: theme.spacing(0, 1),
-  },
-}));
-
 const Board: React.FC<Props> = (props) => {
   const {match, history} = props;
   const {boardId} = match.params;
 
   const {project, projectId} = useProjectContext();
+  const {moveTicket, onMoveTicketStart} = useProjectTicket();
 
   const [board, setBoard] = useState(() => {
     const find = project.boards.find((board) => board.boardId === boardId);
@@ -55,15 +40,7 @@ const Board: React.FC<Props> = (props) => {
     setBoard(_board);
   }, [boardId, projectId]);
 
-  const classes = useStyles();
   const openDialog = useModal(TicketDialog);
-
-  const {tickets} = useTickets(projectId);
-  const [localTickets, setLocalTickets] = useState(tickets);
-
-  useEffect(() => {
-    setLocalTickets(tickets);
-  }, [tickets]);
 
   const openNewTicket = useCallback(async () => {
     if (!project) return;
@@ -72,51 +49,24 @@ const Board: React.FC<Props> = (props) => {
     await openDialog({projectId, boardId, listId});
   }, [openDialog, project, projectId]);
 
-  const ticketsByList = useMemo(
-    () =>
-      localTickets!.reduce((acc: {[key: string]: Ticket[]}, ticket) => {
-        const listId = ticket.currentPosition.list;
-        if (acc[listId] === undefined) {
-          acc[listId] = [ticket];
-          return acc;
-        }
-        inject(acc[listId], ticket, (_ticket) => _ticket.order > ticket.order);
-        return acc;
-      }, {} as {[key: string]: Ticket[]}),
-    [localTickets]
-  );
-
   const onDragEnd = async (result: DropResult) => {
     if (!result.destination) return;
     const source: DraggableLocation = result.source;
     const destination: DraggableLocation = result.destination;
-    const ticket = tickets!.find((_ticket) => _ticket.ticketId === result.draggableId);
-    const listTickets = ticketsByList[destination.droppableId] || [];
-    if (
-      (source.droppableId === destination.droppableId && source.index === destination.index) ||
-      !ticket
-    )
+    if (source.droppableId === destination.droppableId && source.index === destination.index)
       return;
-
-    ticket.currentPosition.list = destination.droppableId;
-    ticket.order = calcNewOrder(listTickets, ticket, destination.index);
-    setLocalTickets([...localTickets]);
-    await updateTicket(ticket);
+    moveTicket(result.draggableId, destination.droppableId, destination.index);
   };
+
   if (!board) return <Spinner />;
   return (
     <>
       <Column>
         <Header board={board} />
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={onMoveTicketStart}>
           <Row height={'100%'} width={'100%'} overflowX={'auto'} padding={[0, 0, 0, 1]}>
             {board.lists.map((list, index) => (
-              <List
-                key={list.listId}
-                listId={list.listId}
-                index={index}
-                tickets={ticketsByList[list.listId]}
-              />
+              <List key={list.listId} listId={list.listId} index={index} />
             ))}
             <Container minWidth={96} height={'100%'} />
           </Row>

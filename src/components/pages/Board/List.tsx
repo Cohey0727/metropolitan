@@ -6,9 +6,9 @@ import {Column, Paper, Row} from '../../atoms/containers';
 import Card from './Card';
 import {styled} from '@material-ui/styles';
 import {useProjectContext} from '../../../api/project/hooks';
+import {useTicketsByList} from '../../../api/ticket/hooks';
 
 type Props = {
-  tickets?: Ticket[];
   listId: List['listId'];
   index: number;
 };
@@ -28,9 +28,10 @@ const Title = styled(Row)<Theme, any>(({theme}) => ({
 }));
 
 const ListComponent: React.FC<Props> = (props) => {
-  const {listId, tickets = [], index} = props;
+  const {listId, index} = props;
   const {getListById} = useProjectContext();
   const list = getListById(listId);
+  const tickets = useTicketsByList(listId);
   return (
     <ListPaper
       padding={[1, 0, 0, 0]}

@@ -9,6 +9,7 @@ import {Project} from '../../../types';
 import {ProjectProvider} from '../../../api/project/providers';
 import {Column} from '../../atoms/containers';
 import useIsMobile from '../../../utils/hooks/useIsMobile';
+import { TicketProvider } from '../../../api/ticket/provider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,7 @@ export type ProjectRouteProps = RouteConfigComponentProps<ProjectPathParams>;
 export type LocationState = {project?: Project};
 type Props = {} & RouteConfigComponentProps<any>;
 
-const ProjectProviders: React.FC<any>[] = [ProjectUsersProvider, ProjectProvider];
+const ProjectProviders: React.FC<any>[] = [ProjectUsersProvider, ProjectProvider, TicketProvider];
 
 const ProjectLayout = (props: Props) => {
   const {route} = props;

@@ -7,17 +7,17 @@ import {makeStyles} from '@material-ui/core/styles';
 const accountMenu: MenuItemType[][] = [
   [
     {
-      label: '個人設定',
+      label: 'Profile',
       key: 'accountSetting',
     },
     {
-      label: 'ヘルプ',
+      label: 'Help',
       key: 'help',
     },
   ],
   [
     {
-      label: 'ログアウト',
+      label: 'Logout',
       key: 'logout',
     },
   ],
