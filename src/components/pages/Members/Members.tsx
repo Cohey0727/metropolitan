@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {User} from '../../../types';
-import {Column} from '../../atoms/containers';
+import {Column, Row} from '../../atoms/containers';
 import {Spinner} from '../../atoms/spinners';
 import {BasicTable} from '../../molecules/table';
 import {TableColumn} from '../../molecules/table/BasicTable';
@@ -14,6 +14,7 @@ import {useProjectUsers} from '../../../api/user/hooks';
 import {Fab} from '../../atoms/buttons';
 import TableCell from '@material-ui/core/TableCell';
 import {IconButton} from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
 
 type Props = {} & ProjectRouteProps;
 
@@ -41,7 +42,14 @@ const columns: TableColumn<User>[] = [
   },
   {
     label: 'Name',
-    accessor: 'name',
+    accessor: (data) => {
+      return (
+        <Row alignItems={'center'}>
+          <Avatar src={data.picture} alt={data.name} style={{height: 32, width: 32, margin: 8}} />
+          {data.name}
+        </Row>
+      );
+    },
   },
   {
     label: 'Email',
