@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import TopBar from './TopBar';
 import SideBar from './SideBar';
 import MobileNavigation from './MobileNavigation';
@@ -9,7 +9,7 @@ import {Project} from '../../../types';
 import {ProjectProvider} from '../../../api/project/providers';
 import {Column} from '../../atoms/containers';
 import useIsMobile from '../../../utils/hooks/useIsMobile';
-import { TicketProvider } from '../../../api/ticket/provider';
+import {TicketProvider} from '../../../api/ticket/provider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
