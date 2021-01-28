@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import {DependencyList, EffectCallback, useEffect, useRef, useState} from 'react';
+import {DependencyList, EffectCallback, useRef} from 'react';
 import {isEqual} from '../array';
 
 export default function useBeforeEffect(effect: EffectCallback, deps: DependencyList) {

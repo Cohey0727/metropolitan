@@ -29,3 +29,8 @@ export const useTicketsByBoard = (boardId: string) => {
   const {getTicketsByBoard} = useContext(TicketContext);
   return getTicketsByBoard(boardId);
 };
+
+export const useTicketByticketId = (ticketId: string) => {
+  const {getTicketById} = useContext(TicketContext);
+  return getTicketById(ticketId);
+};

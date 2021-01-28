@@ -9,11 +9,6 @@ import {useProjectUsers} from '../../../api/user/hooks';
 import {useModal} from '../../../providers/ModalProvider';
 import TicketDialog from '../../organisms/ticket/TicketDialog';
 
-type Props = {
-  ticket: Ticket;
-  index: number;
-};
-
 const useStyles = makeStyles(() => ({
   avatar: {
     width: 32,
@@ -58,6 +53,11 @@ const Footer = React.forwardRef((props: React.ComponentProps<typeof Row>, ref) =
     {props.children}
   </Row>
 ));
+
+type Props = {
+  ticket: Ticket;
+  index: number;
+};
 
 const Card = ({ticket, index}: Props) => {
   const {getUserById} = useProjectUsers();
