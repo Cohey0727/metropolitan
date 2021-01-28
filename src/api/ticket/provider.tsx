@@ -49,7 +49,7 @@ export const TicketProvider: React.FC<Props> = (props) => {
     setLoading(true);
     connectProjectTickets(projectId, (tickets) => {
       if (!clientPriority.current) {
-        setTickets(tickets);
+        setTickets(_.orderBy(tickets, ['order']));
         setLoading(false);
       }
     });

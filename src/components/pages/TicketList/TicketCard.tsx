@@ -30,7 +30,7 @@ const TicketCard = (props: Props) => {
     <Draggable draggableId={ticket.ticketId} index={index} key={ticket.ticketId}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-          <Paper margin={[0.5, 0]} padding={[1]} display={'flex'} alignItems={'center'}>
+          <Paper margin={[0.25, 0]} padding={[1]} display={'flex'} alignItems={'center'} elevation={2}>
             <MoreVertIcon />
             <Row alignItems={'center'} padding={2}>
               <Column width={140} padding={[0, 0.5]}>
